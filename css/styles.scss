@@ -2,5 +2,67 @@
 @import "./gunny_rewritten.css";
 
 body {
+  background-color: lightgray;
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+}
+
+$w: 400px;
+$h: 1.57143 * $w;
+
+$line: $h / 21;
+
+$lc: $w * 0.1226175;
+$sc: $w * 0.0322675;
+
+.diary-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.page {
+  height: $h;
+  width: $w;
+
+  background-color: #f1f0eb;
+  background-image: url(../img/lines.svg);
+  background-size: cover;
+  background-repeat: repeat-x;
+
+  padding-top: 2 * $line;
+  padding-bottom: 1 * $line;
+  padding-left: $line;
+  padding-right: $line;
+
+  box-shadow: 0px 2px 3px #c5c4c0;
+
+  color: #15104a;
+
   font-family: "gunny_rewrittenregular", cursive;
+  line-height: $line;
+  font-size: $line * 0.7777777778;
+
+  &:nth-child(odd) {
+    border-top-left-radius: $lc;
+    border-bottom-left-radius: $lc;
+    border-top-right-radius: $sc;
+    border-bottom-right-radius: $sc;
+
+    border-right: 1px solid #c2c1bd;
+  }
+
+  &:nth-child(even) {
+    border-top-left-radius: $sc;
+    border-bottom-left-radius: $sc;
+    border-top-right-radius: $lc;
+    border-bottom-right-radius: $lc;
+  }
+}
+
+.text-container {
+  overflow: hidden;
+  height: $line * 17.6;
+  position: relative;
 }
