@@ -36,31 +36,50 @@ body {
 }
 
 .diary-container {
-  display: grid;
+  position: relative;
   @media (min-width: $sm-brkpnt) {
+    display: grid;
     grid-template-columns: 1fr 1fr;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 2 * $line - 4px;
+      width: 2 * $w;
+      border-top: 1px solid #cb0072;
+      mix-blend-mode: multiply;
+      opacity: 0.3333;
+    }
+    &:before {
+      top: 2 * $line;
+      z-index: 2;
+    }
   }
 
-  position: relative;
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 2 * $line - 4px;
-    @media (min-width: $sm-brkpnt) {
-      width: 2 * $w;
-    }
-    @media (max-width: $sm-brkpnt) {
+  @media (max-width: $sm-brkpnt) {
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
       width: $w;
+      left: 0;
     }
-    border-top: 1px solid #cb0072;
-    mix-blend-mode: multiply;
-    opacity: 0.3333;
-  }
-  &:before {
-    top: 2 * $line;
-    z-index: 2;
+    &:before {
+      // 308/26,11
+      height: 0.08477272727 * $w;
+      background-image: url(../img/spiral.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      top: -0.08477272727 /3 * $w;
+      z-index: 9;
+    }
+    &:after {
+      top: 2 * $line;
+      border-top: 2px solid #000000;
+      mix-blend-mode: multiply;
+      opacity: 0.3333;
+    }
   }
 }
 
