@@ -29,12 +29,17 @@ $sc: $w * 0.0322675;
     left: 0;
     top: 2 * $line - 4px;
     right: 0;
-    border-top: 1px solid #e1a1c0;
+    border-top: 1px solid #cb0072;
+    mix-blend-mode: multiply;
+    opacity: 0.3333;
   }
-  &:after {
-    top: 2 * $line - 6px;
+  &:before {
+    top: 2 * $line;
+    z-index: 2;
   }
 }
+
+$offset: 7px;
 
 .page {
   height: $h;
@@ -43,11 +48,26 @@ $sc: $w * 0.0322675;
   overflow-y: hidden;
   background-color: #f1f0eb;
 
-  padding-top: 2 * $line;
-
   box-shadow: 0px 2px 3px #c5c4c0;
 
   color: #15104a;
+
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 2 * $line;
+    bottom: 0;
+
+    background-image: repeating-linear-gradient(
+      0deg,
+      #d6d3cc,
+      transparent 1px,
+      transparent $line
+    );
+  }
 
   font-family: "gunny_rewrittenregular", cursive;
   line-height: $line;
@@ -71,21 +91,11 @@ $sc: $w * 0.0322675;
 }
 
 .text-container {
-  $offset: 7px;
-
   overflow: hidden;
-  height: $h - 3 * $line + $offset;
   position: relative;
-  padding-top: $offset;
 
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent $offset,
-    #d6d3cc $offset,
-    transparent $offset + 1px,
-    transparent $line
-  );
+  margin-top: $offset + 2 * $line;
+  height: 18 * $line;
 
   padding-left: $line * 2/3;
   padding-right: $line * 2/3;
