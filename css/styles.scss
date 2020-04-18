@@ -1,22 +1,28 @@
 @import "./reset.scss";
 @import "./fonts.css";
 
-body {
-  background-color: lightgray;
-  min-height: 100vh;
-
-  display: grid;
-  place-items: center;
-}
-
 $w: 400px;
 $h: 1.57143 * $w;
+
+$marg: $w / 20;
 
 $line: ceil($h / 21);
 $fs: $line * 0.777777;
 
 $lc: $w * 0.1226175;
 $sc: $w * 0.0322675;
+
+$sm-brkpnt: $w * 2 + $marg * 2;
+
+body {
+  background-color: lightgray;
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  padding: $marg;
+}
 
 .highlights {
   // font-family: "Kavivanar", cursive;
@@ -31,7 +37,9 @@ $sc: $w * 0.0322675;
 
 .diary-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  @media (min-width: $sm-brkpnt) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   position: relative;
   &:before,
@@ -40,7 +48,12 @@ $sc: $w * 0.0322675;
     position: absolute;
     left: 0;
     top: 2 * $line - 4px;
-    right: 0;
+    @media (min-width: $sm-brkpnt) {
+      width: 2 * $w;
+    }
+    @media (max-width: $sm-brkpnt) {
+      width: $w;
+    }
     border-top: 1px solid #cb0072;
     mix-blend-mode: multiply;
     opacity: 0.3333;
@@ -52,6 +65,9 @@ $sc: $w * 0.0322675;
 }
 
 .staples {
+  @media (max-width: $sm-brkpnt) {
+    display: none;
+  }
   position: absolute;
   left: calc(50% - 1px);
   top: 0;
@@ -106,32 +122,45 @@ $offset: 7px;
   line-height: $line;
   font-size: $fs;
 
-  &:nth-child(odd) {
-    border-top-left-radius: $lc;
-    border-bottom-left-radius: $lc;
-    border-top-right-radius: $sc;
-    border-bottom-right-radius: $sc;
+  @media (min-width: $sm-brkpnt) {
+    &:nth-child(odd) {
+      border-top-left-radius: $lc;
+      border-bottom-left-radius: $lc;
+      border-top-right-radius: $sc;
+      border-bottom-right-radius: $sc;
 
-    border-right: 1px solid #dddcd7;
-    box-shadow: -3px 0 0 #cb0072, 0 -1px 0 #cb0072, 0 3px 0 #cb0072,
-      0px 6px 4px #b3b2ae;
+      border-right: 1px solid #dddcd7;
+      box-shadow: -3px 0 0 #cb0072, 0 -1px 0 #cb0072, 0 3px 0 #cb0072,
+        0px 6px 4px #b3b2ae;
+    }
+
+    &:nth-child(even) {
+      border-top-left-radius: $sc;
+      border-bottom-left-radius: $sc;
+      border-top-right-radius: $lc;
+      border-bottom-right-radius: $lc;
+
+      border-left: 1px solid #dddcd7;
+      box-shadow: 3px 0 0 #cb0072, 0 -1px 0 #cb0072, 0 3px 0 #cb0072,
+        0px 6px 4px #b3b2ae;
+    }
   }
 
-  &:nth-child(even) {
-    border-top-left-radius: $sc;
-    border-bottom-left-radius: $sc;
-    border-top-right-radius: $lc;
-    border-bottom-right-radius: $lc;
-
-    border-left: 1px solid #dddcd7;
-    box-shadow: 3px 0 0 #cb0072, 0 -1px 0 #cb0072, 0 3px 0 #cb0072,
-      0px 6px 4px #b3b2ae;
+  @media (max-width: $sm-brkpnt) {
+    &:nth-child(odd) {
+      box-shadow: 0 -1px 0 #cb0072, 1px -1px 0 #cb0072, -1px -1px 0 #cb0072,
+        2px 2px 0 #cb0072, -2px 2px 0 #cb0072, 0 2px 0 #cb0072,
+        0px 6px 4px #b3b2ae;
+    }
+    &:nth-child(even) {
+      display: none;
+    }
   }
 
   & > .date {
     @extend .highlights;
     position: absolute;
-    right: $line * 2/3;
+    left: $line * 2/3;
     top: $line;
   }
 }
