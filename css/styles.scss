@@ -1,5 +1,5 @@
 @import "./reset.scss";
-@import "./gunny_rewritten.css";
+@import "./fonts.css";
 
 body {
   background-color: lightgray;
@@ -13,9 +13,21 @@ $w: 400px;
 $h: 1.57143 * $w;
 
 $line: ceil($h / 21);
+$fs: $line * 0.777777;
 
 $lc: $w * 0.1226175;
 $sc: $w * 0.0322675;
+
+.highlights {
+  // font-family: "Kavivanar", cursive;
+  // font-family: "Rock Salt", cursive;
+  font-family: "brizelregular", cursive;
+
+  font-size: $fs * 0.95;
+  display: block;
+  color: #cb0072;
+  mix-blend-mode: multiply;
+}
 
 .diary-container {
   display: grid;
@@ -49,8 +61,7 @@ $sc: $w * 0.0322675;
     height: 3/2 * $line;
     width: 2px;
     mix-blend-mode: multiply;
-    background: brown;
-    opacity: 0.4;
+    background: slategray;
     &:nth-child(1) {
       top: 15%;
     }
@@ -72,7 +83,7 @@ $offset: 7px;
   overflow-y: hidden;
   background-color: #f1f0eb;
 
-  color: #15104a;
+  color: dimgray;
 
   position: relative;
   &:before {
@@ -93,7 +104,7 @@ $offset: 7px;
 
   font-family: "gunny_rewrittenregular", cursive;
   line-height: $line;
-  font-size: $line * 0.777777;
+  font-size: $fs;
 
   &:nth-child(odd) {
     border-top-left-radius: $lc;
@@ -115,6 +126,13 @@ $offset: 7px;
     border-left: 1px solid #dddcd7;
     box-shadow: 3px 0 0 #cb0072, 0 -1px 0 #cb0072, 0 3px 0 #cb0072,
       0px 6px 4px #b3b2ae;
+  }
+
+  & > .date {
+    @extend .highlights;
+    position: absolute;
+    right: $line * 2/3;
+    top: $line;
   }
 }
 
