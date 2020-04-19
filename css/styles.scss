@@ -12,6 +12,8 @@ $fs: $line * 0.777777;
 $lc: $w * 0.1226175;
 $sc: $w * 0.0322675;
 
+$default-pencil: dimgray;
+
 $sm-brkpnt: $w * 2 + $marg * 2;
 
 body {
@@ -25,14 +27,18 @@ body {
 }
 
 .highlights {
-  // font-family: "Kavivanar", cursive;
-  // font-family: "Rock Salt", cursive;
   font-family: "brizelregular", cursive;
+
+  color: #cb0072;
 
   font-size: $fs * 0.95;
   display: block;
-  color: #cb0072;
   mix-blend-mode: multiply;
+}
+
+.header-highlights {
+  @extend .highlights;
+  color: $default-pencil;
 }
 
 .diary-container {
@@ -118,7 +124,7 @@ $offset: 7px;
   overflow-y: hidden;
   background-color: #f1f0eb;
 
-  color: dimgray;
+  color: $default-pencil;
 
   position: relative;
   &:before {
@@ -177,7 +183,7 @@ $offset: 7px;
   }
 
   & > .date {
-    @extend .highlights;
+    @extend .header-highlights;
     position: absolute;
     left: $line * 2/3;
     top: $line;
@@ -193,6 +199,16 @@ $offset: 7px;
 
   padding-left: $line * 2/3;
   padding-right: $line * 2/3;
+}
+
+.pg-num {
+  @extend .header-highlights;
+  position: absolute;
+  top: $line;
+  right: $line * 2/3;
+  &:before {
+    content: "p. ";
+  }
 }
 
 .navigation {
@@ -225,7 +241,7 @@ $offset: 7px;
 
     transition: transform 2s ease;
     &:hover {
-      transition: transform 0.5s ease;
+      transition: transform 0.75s ease;
     }
 
     $m: 2/3 * $line;
