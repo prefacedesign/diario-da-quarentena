@@ -189,8 +189,52 @@ $offset: 7px;
   position: relative;
 
   margin-top: $offset + 2 * $line;
-  height: 18 * $line;
+  height: 17 * $line;
 
   padding-left: $line * 2/3;
   padding-right: $line * 2/3;
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 $line * 2 * 2/3;
+
+  position: absolute;
+  bottom: 1/3 * $line;
+
+  @media (min-width: $sm-brkpnt) {
+    width: $w * 2;
+  }
+  @media (max-width: $sm-brkpnt) {
+    width: $w;
+  }
+  > :nth-child(odd) {
+    justify-self: flex-start;
+  }
+  > :nth-child(even) {
+    justify-self: end;
+  }
+
+  a {
+    font-family: "brizelregular", cursive;
+    text-decoration: none;
+    font-size: 64px;
+    line-height: 40px;
+    color: #3d50fa;
+
+    transition: transform 2s ease;
+    &:hover {
+      transition: transform 0.5s ease;
+    }
+
+    $m: 2/3 * $line;
+
+    &:nth-child(odd):hover {
+      transform: translateX(-$m);
+    }
+    &:nth-child(even):hover {
+      transform: translateX($m);
+    }
+  }
 }
