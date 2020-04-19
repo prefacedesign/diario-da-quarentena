@@ -10,8 +10,8 @@
 
 @font-face {
   font-family: "brizelregular";
-  src: url("../fonts/brizel-webfont.woff2") format("woff2"),
-    url("../fonts/brizel-webfont.woff") format("woff");
+  src: url("../fonts/brizel.woff2") format("woff2"),
+    url("../fonts/brizel.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
