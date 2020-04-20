@@ -58,7 +58,13 @@ $horiz-pad: 10px;
 .diary-container {
   position: relative;
   perspective: 50cm;
-  transform: rotate3d(1, 0, 0, 2deg);
+  transform: rotate3d(1, 0, 0, 10deg);
+
+  .pages-container {
+    position: relative;
+    z-index: 5;
+    width: 2 * $w;
+  }
 
   @media (min-width: $sm-brkpnt) {
     display: grid;
@@ -203,7 +209,10 @@ $offset: 7px;
 
     box-shadow: 0 0 0 #0000;
 
-    &.left-page {
+    &:nth-child(odd) {
+      position: absolute;
+      right: 50%;
+
       transform-origin: top right;
 
       border-top-left-radius: $lc;
@@ -222,18 +231,25 @@ $offset: 7px;
         #dbdad1 100%
       );
 
-      &.future {
+      &:not(.past) {
         transform: rotate3d(0, 1, 0, 90deg);
+        z-index: 1000;
       }
-      &.present {
-        transform: rotate3d(0, 1, 0, 0deg);
+      &.current {
+        transform: rotate3d(0, 1, 0, 3deg);
         box-shadow: -3px 1px 3px #0003;
+        z-index: 100;
       }
       &.past {
+        transform: rotate3d(1, 1, 1, 0deg);
+        z-index: 10;
       }
     }
 
-    &.right-page {
+    &:nth-child(even) {
+      position: absolute;
+      left: 50%;
+
       transform-origin: top left;
 
       border-top-left-radius: $sc;
@@ -252,22 +268,29 @@ $offset: 7px;
         #e7e6e0 100%
       );
 
-      &.future {
+      @at-root .current ~ & {
+        z-index: 10;
+        opacity: 0.9;
       }
-      &.present {
-        transform: rotate3d(0, 1, 0, 0deg);
+
+      @at-root .current + & {
+        transform: rotate3d(0, 1, 0, -1deg);
         box-shadow: 3px 1px 3px #0003;
+        z-index: 100;
+        opacity: 1;
       }
+
       &.past {
-        transform: rotate3d(0, 1, 0, -90deg);
+        transform: rotate3d(0, 1, 0, -90deg) scale(0.9);
+        z-index: 1000;
       }
     }
   }
 
   @media (max-width: $sm-brkpnt) {
-    &.left-page {
+    &:nth-child(odd) {
     }
-    &.right-page {
+    &:nth-child(even) {
       display: none;
     }
   }
