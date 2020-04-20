@@ -31,6 +31,7 @@ body {
   place-items: center;
 
   padding: $marg;
+  perspective: 50cm;
 }
 
 .highlights {
@@ -49,11 +50,13 @@ body {
   color: $default-pencil;
 }
 
-$vert-pad: 4px;
-$horiz-pad: 4px;
+$vert-pad: 5px;
+$horiz-pad: 10px;
 
 .diary-container {
   position: relative;
+  perspective: 50cm;
+  transform: rotate3d(1, 0, 0, 2deg);
 
   @media (min-width: $sm-brkpnt) {
     display: grid;
@@ -76,7 +79,7 @@ $horiz-pad: 4px;
       width: $w + $horiz-pad;
 
       background: $cover-color;
-      box-shadow: 0px 5px 10px #a88d1e;
+      box-shadow: 0px 5px 20px #a88d1e;
     }
 
     $radius-adjust: 1.05;
@@ -192,36 +195,76 @@ $offset: 7px;
   font-size: $fs;
 
   @media (min-width: $sm-brkpnt) {
-    &:nth-child(odd) {
+    transform-style: preserve-3d;
+    transition: transform 1s ease-out, box-shadow 1s ease;
+
+    box-shadow: 0 0 0 #0000;
+
+    &.left-page {
+      transform-origin: top right;
+
       border-top-left-radius: $lc;
       border-bottom-left-radius: $lc;
       border-top-right-radius: $sc;
       border-bottom-right-radius: $sc;
 
       border-right: 1px solid #dddcd7;
-      // box-shadow: -4px 0 0 $cover-color, 0 -2px 0 $cover-color,
-      //   0 4px 0 $cover-color, 0px 6px 4px #a88d1e;
+
+      transform: rotate3d(0, 1, 0, 3deg);
+
+      background-image: linear-gradient(
+        to right,
+        #f1f0eb,
+        #f1f0eb 70%,
+        #dbdad1 100%
+      );
+
+      &.future {
+        transform: rotate3d(0, 1, 0, 90deg);
+      }
+      &.present {
+        transform: rotate3d(0, 1, 0, 0deg);
+        box-shadow: -3px 1px 3px #0003;
+      }
+      &.past {
+      }
     }
 
-    &:nth-child(even) {
+    &.right-page {
+      transform-origin: top left;
+
       border-top-left-radius: $sc;
       border-bottom-left-radius: $sc;
       border-top-right-radius: $lc;
       border-bottom-right-radius: $lc;
 
       border-left: 1px solid #dddcd7;
-      // box-shadow: 4px 0 0 $cover-color, 0 -2px 0 $cover-color,
-      //   0 4px 0 $cover-color, 0px 6px 4px #a88d1e;
+
+      transform: rotateY(-3deg);
+
+      background-image: linear-gradient(
+        to left,
+        #f1f0eb,
+        #f1f0eb 95%,
+        #e7e6e0 100%
+      );
+
+      &.future {
+      }
+      &.present {
+        transform: rotate3d(0, 1, 0, 0deg);
+        box-shadow: 3px 1px 3px #0003;
+      }
+      &.past {
+        transform: rotate3d(0, 1, 0, -90deg);
+      }
     }
   }
 
   @media (max-width: $sm-brkpnt) {
-    &:nth-child(odd) {
-      // box-shadow: 0 -1px 0 $cover-color, 1px -1px 0 $cover-color,
-      //   -1px -1px 0 $cover-color, 2px 2px 0 $cover-color,
-      //   -2px 2px 0 $cover-color, 0 2px 0 $cover-color, 0px 2px 10px #a88d1e;
+    &.left-page {
     }
-    &:nth-child(even) {
+    &.right-page {
       display: none;
     }
   }
