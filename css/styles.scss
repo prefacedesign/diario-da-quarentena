@@ -389,12 +389,18 @@ $offset: 7px;
     justify-self: end;
   }
 
-  a {
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
     font-family: "brizelregular", cursive;
     text-decoration: none;
     font-size: 64px;
     line-height: 40px;
     color: #3d50fa;
+    &:disabled {
+      cursor: none;
+    }
 
     $m: 2/3 * $line;
   }

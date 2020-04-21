@@ -44,11 +44,13 @@ function advancesPages() {
     pages[pageIndex + 1].classList.add("past");
 
     if (!mobilePaginationScheme) {
+      blockNavigation(true);
       pages[pageIndex + 1].classList.add("zoom-top");
       setTimeout(() => {
         pages[pageIndex + 1].classList.remove("zoom-top");
         pageIndex += pageOffset;
         pages[pageIndex].classList.add("current");
+        blockNavigation(false);
       }, flipDelay);
     } else {
       pageIndex += pageOffset;
@@ -63,6 +65,7 @@ function returnsPages() {
     pages[pageIndex].classList.remove("current");
 
     if (!mobilePaginationScheme) {
+      blockNavigation(true);
       pages[pageIndex + 1].classList.add("zoom-top");
     }
 
@@ -72,11 +75,20 @@ function returnsPages() {
 
     setTimeout(() => {
       if (!mobilePaginationScheme) {
+        blockNavigation(false);
         pages[pageIndex + pageOffset + 1].classList.remove("zoom-top");
       }
       pages[pageIndex + 1].classList.remove("past");
     }, flipDelay);
   }
+}
+
+function blockNavigation(block) {
+  let navButs = document.querySelectorAll(".navigation button");
+
+  navButs.forEach((b) => {
+    b.disabled = block;
+  });
 }
 
 window.addEventListener("resize", detectMobile);
