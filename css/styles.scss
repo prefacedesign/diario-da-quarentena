@@ -63,7 +63,13 @@ $horiz-pad: 10px;
   .pages-container {
     position: relative;
     z-index: 5;
-    width: 2 * $w;
+    @media (min-width: $sm-brkpnt) {
+      width: 2 * $w;
+    }
+    @media (max-width: $sm-brkpnt) {
+      width: $w;
+      height: $h;
+    }
   }
 
   @media (min-width: $sm-brkpnt) {
@@ -306,10 +312,12 @@ $offset: 7px;
   }
 
   @media (max-width: $sm-brkpnt) {
-    &:nth-child(odd) {
-    }
-    &:nth-child(even) {
+    position: absolute;
+    &:not(.current) {
       display: none;
+    }
+    &.current {
+      display: block;
     }
   }
 
