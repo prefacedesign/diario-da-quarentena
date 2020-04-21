@@ -27,7 +27,9 @@ function detectMobile() {
     // if current page is even i'll set index to its
     // even pair
     if (pageIndex % 2 != 0) {
+      pages[pageIndex].classList.remove("current");
       pageIndex -= 1;
+      pages[pageIndex].classList.add("current");
     }
     pageOffset = 2;
     flipDelay = 250;
