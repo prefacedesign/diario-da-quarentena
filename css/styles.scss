@@ -205,7 +205,7 @@ $offset: 7px;
 
   @media (min-width: $sm-brkpnt) {
     transform-style: preserve-3d;
-    transition: transform 1s ease-out, box-shadow 1s ease;
+    transition: transform 1s ease-out, box-shadow 1s ease, opacity 1ms ease;
 
     box-shadow: 0 0 0 #0000;
 
@@ -233,16 +233,19 @@ $offset: 7px;
 
       &:not(.past) {
         transform: rotate3d(0, 1, 0, 90deg);
+        opacity: 0;
         z-index: 1000;
       }
       &.current {
         transform: rotate3d(0, 1, 0, 3deg);
         box-shadow: -3px 1px 3px #0003;
         z-index: 100;
+        opacity: 1;
       }
       &.past {
         transform: rotate3d(1, 1, 1, 0deg);
         z-index: 10;
+        opacity: 1;
       }
     }
 
@@ -270,7 +273,7 @@ $offset: 7px;
 
       @at-root .current ~ & {
         z-index: 10;
-        opacity: 0.9;
+        opacity: 1;
       }
 
       @at-root .current + & {
@@ -281,7 +284,8 @@ $offset: 7px;
       }
 
       &.past {
-        transform: rotate3d(0, 1, 0, -90deg) scale(0.9);
+        transform: rotate3d(0, 1, 0, -90deg);
+        opacity: 0;
         z-index: 1000;
       }
     }
