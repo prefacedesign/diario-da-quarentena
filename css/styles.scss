@@ -214,6 +214,35 @@ $offset: 7px;
   &:first-child {
     display: none;
   }
+
+  &.summary {
+    font-family: "Courier Prime", monospace;
+    font-size: $fs * 0.7;
+
+    p + p {
+      text-indent: 0;
+      margin-top: $line;
+    }
+
+    .text-container {
+      position: relative;
+      top: 3px;
+      mix-blend-mode: multiply;
+      color: darken($default-pencil, 10%);
+      &:after {
+        content: "";
+        position: absolute;
+        left: $line * 2/3;
+        bottom: 0;
+        width: $line * 2;
+        height: $line * 2;
+        background-image: url(../img/stamp-onhb.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
   @media (min-width: $sm-brkpnt) {
     transform-style: preserve-3d;
 
