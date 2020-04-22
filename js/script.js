@@ -3,6 +3,8 @@ let pgW = 400,
   marg = pgW / 20,
   smBrkpnt = pgW * 2 + marg * 2;
 
+let audio = new Audio("../sounds/page-flip-4.mp3");
+
 let pageIndex = 4;
 let pages = document.querySelectorAll(".page");
 let mobilePaginationScheme = false;
@@ -39,6 +41,7 @@ function detectMobile() {
 function advancesPages() {
   // are there more pages to flip to?
   if (pageIndex + pageOffset < pages.length) {
+    playFlip();
     pages[pageIndex].classList.remove("current");
     pages[pageIndex].classList.add("past");
     pages[pageIndex + 1].classList.add("past");
@@ -62,6 +65,8 @@ function advancesPages() {
 function returnsPages() {
   // have we reached the start of the book?
   if (pageIndex - pageOffset >= 0) {
+    playFlip();
+
     pages[pageIndex].classList.remove("current");
 
     if (!mobilePaginationScheme) {
@@ -89,6 +94,11 @@ function blockNavigation(block) {
   navButs.forEach((b) => {
     b.disabled = block;
   });
+}
+
+function playFlip() {
+  audio.currentTime = 0;
+  audio.play();
 }
 
 window.addEventListener("resize", detectMobile);
