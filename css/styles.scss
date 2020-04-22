@@ -211,6 +211,9 @@ $offset: 7px;
   line-height: $line;
   font-size: $fs;
 
+  &:first-child {
+    display: none;
+  }
   @media (min-width: $sm-brkpnt) {
     transform-style: preserve-3d;
 

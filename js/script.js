@@ -5,7 +5,7 @@ let pgW = 400,
 
 let audio = new Audio("../sounds/page-flip-4.mp3");
 
-let pageIndex = 4;
+let pageIndex = 0;
 let pages = document.querySelectorAll(".page");
 let mobilePaginationScheme = false;
 let pageOffset = 2;
