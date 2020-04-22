@@ -23,8 +23,19 @@ function detectMobile() {
     mobilePaginationScheme = true;
     pageOffset = 1;
     flipDelay = 0;
+    if (pageIndex == pages.length - 2) {
+      blockNavigation(false, [false, true]);
+    }
   } else if (!mobile && mobilePaginationScheme) {
     mobilePaginationScheme = false;
+
+    if (pageIndex >= pages.length - 2) {
+      blockNavigation(true, [false, true]);
+    }
+
+    if (pageIndex == 1) {
+      blockNavigation(true, [true, false]);
+    }
 
     // if current page is even i'll set index to its
     // even pair
@@ -54,10 +65,18 @@ function advancesPages() {
         pageIndex += pageOffset;
         pages[pageIndex].classList.add("current");
         blockNavigation(false);
+        if (pageIndex >= pages.length - 2) {
+          blockNavigation(true, [false, true]);
+        }
       }, flipDelay);
     } else {
       pageIndex += pageOffset;
       pages[pageIndex].classList.add("current");
+      if (pageIndex == pages.length - 1) {
+        blockNavigation(true, [false, true]);
+      } else {
+        blockNavigation(false);
+      }
     }
   }
 }
@@ -84,15 +103,23 @@ function returnsPages() {
         pages[pageIndex + pageOffset + 1].classList.remove("zoom-top");
       }
       pages[pageIndex + 1].classList.remove("past");
+
+      if (pageIndex == 0) {
+        blockNavigation(true, [true, false]);
+      } else {
+        blockNavigation(false);
+      }
     }, flipDelay);
   }
 }
 
-function blockNavigation(block) {
+function blockNavigation(block, changeWhich = [true, true]) {
   let navButs = document.querySelectorAll(".navigation button");
 
-  navButs.forEach((b) => {
-    b.disabled = block;
+  navButs.forEach((b, i) => {
+    if (changeWhich[i]) {
+      b.disabled = block;
+    }
   });
 }
 

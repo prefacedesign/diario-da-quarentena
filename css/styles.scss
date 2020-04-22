@@ -4,6 +4,8 @@
 $w: 400px;
 $h: 1.57143 * $w;
 
+$flipTime: 250ms;
+
 $marg: $w / 20;
 
 $line: ceil($h / 21);
@@ -211,7 +213,7 @@ $offset: 7px;
 
   @media (min-width: $sm-brkpnt) {
     transform-style: preserve-3d;
-    transition: transform 250ms linear, box-shadow 250ms linear,
+    transition: transform $flipTime linear, box-shadow $flipTime linear,
       opacity 1ms ease;
 
     box-shadow: 0 0 0 #0000;
@@ -398,8 +400,11 @@ $offset: 7px;
     font-size: 64px;
     line-height: 40px;
     color: #3d50fa;
+    transition: opacity 0.05s ease;
+    transition-delay: $flipTime;
     &:disabled {
-      cursor: none;
+      opacity: 0.2;
+      transition-delay: 0;
     }
 
     $m: 2/3 * $line;
