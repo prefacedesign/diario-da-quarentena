@@ -55,10 +55,10 @@ function advancesPages() {
     playFlip();
     pages[pageIndex].classList.remove("current");
     pages[pageIndex].classList.add("past");
-    pages[pageIndex + 1].classList.add("past");
 
     if (!mobilePaginationScheme) {
       blockNavigation(true);
+      pages[pageIndex + 1].classList.add("past");
       pages[pageIndex + 1].classList.add("zoom-top");
       setTimeout(() => {
         pages[pageIndex + 1].classList.remove("zoom-top");
