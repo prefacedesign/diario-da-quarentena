@@ -413,6 +413,12 @@ $offset: 7px;
   }
 }
 
+@media (min-width: $sm-brkpnt) {
+  .page:nth-child(even) .date {
+    display: none;
+  }
+}
+
 .text-container {
   overflow: hidden;
   position: relative;
