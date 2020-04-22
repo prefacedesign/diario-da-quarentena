@@ -48,6 +48,17 @@ body {
   mix-blend-mode: multiply;
 }
 
+.mood-summary {
+  @extend .highlights;
+  color: $default-pencil;
+  text-indent: 0 !important;
+  margin-top: $line;
+}
+
+p + .highlights {
+  margin-top: $line;
+}
+
 .header-highlights {
   @extend .highlights;
   user-select: none;
@@ -241,6 +252,10 @@ $offset: 7px;
         background-size: contain;
       }
     }
+  }
+
+  p + p {
+    text-indent: $line;
   }
 
   @media (min-width: $sm-brkpnt) {
@@ -444,7 +459,8 @@ $offset: 7px;
     transition: opacity 0.05s ease;
     transition-delay: $flipTime;
     &:disabled {
-      opacity: 0.2;
+      opacity: 0;
+      cursor: default;
       transition-delay: 0;
     }
 
