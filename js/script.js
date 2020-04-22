@@ -9,6 +9,7 @@ let pageIndex = 0;
 let pages = document.querySelectorAll(".page");
 let mobilePaginationScheme = false;
 let pageOffset = 2;
+let minPage = 0;
 let flipDelay = 250;
 
 function detectMobile() {
@@ -22,7 +23,11 @@ function detectMobile() {
   if (mobile && !mobilePaginationScheme) {
     mobilePaginationScheme = true;
     pageOffset = 1;
+    minPage = 1;
     flipDelay = 0;
+    if (pageIndex == 0) {
+      advancesPages(false);
+    }
     if (pageIndex == pages.length - 2) {
       blockNavigation(false, [false, true]);
     }
@@ -45,14 +50,17 @@ function detectMobile() {
       pages[pageIndex].classList.add("current");
     }
     pageOffset = 2;
+    minPage = 0;
     flipDelay = 250;
   }
 }
 
-function advancesPages() {
+function advancesPages(playSound = true) {
   // are there more pages to flip to?
   if (pageIndex + pageOffset < pages.length) {
-    playFlip();
+    if (playSound) {
+      playFlip();
+    }
     pages[pageIndex].classList.remove("current");
     pages[pageIndex].classList.add("past");
 
@@ -75,16 +83,22 @@ function advancesPages() {
       if (pageIndex == pages.length - 1) {
         blockNavigation(true, [false, true]);
       } else {
-        blockNavigation(false);
+        if (pageIndex == minPage) {
+          blockNavigation(true, [true, false]);
+        } else {
+          blockNavigation(false);
+        }
       }
     }
   }
 }
 
-function returnsPages() {
+function returnsPages(playSound = true) {
   // have we reached the start of the book?
-  if (pageIndex - pageOffset >= 0) {
-    playFlip();
+  if (pageIndex - pageOffset >= minPage) {
+    if (playSound) {
+      playFlip();
+    }
 
     pages[pageIndex].classList.remove("current");
 
@@ -104,7 +118,7 @@ function returnsPages() {
       }
       pages[pageIndex + 1].classList.remove("past");
 
-      if (pageIndex == 0) {
+      if (pageIndex == minPage) {
         blockNavigation(true, [true, false]);
       } else {
         blockNavigation(false);
