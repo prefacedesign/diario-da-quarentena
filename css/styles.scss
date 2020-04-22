@@ -213,16 +213,16 @@ $offset: 7px;
 
   @media (min-width: $sm-brkpnt) {
     transform-style: preserve-3d;
-    transition: transform $flipTime linear, box-shadow $flipTime linear,
-      opacity 1ms ease;
 
     box-shadow: 0 0 0 #0000;
-
     @at-root .current + .page + .page + .page ~ & {
       z-index: 5;
     }
 
     &:nth-child(odd) {
+      transition: transform $flipTime linear 0s, box-shadow $flipTime linear 0s,
+        opacity 0s ease 0s;
+
       position: absolute;
       right: 50%;
 
@@ -247,6 +247,9 @@ $offset: 7px;
       &:not(.past):not(.current) {
         // future page
         transform: rotate3d(0, 1, 0, 90deg);
+        transition: transform $flipTime linear 0s,
+          box-shadow $flipTime linear 0s, opacity 0s ease $flipTime;
+        opacity: 0;
         z-index: 1000;
       }
       &.current {
@@ -263,6 +266,9 @@ $offset: 7px;
     }
 
     &:nth-child(even) {
+      transition: transform $flipTime linear 0s, box-shadow $flipTime linear 0s,
+        opacity 0s ease 0s;
+
       position: absolute;
       left: 50%;
 
@@ -308,6 +314,9 @@ $offset: 7px;
 
       &.past {
         transform: rotate3d(0, 1, 0, -90deg);
+        transition: transform $flipTime linear 0s,
+          box-shadow $flipTime linear 0s, opacity 0s ease $flipTime;
+        opacity: 0;
         z-index: 10;
       }
     }
