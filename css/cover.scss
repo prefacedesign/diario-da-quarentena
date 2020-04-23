@@ -1,0 +1,29 @@
+$alphabet: A b C D E f G H i J K L m N O P Q R S t U V W x y Z;
+// c h
+
+$s: "";
+.cover {
+  &:before {
+    content: "c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a ";
+  }
+  @each $letter in $alphabet {
+    $s: "" !global;
+    $br: "\a";
+    $sp1: "\2004";
+    $sp2: "\2006";
+    &.first_#{to-lower-case($letter)}:before {
+      @for $y from 1 through 28 {
+        @for $x from 1 through 28 {
+          $s: $s + $letter + " " !global;
+        }
+        @if $y % 2 == 0 {
+          $s: $s + $br + " " !global;
+        } @else {
+          $s: $s + $br + " " + $letter !global;
+          // $s: $s + $br + $sp1 + $sp2 + " " !global;
+        }
+      }
+      content: "#{$s}";
+    }
+  }
+}

@@ -1,5 +1,6 @@
 @import "./reset.scss";
 @import "./fonts.css";
+@import "./cover.scss";
 
 $w: 400px;
 $h: 1.57143 * $w;
@@ -25,7 +26,8 @@ $top-line: rgba(61, 80, 250, 0.231);
 
 $sm-brkpnt: $w * 2 + $marg * 2;
 
-$cover-color: #cb0072;
+// $cover-color: #cb0072;
+$cover-color: #760031;
 
 body {
   background-color: #ffd21f;
@@ -71,8 +73,77 @@ p + .highlights {
 $vert-pad: 5px;
 $horiz-pad: 10px;
 
-.diary-container {
+@mixin diary-shadow {
+  box-shadow: 0px 5px 10px #a88d1e;
+}
+
+$radius-adjust: 1.05;
+@mixin left-page-radiuses {
+  border-top-left-radius: $lc * $radius-adjust;
+  border-bottom-left-radius: $lc * $radius-adjust;
+  border-top-right-radius: $sc * $radius-adjust;
+  border-bottom-right-radius: $sc * $radius-adjust;
+}
+
+@mixin right-page-radiuses {
+  border-top-left-radius: $sc * $radius-adjust;
+  border-bottom-left-radius: $sc * $radius-adjust;
+  border-top-right-radius: $lc * $radius-adjust;
+  border-bottom-right-radius: $lc * $radius-adjust;
+}
+.diary {
   position: relative;
+  @media (min-width: $sm-brkpnt) {
+    height: $h + $vert-pad * 2;
+    width: 2 * $w + $horiz-pad * 2;
+  }
+  @media (max-width: $sm-brkpnt) {
+  }
+}
+
+.closed.diary {
+  .pages-container,
+  .navigation,
+  .staples {
+    display: none;
+  }
+
+  display: grid;
+  place-items: end;
+
+  .cover {
+    width: $w;
+    height: $h;
+    background: $cover-color;
+    @include diary-shadow;
+    @media (min-width: $sm-brkpnt) {
+      @include right-page-radiuses;
+    }
+
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      left: -$line * 4.5;
+      top: -$line * 0.2;
+      height: $h + $line;
+      width: $w + $line * 3;
+      font-family: "italian_mosaic_ornamentsRg";
+      color: white;
+      font-size: 31px;
+      line-height: 0.8em;
+      letter-spacing: 0em;
+      word-spacing: 0.28em;
+      white-space: pre;
+    }
+  }
+}
+
+.open.diary {
+  .cover {
+  }
+
   @media (min-width: $sm-brkpnt) {
     perspective: 50cm;
   }
@@ -94,9 +165,6 @@ $horiz-pad: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    height: $h + $vert-pad * 2;
-    width: 2 * $w + $horiz-pad * 2;
-
     padding: ($vert-pad * 2/3) ($horiz-pad) ($vert-pad * 4/3);
 
     &:before,
@@ -111,27 +179,17 @@ $horiz-pad: 10px;
       width: $w + $horiz-pad;
 
       background: $cover-color;
-      box-shadow: 0px 5px 20px #a88d1e;
+      @include diary-shadow;
     }
-
-    $radius-adjust: 1.05;
 
     &:before {
       left: 0;
-
-      border-top-left-radius: $lc * $radius-adjust;
-      border-bottom-left-radius: $lc * $radius-adjust;
-      border-top-right-radius: $sc * $radius-adjust;
-      border-bottom-right-radius: $sc * $radius-adjust;
+      @include left-page-radiuses;
     }
 
     &:after {
       right: 0;
-
-      border-top-left-radius: $sc * $radius-adjust;
-      border-bottom-left-radius: $sc * $radius-adjust;
-      border-top-right-radius: $lc * $radius-adjust;
-      border-bottom-right-radius: $lc * $radius-adjust;
+      @include right-page-radiuses;
     }
   }
 
@@ -151,7 +209,7 @@ $horiz-pad: 10px;
       left: -$horiz-pad;
 
       background: $cover-color;
-      box-shadow: 0px 5px 10px #a88d1e;
+      @include diary-shadow;
     }
     &:after {
       width: $w;
