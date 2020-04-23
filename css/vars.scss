@@ -1,0 +1,29 @@
+$w: 400px;
+$h: 1.57143 * $w;
+
+$flipTime: 250ms;
+
+$marg: $w / 20;
+
+$line: ceil($h / 21);
+$fs: $line * 0.777777;
+
+// $lc: $w * 0.1226175;
+$lc: $w * 0.1;
+// $sc: $w * 0.0322675;
+$sc: $w * 0.01;
+
+$max-z: 999;
+
+$default-pencil: dimgray;
+
+$main-line: #d6d3cc;
+$top-line: rgba(61, 80, 250, 0.231);
+
+$sm-brkpnt: $w * 2 + $marg * 2;
+
+$default-cover-color: #cb0072;
+
+@mixin diary-shadow {
+  box-shadow: 0px 5px 10px #a88d1e;
+}

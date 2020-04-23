@@ -1,33 +1,7 @@
 @import "./reset.scss";
+@import "./vars.scss";
 @import "./fonts.css";
 @import "./cover.scss";
-
-$w: 400px;
-$h: 1.57143 * $w;
-
-$flipTime: 250ms;
-
-$marg: $w / 20;
-
-$line: ceil($h / 21);
-$fs: $line * 0.777777;
-
-// $lc: $w * 0.1226175;
-$lc: $w * 0.1;
-// $sc: $w * 0.0322675;
-$sc: $w * 0.01;
-
-$max-z: 999;
-
-$default-pencil: dimgray;
-
-$main-line: #d6d3cc;
-$top-line: rgba(61, 80, 250, 0.231);
-
-$sm-brkpnt: $w * 2 + $marg * 2;
-
-// $cover-color: #cb0072;
-$cover-color: #760031;
 
 body {
   background-color: #ffd21f;
@@ -73,10 +47,6 @@ p + .highlights {
 $vert-pad: 5px;
 $horiz-pad: 10px;
 
-@mixin diary-shadow {
-  box-shadow: 0px 5px 10px #a88d1e;
-}
-
 $radius-adjust: 1.05;
 @mixin left-page-radiuses {
   border-top-left-radius: $lc * $radius-adjust;
@@ -114,8 +84,6 @@ $radius-adjust: 1.05;
   .cover {
     width: $w;
     height: $h;
-    background: $cover-color;
-    @include diary-shadow;
     @media (min-width: $sm-brkpnt) {
       @include right-page-radiuses;
     }
@@ -142,6 +110,7 @@ $radius-adjust: 1.05;
 
 .open.diary {
   .cover {
+    display: none;
   }
 
   @media (min-width: $sm-brkpnt) {
@@ -177,9 +146,6 @@ $radius-adjust: 1.05;
 
       height: $h + $vert-pad * 2;
       width: $w + $horiz-pad;
-
-      background: $cover-color;
-      @include diary-shadow;
     }
 
     &:before {
@@ -207,9 +173,6 @@ $radius-adjust: 1.05;
 
       top: -$vert-pad * 2/3;
       left: -$horiz-pad;
-
-      background: $cover-color;
-      @include diary-shadow;
     }
     &:after {
       width: $w;

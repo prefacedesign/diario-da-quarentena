@@ -1,3 +1,5 @@
+@import "./vars.scss";
+
 $alphabet: A b C D E f G H i J K L m N O P Q R S t U V W x y Z;
 // c h
 
@@ -6,24 +8,64 @@ $s: "";
   &:before {
     content: "c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a ";
   }
-  @each $letter in $alphabet {
-    $s: "" !global;
-    $br: "\a";
-    $sp1: "\2004";
-    $sp2: "\2006";
-    &.first_#{to-lower-case($letter)}:before {
-      @for $y from 1 through 28 {
-        @for $x from 1 through 28 {
-          $s: $s + $letter + " " !global;
-        }
-        @if $y % 2 == 0 {
-          $s: $s + $br + " " !global;
-        } @else {
-          $s: $s + $br + " " + $letter !global;
-          // $s: $s + $br + $sp1 + $sp2 + " " !global;
-        }
+}
+@each $letter in $alphabet {
+  $s: "" !global;
+  $br: "\a";
+  $sp1: "\2004";
+  $sp2: "\2006";
+  .first_#{to-lower-case($letter)} .cover:before {
+    @for $y from 1 through 28 {
+      @for $x from 1 through 28 {
+        $s: $s + $letter + " " !global;
       }
-      content: "#{$s}";
+      @if $y % 2 == 0 {
+        $s: $s + $br + " " !global;
+      } @else {
+        $s: $s + $br + " " + $letter !global;
+        // $s: $s + $br + $sp1 + $sp2 + " " !global;
+      }
+    }
+    content: "#{$s}";
+  }
+}
+
+:root {
+  --cover-color: #cb0072;
+}
+
+.diary {
+  $cover-cols: #e09900, #b94400, #c71717, #99004d, #50474b, #212dcf, #230076,
+    #055c1f, #017c7e, #110f1b;
+  @for $i from 1 to length($cover-cols) {
+    $c: nth($cover-cols, $i);
+    &.cover_#{$i} {
+      --cover-color: #{$c};
     }
   }
+}
+
+.open.diary {
+  @media (min-width: $sm-brkpnt) {
+    &:before,
+    &:after {
+      background: $default-cover-color;
+      background: var(--cover-color) !important;
+      @include diary-shadow;
+    }
+  }
+  @media (max-width: $sm-brkpnt) {
+    &:before {
+      background: $default-cover-color;
+      background-color: var(--cover-color) !important;
+      @include diary-shadow;
+    }
+  }
+}
+
+.cover {
+  @include diary-shadow;
+
+  background-color: $default-cover-color;
+  background-color: var(--cover-color);
 }
