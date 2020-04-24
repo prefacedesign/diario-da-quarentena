@@ -12,16 +12,11 @@ $line-cols: #ffd21f, #b9440050, #c7171750, #99004d50, #50474b50, #212dcf50,
   #23007650, #06882d50, #005a6150, #110f1b40, #b5c9c6;
 
 $s: "";
-.cover {
-  &:before {
-    content: "c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a ";
-  }
-}
+$br: "\a";
+$sp1: "\2004";
+$sp2: "\2006";
 @each $letter in $alphabet {
   $s: "" !global;
-  $br: "\a";
-  $sp1: "\2004";
-  $sp2: "\2006";
   .first_#{to-lower-case($letter)} .cover:before {
     @for $y from 1 through 41 {
       @for $x from 1 through 28 {
@@ -34,6 +29,11 @@ $s: "";
       }
     }
     content: "#{$s}";
+  }
+}
+.cover {
+  &:before {
+    content: $s; // defaults to a bunch of Zs!
   }
 }
 
@@ -152,6 +152,10 @@ $s: "";
 
 $ink-cols: #ffffffd7, #fff67bf3, #ff8741, #479654f3, #3f253dcc, #72b1ecf1,
   #f85555d8, #665cf1e1, #ffffffb2, #e0ababd8;
+
+.cover:before {
+  color: #e0ababd8; // defaults to the pink
+}
 
 @for $i from 1 through length($ink-cols) {
   $c: nth($ink-cols, $i);
