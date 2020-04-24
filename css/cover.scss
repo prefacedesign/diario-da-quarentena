@@ -37,7 +37,7 @@ $s: "";
 .diary {
   $cover-cols: #e09900, #b94400, #c71717, #99004d, #50474b, #212dcf, #230076,
     #055c1f, #017c7e, #110f1b;
-  @for $i from 1 to length($cover-cols) {
+  @for $i from 1 through length($cover-cols) {
     $c: nth($cover-cols, $i);
     &.cover_#{$i} {
       --cover-color: #{$c};
