@@ -83,11 +83,7 @@ function advancesPages(playSound = true) {
       if (pageIndex == pages.length - 1) {
         blockNavigation(true, [false, true]);
       } else {
-        if (pageIndex == minPage) {
-          blockNavigation(true, [true, false]);
-        } else {
-          blockNavigation(false);
-        }
+        blockNavigation(false);
       }
     }
   }
@@ -117,13 +113,11 @@ function returnsPages(playSound = true) {
         pages[pageIndex + pageOffset + 1].classList.remove("zoom-top");
       }
       pages[pageIndex + 1].classList.remove("past");
-
-      if (pageIndex == minPage) {
-        blockNavigation(true, [true, false]);
-      } else {
-        blockNavigation(false);
-      }
     }, flipDelay);
+  } else {
+    if (pageIndex == minPage) {
+      closeDiary();
+    }
   }
 }
 
