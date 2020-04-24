@@ -77,13 +77,30 @@ $s: "";
   }
 }
 
+.spiral {
+  @media (min-width: $sm-brkpnt) {
+    display: none;
+  }
+  @media (max-width: $sm-brkpnt) {
+    position: absolute;
+
+    width: $w;
+    left: 0;
+    height: 0.08477272727 * $w;
+    background-image: url(../img/spiral.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: -0.08477272727 /3 * $w;
+    z-index: $max-z + 1;
+  }
+}
+
 .cover {
-  @include diary-shadow(3px);
+  @include diary-shadow;
   transform-origin: left center;
 
   position: absolute;
   top: 0;
-  left: 50%;
 
   z-index: $max-z;
 
@@ -101,6 +118,8 @@ $s: "";
   width: $w + $horiz-pad;
   height: $h + $vert-pad;
   @media (min-width: $sm-brkpnt) {
+    left: 50%;
+    @include diary-shadow(3px);
     @include right-page-radiuses;
     transition: transform $opening-delay linear;
     &:hover {

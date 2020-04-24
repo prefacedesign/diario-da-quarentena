@@ -65,25 +65,39 @@ p + .highlights {
   }
 }
 
-.opening.diary {
-  .cover {
-    transform: rotate3d(0, 1, 0, -180deg);
-    // box-shadow: none;
+@media (max-width: $sm-brkpnt) {
+  .opening.diary {
+    .pages-container,
+    .navigation,
+    .staples,
+    &:before,
+    &:after {
+      display: none;
+      opacity: 0;
+    }
+  }
+}
+
+@media (min-width: $sm-brkpnt) {
+  .opening.diary {
+    .cover {
+      transform: rotate3d(0, 1, 0, -180deg);
+      &:before {
+        opacity: 0;
+      }
+      .about-the-diary {
+        opacity: 0;
+      }
+    }
+
     &:before {
-      opacity: 0;
+      display: none;
     }
-    .about-the-diary {
-      opacity: 0;
+
+    .navigation,
+    .staples {
+      display: none;
     }
-  }
-
-  &:before {
-    display: none;
-  }
-
-  .navigation,
-  .staples {
-    display: none;
   }
 }
 
@@ -97,7 +111,7 @@ p + .highlights {
   @media (min-width: $sm-brkpnt) {
     perspective: 50cm;
   }
-  transform: rotate3d(1, 0, 0, 15deg);
+  transform: rotate3d(1, 0, 0, 8deg);
 
   @media (min-width: $sm-brkpnt) {
     padding: ($vert-pad * 2/3) ($horiz-pad) ($vert-pad * 4/3);
@@ -126,12 +140,9 @@ p + .highlights {
   }
 
   @media (max-width: $sm-brkpnt) {
-    &:before,
-    &:after {
+    &:before {
       content: "";
       position: absolute;
-    }
-    &:before {
       z-index: 0;
 
       height: $h + $vert-pad * 2;
@@ -139,16 +150,6 @@ p + .highlights {
 
       top: -$vert-pad * 2/3;
       left: -$horiz-pad;
-    }
-    &:after {
-      width: $w;
-      left: 0;
-      height: 0.08477272727 * $w;
-      background-image: url(../img/spiral.svg);
-      background-size: contain;
-      background-repeat: no-repeat;
-      top: -0.08477272727 /3 * $w;
-      z-index: 9;
     }
   }
 
@@ -175,16 +176,17 @@ p + .highlights {
 }
 
 .pages-container {
-  position: absolute;
   z-index: 5;
   @media (min-width: $sm-brkpnt) {
     width: 2 * $w;
     left: $horiz-pad;
     top: $vert-pad;
+    position: absolute;
   }
   @media (max-width: $sm-brkpnt) {
     width: $w;
     height: $h;
+    position: relative;
   }
 }
 
