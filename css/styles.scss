@@ -4,7 +4,7 @@
 @import "./cover.scss";
 
 body {
-  background-color: #ffd21f;
+  background-color: $canvas_bg;
   min-height: 100vh;
 
   display: grid;
@@ -44,23 +44,6 @@ p + .highlights {
   color: $default-pencil;
 }
 
-$vert-pad: 5px;
-$horiz-pad: 10px;
-
-$radius-adjust: 1.05;
-@mixin left-page-radiuses {
-  border-top-left-radius: $lc * $radius-adjust;
-  border-bottom-left-radius: $lc * $radius-adjust;
-  border-top-right-radius: $sc * $radius-adjust;
-  border-bottom-right-radius: $sc * $radius-adjust;
-}
-
-@mixin right-page-radiuses {
-  border-top-left-radius: $sc * $radius-adjust;
-  border-bottom-left-radius: $sc * $radius-adjust;
-  border-top-right-radius: $lc * $radius-adjust;
-  border-bottom-right-radius: $lc * $radius-adjust;
-}
 .diary {
   position: relative;
   @media (min-width: $sm-brkpnt) {
@@ -80,32 +63,6 @@ $radius-adjust: 1.05;
 
   display: grid;
   place-items: end;
-
-  .cover {
-    width: $w;
-    height: $h;
-    @media (min-width: $sm-brkpnt) {
-      @include right-page-radiuses;
-    }
-
-    overflow: hidden;
-    position: relative;
-
-    &:before {
-      position: absolute;
-      left: -$line * 4.5;
-      top: -$line * 0.2;
-      height: $h + $line;
-      width: $w + $line * 3;
-      font-family: "italian_mosaic_ornamentsRg";
-      color: white;
-      font-size: 31px;
-      line-height: 0.8em;
-      letter-spacing: 0em;
-      word-spacing: 0.28em;
-      white-space: pre;
-    }
-  }
 }
 
 .open.diary {

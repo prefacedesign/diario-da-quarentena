@@ -3,6 +3,9 @@
 $alphabet: A b C D E f G H i J K L m N O P Q R S t U V W x y Z;
 // c h
 
+$cover-cols: #ffd21f, #b94400, #c71717, #99004d, #50474b, #212dcf, #230076,
+  #06882d, #005a61, #110f1b, #cadfdc;
+
 $s: "";
 .cover {
   &:before {
@@ -35,8 +38,6 @@ $s: "";
 }
 
 .diary {
-  $cover-cols: #e09900, #b94400, #c71717, #99004d, #50474b, #212dcf, #230076,
-    #055c1f, #017c7e, #110f1b;
   @for $i from 1 through length($cover-cols) {
     $c: nth($cover-cols, $i);
     &.cover_#{$i} {
@@ -68,4 +69,39 @@ $s: "";
 
   background-color: $default-cover-color;
   background-color: var(--cover-color);
+}
+
+.cover {
+  width: $w;
+  height: $h;
+  @media (min-width: $sm-brkpnt) {
+    @include right-page-radiuses;
+  }
+
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    left: -$line * 4.5;
+    top: -$line * 0.2;
+    height: $h + $line;
+    width: $w + $line * 3;
+    font-family: "italian_mosaic_ornamentsRg";
+    font-size: 31px;
+    line-height: 0.8em;
+    letter-spacing: 0em;
+    word-spacing: 0.28em;
+    white-space: pre;
+  }
+}
+
+$ink-cols: #fff, #fff67bf3, #ff7c31, #0fa127f3, #3f253dcc, #67b6fff1, #ff4444d8,
+  #5b51f0e1, #ffffffb2, #ffb9b9ce;
+
+@for $i from 1 through length($ink-cols) {
+  $c: nth($ink-cols, $i);
+  .diary.f_color_#{$i} {
+    color: #{$c};
+  }
 }

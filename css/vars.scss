@@ -16,6 +16,7 @@ $sc: $w * 0.01;
 $max-z: 999;
 
 $default-pencil: dimgray;
+$canvas_bg: #5e5d5d;
 
 $main-line: #d6d3cc;
 $top-line: rgba(61, 80, 250, 0.231);
@@ -25,5 +26,23 @@ $sm-brkpnt: $w * 2 + $marg * 2;
 $default-cover-color: #cb0072;
 
 @mixin diary-shadow {
-  box-shadow: 0px 5px 10px #a88d1e;
+  box-shadow: 0px 5px 10px darken($canvas_bg, 20%);
+}
+
+$vert-pad: 5px;
+$horiz-pad: 10px;
+
+$radius-adjust: 1.05;
+@mixin left-page-radiuses {
+  border-top-left-radius: $lc * $radius-adjust;
+  border-bottom-left-radius: $lc * $radius-adjust;
+  border-top-right-radius: $sc * $radius-adjust;
+  border-bottom-right-radius: $sc * $radius-adjust;
+}
+
+@mixin right-page-radiuses {
+  border-top-left-radius: $sc * $radius-adjust;
+  border-bottom-left-radius: $sc * $radius-adjust;
+  border-top-right-radius: $lc * $radius-adjust;
+  border-bottom-right-radius: $lc * $radius-adjust;
 }
