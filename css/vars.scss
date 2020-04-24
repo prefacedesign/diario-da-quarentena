@@ -17,6 +17,7 @@ $max-z: 999;
 
 $default-pencil: dimgray;
 $canvas_bg: #5e5d5d;
+$paper-color: #f1f0eb;
 
 $main-line: #d6d3cc;
 $top-line: rgba(61, 80, 250, 0.231);
@@ -45,4 +46,13 @@ $radius-adjust: 1.05;
   border-bottom-left-radius: $sc * $radius-adjust;
   border-top-right-radius: $lc * $radius-adjust;
   border-bottom-right-radius: $lc * $radius-adjust;
+}
+
+.typewriter {
+  font-family: "Courier Prime", monospace;
+  font-size: $fs * 0.6;
+  &,
+  p {
+    color: mix($default-pencil, red);
+  }
 }

@@ -179,7 +179,7 @@ p + .highlights {
     height: 3/2 * $line;
     width: 2px;
     mix-blend-mode: multiply;
-    background: slategray;
+    background: transparentize(slategray, 0.75);
     &:nth-child(1) {
       top: 15%;
     }
@@ -199,7 +199,7 @@ $offset: 7px;
   width: $w;
 
   overflow-y: hidden;
-  background-color: #f1f0eb;
+  background-color: $paper-color;
 
   color: $default-pencil;
 
@@ -231,8 +231,7 @@ $offset: 7px;
   }
 
   &.summary {
-    font-family: "Courier Prime", monospace;
-    font-size: $fs * 0.7;
+    @extend .typewriter;
 
     p + p {
       text-indent: 0;
@@ -242,8 +241,6 @@ $offset: 7px;
     .text-container {
       position: relative;
       top: 3px;
-      mix-blend-mode: multiply;
-      color: darken($default-pencil, 10%);
       &:after {
         content: "";
         position: absolute;
