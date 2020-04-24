@@ -416,7 +416,7 @@ $offset: 7px;
   left: 0;
   padding-right: $line * 2/3;
   text-align: right;
-  border-bottom: 1px solid $top-line;
+  border-bottom: 1px solid var(--divider-line-color);
 
   &:after {
     content: "";
@@ -424,7 +424,7 @@ $offset: 7px;
     left: 0;
     right: 0;
     bottom: 4px;
-    border-bottom: 1px solid $top-line;
+    border-bottom: 1px solid var(--divider-line-color);
   }
 
   &:before {
