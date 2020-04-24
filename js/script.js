@@ -12,6 +12,8 @@ let pageOffset = 2;
 let minPage = 0;
 let flipDelay = 250;
 
+let diaryOpeningOrClosing = false;
+
 function detectMobile() {
   let w = Math.max(
     document.documentElement.clientWidth,
@@ -137,23 +139,31 @@ function playFlip() {
 }
 
 function openDiary() {
-  playFlip();
-  diary.classList.add("opening");
-  diary.classList.remove("closed");
-  setTimeout(() => {
-    diary.classList.remove("opening");
-    diary.classList.add("open");
-  }, flipDelay * 3);
+  if (!diaryOpeningOrClosing) {
+    playFlip();
+    diary.classList.add("opening");
+    diary.classList.remove("closed");
+    diaryOpeningOrClosing = true;
+    setTimeout(() => {
+      diary.classList.remove("opening", "closing", "closed");
+      diary.classList.add("open");
+      diaryOpeningOrClosing = false;
+    }, flipDelay * 3);
+  }
 }
 
 function closeDiary() {
-  playFlip();
-  diary.classList.add("closing");
-  diary.classList.remove("open");
-  setTimeout(() => {
-    diary.classList.remove("closing");
-    diary.classList.add("closed");
-  }, flipDelay * 3);
+  if (!diaryOpeningOrClosing) {
+    playFlip();
+    diary.classList.add("closing");
+    diary.classList.remove("open");
+    diaryOpeningOrClosing = true;
+    setTimeout(() => {
+      diary.classList.remove("closing", "opening", "open");
+      diary.classList.add("closed");
+      diaryOpeningOrClosing = false;
+    }, flipDelay * 3);
+  }
 }
 
 let diary = document.querySelector(".diary");
