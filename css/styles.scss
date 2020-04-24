@@ -99,11 +99,34 @@ p + .highlights {
       display: none;
     }
   }
+
+  .closing.diary {
+    .cover {
+      transform: rotate3d(0, 1, 0, 0deg);
+      &:before,
+      .about-the-diary {
+        opacity: 1;
+      }
+    }
+
+    &:before {
+      display: none;
+    }
+    .navigation,
+    .staples {
+      display: none;
+    }
+  }
 }
 
 .open.diary {
   .cover {
-    display: none;
+    transform: rotate3d(0, 1, 0, -180deg);
+    z-index: -1;
+    .about-the-diary,
+    &:before {
+      opacity: 0;
+    }
   }
 }
 

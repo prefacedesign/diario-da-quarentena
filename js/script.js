@@ -152,6 +152,16 @@ function openDiary() {
   }, flipDelay * 3);
 }
 
+function closeDiary() {
+  playFlip();
+  diary.classList.add("closing");
+  diary.classList.remove("open");
+  setTimeout(() => {
+    diary.classList.remove("closing");
+    diary.classList.add("closed");
+  }, flipDelay * 3);
+}
+
 let diary = document.querySelector(".diary");
 debugAnimations = false;
 window.addEventListener("resize", detectMobile);
@@ -159,6 +169,8 @@ window.addEventListener("resize", detectMobile);
 detectMobile();
 
 if (debugAnimations) {
+  let del = 800;
+
   let iClass = 10;
   let maxClass = 11;
   setInterval(() => {
@@ -169,7 +181,7 @@ if (debugAnimations) {
       iClass++;
     }
     diary.classList.add(`cover_${iClass}`);
-  }, 300);
+  }, del * maxClass);
 
   let alpha = "abcdefghijklmnopqrstuvwxyz";
   let iAlpha = 0;
@@ -182,7 +194,7 @@ if (debugAnimations) {
       iAlpha++;
     }
     diary.classList.add(`first_${alpha[iAlpha]}`);
-  }, 400);
+  }, del * 2);
 
   let iCol = 1;
   let maxCol = 10;
@@ -195,5 +207,5 @@ if (debugAnimations) {
       iCol++;
     }
     diary.classList.add(`f_color_${iCol}`);
-  }, 300 * maxClass);
+  }, del);
 }
