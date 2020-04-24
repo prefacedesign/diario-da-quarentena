@@ -158,6 +158,7 @@ $ink-cols: #fff, #fff67bf3, #ff7c31, #0fa127f3, #3f253dcc, #67b6fff1, #ff4444d8,
 .about-the-diary {
   background: $paper-color;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  transition: opacity 0s linear $opening-delay/2;
   transform: rotate3d(0, 0, 1, -0.5deg);
   border-radius: 2px;
 
@@ -172,9 +173,6 @@ $ink-cols: #fff, #fff67bf3, #ff7c31, #0fa127f3, #3f253dcc, #67b6fff1, #ff4444d8,
     @extend .typewriter;
     &.who:before {
       content: "DIÁRIO DA QUARENTENA \a";
-      text-decoration: underline;
-      text-decoration-skip-ink: none;
-      text-decoration-color: var(--divider-line-color);
     }
   }
 
