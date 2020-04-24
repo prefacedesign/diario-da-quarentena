@@ -60,6 +60,12 @@ $s: "";
     &:after {
       background: $default-cover-color;
       background-color: var(--cover-color) !important;
+      background-image: linear-gradient(
+        to bottom,
+        var(--cover-color),
+        var(--cover-color) 25%,
+        #000 1000%
+      );
     }
     &:before {
       @include diary-shadow(-3px);
