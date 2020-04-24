@@ -66,7 +66,8 @@ p + .highlights {
 }
 
 @media (max-width: $sm-brkpnt) {
-  .opening.diary {
+  .opening.diary,
+  .closing.diary {
     .pages-container,
     .navigation,
     .staples,
@@ -120,12 +121,19 @@ p + .highlights {
 }
 
 .open.diary {
-  .cover {
-    transform: rotate3d(0, 1, 0, -180deg);
-    z-index: -1;
-    .about-the-diary,
-    &:before {
-      opacity: 0;
+  @media (min-width: $sm-brkpnt) {
+    .cover {
+      transform: rotate3d(0, 1, 0, -180deg);
+      z-index: -1;
+      .about-the-diary,
+      &:before {
+        opacity: 0;
+      }
+    }
+  }
+  @media (max-width: $sm-brkpnt) {
+    .cover {
+      display: none;
     }
   }
 }
