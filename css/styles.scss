@@ -13,7 +13,7 @@ body {
 
   @media (min-width: $sm-brkpnt) {
     perspective: 50cm;
-    padding: $marg;
+    padding: $marg $marg $marg * 3 $marg;
   }
 }
 
@@ -57,40 +57,49 @@ p + .highlights {
 .closed.diary {
   .pages-container,
   .navigation,
-  .staples {
+  .staples,
+  &:before,
+  &:after {
+    display: none;
+    opacity: 0;
+  }
+}
+
+.opening.diary {
+  .cover {
+    transform: rotate3d(0, 1, 0, -180deg);
+    // box-shadow: none;
+    &:before {
+      opacity: 0;
+    }
+    .about-the-diary {
+      opacity: 0;
+    }
+  }
+
+  &:before {
     display: none;
   }
 
-  display: grid;
-  place-items: end;
+  .navigation,
+  .staples {
+    display: none;
+  }
 }
 
 .open.diary {
   .cover {
     display: none;
   }
+}
 
+.diary {
   @media (min-width: $sm-brkpnt) {
     perspective: 50cm;
   }
-  transform: rotate3d(1, 0, 0, 10deg);
-
-  .pages-container {
-    position: relative;
-    z-index: 5;
-    @media (min-width: $sm-brkpnt) {
-      width: 2 * $w;
-    }
-    @media (max-width: $sm-brkpnt) {
-      width: $w;
-      height: $h;
-    }
-  }
+  transform: rotate3d(1, 0, 0, 15deg);
 
   @media (min-width: $sm-brkpnt) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
     padding: ($vert-pad * 2/3) ($horiz-pad) ($vert-pad * 4/3);
 
     &:before,
@@ -162,6 +171,20 @@ p + .highlights {
   }
   @media (max-width: $aux-w*0.5) {
     transform: scale(0.9 * 0.5);
+  }
+}
+
+.pages-container {
+  position: absolute;
+  z-index: 5;
+  @media (min-width: $sm-brkpnt) {
+    width: 2 * $w;
+    left: $horiz-pad;
+    top: $vert-pad;
+  }
+  @media (max-width: $sm-brkpnt) {
+    width: $w;
+    height: $h;
   }
 }
 

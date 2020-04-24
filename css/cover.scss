@@ -1,6 +1,8 @@
 @import "./vars.scss";
 
 $alphabet: A b C D E f G H i J K L m N O P Q R S t U V W x y Z;
+
+$opening-delay: $flipTime * 3;
 // c h
 
 $cover-cols: #ffd21f, #b94400, #c71717, #99004d, #50474b, #212dcf, #230076,
@@ -13,6 +15,7 @@ $s: "";
 .cover {
   &:before {
     content: "c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a c c c c c c c c c c c c c c c c c c c c c c c c c c c c \a cc c c c c c c c c c c c c c c c c c c c c c c c c c c c \a ";
+    transition: opacity 0s linear $opening-delay/2;
   }
 }
 @each $letter in $alphabet {
@@ -51,13 +54,18 @@ $s: "";
   }
 }
 
-.open.diary {
+.diary {
   @media (min-width: $sm-brkpnt) {
     &:before,
     &:after {
       background: $default-cover-color;
       background-color: var(--cover-color) !important;
-      @include diary-shadow;
+    }
+    &:before {
+      @include diary-shadow(-3px);
+    }
+    &:after {
+      @include diary-shadow(3px);
     }
   }
   @media (max-width: $sm-brkpnt) {
@@ -70,7 +78,14 @@ $s: "";
 }
 
 .cover {
-  @include diary-shadow;
+  @include diary-shadow(3px);
+  transform-origin: left center;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  z-index: $max-z;
 
   background-color: $default-cover-color;
   background-color: var(--cover-color);
@@ -80,13 +95,17 @@ $s: "";
     var(--cover-color) 25%,
     #000 1000%
   );
-}
 
-.cover {
-  width: $w;
-  height: $h;
+  cursor: pointer;
+
+  width: $w + $horiz-pad;
+  height: $h + $vert-pad;
   @media (min-width: $sm-brkpnt) {
     @include right-page-radiuses;
+    transition: transform $opening-delay linear;
+    &:hover {
+      transform: rotate3d(0, 1, 0, -5deg);
+    }
   }
 
   overflow: hidden;

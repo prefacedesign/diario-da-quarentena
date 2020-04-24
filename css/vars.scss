@@ -26,8 +26,8 @@ $sm-brkpnt: $w * 2 + $marg * 2;
 
 $default-cover-color: #cb0072;
 
-@mixin diary-shadow {
-  box-shadow: 0px 5px 10px darken($canvas_bg, 20%);
+@mixin diary-shadow($x: 0px) {
+  box-shadow: $x 2px 5px darken($canvas_bg, 10%);
 }
 
 $vert-pad: 5px;

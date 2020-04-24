@@ -142,47 +142,58 @@ function playFlip() {
   audio.play();
 }
 
+function openDiary() {
+  playFlip();
+  diary.classList.add("opening");
+  diary.classList.remove("closed");
+  setTimeout(() => {
+    diary.classList.remove("opening");
+    diary.classList.add("open");
+  }, flipDelay * 3);
+}
+
+let diary = document.querySelector(".diary");
+debugAnimations = false;
 window.addEventListener("resize", detectMobile);
 
 detectMobile();
 
-if (false) {
-  let c = document.querySelector(".diary");
+if (debugAnimations) {
   let iClass = 10;
   let maxClass = 11;
   setInterval(() => {
-    c.classList.remove(`cover_${iClass}`);
+    diary.classList.remove(`cover_${iClass}`);
     if (iClass == maxClass) {
       iClass = 1;
     } else {
       iClass++;
     }
-    c.classList.add(`cover_${iClass}`);
+    diary.classList.add(`cover_${iClass}`);
   }, 300);
 
   let alpha = "abcdefghijklmnopqrstuvwxyz";
   let iAlpha = 0;
 
   setInterval(() => {
-    c.classList.remove(`first_${alpha[iAlpha]}`);
+    diary.classList.remove(`first_${alpha[iAlpha]}`);
     if (iAlpha == alpha.length - 1) {
       iAlpha = 0;
     } else {
       iAlpha++;
     }
-    c.classList.add(`first_${alpha[iAlpha]}`);
+    diary.classList.add(`first_${alpha[iAlpha]}`);
   }, 400);
 
   let iCol = 1;
   let maxCol = 10;
 
   setInterval(() => {
-    c.classList.remove(`f_color_${iCol}`);
+    diary.classList.remove(`f_color_${iCol}`);
     if (iCol == maxCol) {
       iCol = 1;
     } else {
       iCol++;
     }
-    c.classList.add(`f_color_${iCol}`);
+    diary.classList.add(`f_color_${iCol}`);
   }, 300 * maxClass);
 }
