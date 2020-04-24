@@ -26,7 +26,6 @@ $s: "";
         $s: $s + $br + " " !global;
       } @else {
         $s: $s + $br + " " + $letter !global;
-        // $s: $s + $br + $sp1 + $sp2 + " " !global;
       }
     }
     content: "#{$s}";
@@ -51,7 +50,7 @@ $s: "";
     &:before,
     &:after {
       background: $default-cover-color;
-      background: var(--cover-color) !important;
+      background-color: var(--cover-color) !important;
       @include diary-shadow;
     }
   }
@@ -69,6 +68,12 @@ $s: "";
 
   background-color: $default-cover-color;
   background-color: var(--cover-color);
+  background-image: linear-gradient(
+    to bottom,
+    var(--cover-color),
+    var(--cover-color) 25%,
+    #000 1000%
+  );
 }
 
 .cover {
