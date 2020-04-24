@@ -193,6 +193,8 @@ $ink-cols: #ffffffd7, #fff67bf3, #ff8741, #479654f3, #3f253dcc, #72b1ecf1,
   width: 8 * $line;
 
   p {
+    user-select: none;
+
     @extend .typewriter;
     &.who:before {
       content: "DIÁRIO DA QUARENTENA \a";
