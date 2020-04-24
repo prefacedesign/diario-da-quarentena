@@ -11,6 +11,8 @@ body {
   place-items: center;
   justify-content: center;
 
+  overflow-y: scroll; // the flipping page sometimes makes scroll bars appear...
+
   @media (min-width: $sm-brkpnt) {
     perspective: 50cm;
     padding: $marg $marg $marg * 3 $marg;
