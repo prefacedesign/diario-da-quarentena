@@ -105,10 +105,19 @@ $sp2: "\2006";
 
 .cover {
   @include diary-shadow;
-  transform-origin: left center;
+  transform-origin: left top;
 
   position: absolute;
-  top: 0;
+  @media (min-width: $sm-brkpnt) {
+    top: -$vert-pad * 3/5;
+
+    width: $w + $horiz-pad;
+  }
+  @media (max-width: $sm-brkpnt) {
+    top: 0;
+
+    width: $w + $horiz-pad * 2;
+  }
 
   z-index: $max-z;
 
@@ -122,9 +131,7 @@ $sp2: "\2006";
   );
 
   cursor: pointer;
-
-  width: $w + $horiz-pad;
-  height: $h + $vert-pad;
+  height: $h + $vert-pad * 2;
   @media (min-width: $sm-brkpnt) {
     left: 50%;
     @include diary-shadow(3px);
