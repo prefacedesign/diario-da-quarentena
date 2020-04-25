@@ -1,3 +1,5 @@
+let mockData;
+
 let mobile = false;
 let pgW = 400,
   marg = pgW / 20,
@@ -213,4 +215,13 @@ detectMobile();
 if (debugAnimations) {
   startDebuggingAnimations();
 }
+
+fetch("../data/example.json")
+  .then((response) => {
+    return response.json();
+  })
+  .then((json) => {
+    mockData = json;
+    setDiaryStyle();
+  });
 
