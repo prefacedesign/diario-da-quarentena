@@ -162,13 +162,7 @@ function closeDiary() {
   }
 }
 
-let diary = document.querySelector(".diary");
-debugAnimations = false;
-window.addEventListener("resize", detectMobile);
-
-detectMobile();
-
-if (debugAnimations) {
+function startDebuggingAnimations() {
   let del = 800;
 
   let iClass = 10;
@@ -209,3 +203,14 @@ if (debugAnimations) {
     diary.classList.add(`f_color_${iCol}`);
   }, del);
 }
+
+let diary = document.querySelector(".diary");
+debugAnimations = false;
+window.addEventListener("resize", detectMobile);
+
+detectMobile();
+
+if (debugAnimations) {
+  startDebuggingAnimations();
+}
+
