@@ -5,13 +5,13 @@ $alphabet: A b C D E f G H i J K L m N O P Q R S t U V W x y Z;
 $opening-delay: $flipTime * 3;
 // c h
 
-$cover-cols: #ffd21f, #b94400, #c71717, #99004d, #50474b, #0068fb, #000059,
-  #006e00, #005a61, #110f1b, #cadfdc, #5a2c00, #798c79, #6c2cb6, #ff8faa,
+$cover-cols: #efac02, #b94400, #c71717, #99004d, #50474b, #0068fb, #000059,
+  #006e00, #005a61, #110f1b, #cadfdc, #5a2c00, #4f2aa8, #798c79, #ff8faa,
   #00866c;
 
-$line-cols: #ffd21f, #b9440050, #c7171750, #99004d50, #50474b50, #0068fb50,
-  #00005950, #006e0050, #005a6150, #110f1b40, #b5c9c6, #5a2c0050, #798c7950,
-  #6c2cb650, #ff8faa50, #00866c50;
+$line-cols: #efac028f, #b9440050, #c7171750, #99004d50, #50474b50, #0068fb50,
+  #00005950, #006e0050, #005a6150, #110f1b40, #b5c9c6, #5a2c0050, #4f2aa850,
+  #798c7950, #ff8faa50, #00866c50;
 
 $s: "";
 $br: "\a";
@@ -42,6 +42,7 @@ $sp2: "\2006";
 :root {
   --cover-color: #cb0072;
   --divider-line-color: #cb007280;
+  --ink-color: #fff;
 }
 
 .diary {
@@ -152,8 +153,8 @@ $sp2: "\2006";
   }
 }
 
-$ink-cols: #ffffff, #f1e8a4, #ff8741, #479654, #332653, #72b1ec, #f85555,
-  #665cf1, #8eba62, #e0abab, #849aa0;
+$ink-cols: #a0bcf1, #7c564a, #c86fa7, #ffc959, #ff8741, #479654, #332653,
+  #72b1ec, #f85555, #0082f2, #8eba62, #e0abab, #849aa0, #006099, #ac5569;
 
 .cover:before {
   color: #e0abab; // defaults to the pink
@@ -161,8 +162,11 @@ $ink-cols: #ffffff, #f1e8a4, #ff8741, #479654, #332653, #72b1ec, #f85555,
 
 @for $i from 1 through length($ink-cols) {
   $c: nth($ink-cols, $i);
-  .diary.ink_#{$i} .cover:before {
-    color: #{$c};
+  .diary.ink_#{$i} {
+    --ink-color: #{$c};
+    .cover:before {
+      color: #{$c};
+    }
   }
 }
 
