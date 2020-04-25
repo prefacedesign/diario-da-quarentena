@@ -40,10 +40,6 @@ function detectMobile() {
       blockNavigation(true, [false, true]);
     }
 
-    if (pageIndex == 1) {
-      blockNavigation(true, [true, false]);
-    }
-
     // if current page is even i'll set index to its
     // even pair
     if (pageIndex % 2 != 0) {
