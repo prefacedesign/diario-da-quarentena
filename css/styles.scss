@@ -492,7 +492,7 @@ $offset: 7px;
 .navigation {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 0 $line;
+  padding: 0 $line * 1/2;
 
   position: absolute;
   z-index: $max-z;
@@ -518,9 +518,10 @@ $offset: 7px;
     cursor: pointer;
     font-family: "brizelregular", cursive;
     text-decoration: none;
-    font-size: 64px;
+    font-size: 90px;
     line-height: 40px;
     color: #3d50fa;
+    color: var(--ink-color);
     transition: opacity 0.05s ease;
     transition-delay: $flipTime;
     &:disabled {
