@@ -1,5 +1,8 @@
 let mockData;
 
+let inkColors = 11,
+  bgColors = 16;
+
 let mobile = false;
 let pgW = 400,
   marg = pgW / 20,
@@ -165,19 +168,18 @@ function closeDiary() {
 }
 
 function startDebuggingAnimations() {
-  let del = 800;
+  let del = 200;
 
   let iClass = 10;
-  let maxClass = 11;
   setInterval(() => {
     diary.classList.remove(`cover_${iClass}`);
-    if (iClass == maxClass) {
+    if (iClass == bgColors) {
       iClass = 1;
     } else {
       iClass++;
     }
     diary.classList.add(`cover_${iClass}`);
-  }, del * maxClass);
+  }, del * bgColors);
 
   let alpha = "abcdefghijklmnopqrstuvwxyz";
   let iAlpha = 0;
@@ -193,11 +195,10 @@ function startDebuggingAnimations() {
   }, del * 2);
 
   let iCol = 1;
-  let maxCol = 10;
 
   setInterval(() => {
-    if (iCol == maxCol) {
     diary.classList.remove(`ink_${iCol}`);
+    if (iCol == inkColors) {
       iCol = 1;
     } else {
       iCol++;
@@ -207,7 +208,7 @@ function startDebuggingAnimations() {
 }
 
 let diary = document.querySelector(".diary");
-debugAnimations = false;
+let debugAnimations = false;
 window.addEventListener("resize", detectMobile);
 
 detectMobile();
@@ -244,8 +245,8 @@ function setDiaryStyle() {
   let firstLetter = mockData.initials[0].toLowerCase();
   let bgCodeSeed = mockData.location + mockData.age + mockData.initials;
   let inkCodeSeed = mockData.initials + mockData.location + mockData.gender;
-  let bgCode = (Math.abs(bgCodeSeed.hashCode()) % 11) + 1;
-  let inkCode = (Math.abs(inkCodeSeed.hashCode()) % 10) + 1;
+  let bgCode = (Math.abs(bgCodeSeed.hashCode()) % bgColors) + 1;
+  let inkCode = (Math.abs(inkCodeSeed.hashCode()) % inkColors) + 1;
   diary.classList.add(
     `first_${firstLetter}`,
     `cover_${bgCode}`,
