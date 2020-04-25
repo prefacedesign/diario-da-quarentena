@@ -225,3 +225,30 @@ fetch("../data/example.json")
     setDiaryStyle();
   });
 
+// https://stackoverflow.com/a/8831937
+String.prototype.hashCode = function () {
+  var hash = 0;
+  if (this.length == 0) {
+    return hash;
+  }
+  for (var i = 0; i < this.length; i++) {
+    var char = this.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+// first_c cover_4 f_color_8
+function setDiaryStyle() {
+  let firstLetter = mockData.initials[0].toLowerCase();
+  let bgCodeSeed = mockData.location + mockData.age + mockData.initials;
+  let inkCodeSeed = mockData.initials + mockData.location + mockData.gender;
+  let bgCode = (Math.abs(bgCodeSeed.hashCode()) % 11) + 1;
+  let inkCode = (Math.abs(inkCodeSeed.hashCode()) % 10) + 1;
+  diary.classList.add(
+    `first_${firstLetter}`,
+    `cover_${bgCode}`,
+    `f_color_${inkCode}`
+  );
+}
