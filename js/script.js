@@ -1,6 +1,6 @@
 let mockData;
 
-let inkColors = 11,
+let inkColors = 15,
   bgColors = 16;
 
 let mobile = false;
@@ -170,41 +170,51 @@ function closeDiary() {
 function startDebuggingAnimations() {
   let del = 200;
 
+  let bgs = true,
+    inks = true,
+    patterns = true;
+
   let iClass = 10;
-  setInterval(() => {
-    diary.classList.remove(`cover_${iClass}`);
-    if (iClass == bgColors) {
-      iClass = 1;
-    } else {
-      iClass++;
-    }
-    diary.classList.add(`cover_${iClass}`);
-  }, del * bgColors);
+  if (bgs) {
+    setInterval(() => {
+      diary.classList.remove(`cover_${iClass}`);
+      if (iClass == bgColors) {
+        iClass = 1;
+      } else {
+        iClass++;
+      }
+      diary.classList.add(`cover_${iClass}`);
+    }, (del * bgColors) / 4);
+  }
 
   let alpha = "abcdefghijklmnopqrstuvwxyz";
   let iAlpha = 0;
 
-  setInterval(() => {
-    diary.classList.remove(`first_${alpha[iAlpha]}`);
-    if (iAlpha == alpha.length - 1) {
-      iAlpha = 0;
-    } else {
-      iAlpha++;
-    }
-    diary.classList.add(`first_${alpha[iAlpha]}`);
-  }, del * 2);
+  if (patterns) {
+    setInterval(() => {
+      diary.classList.remove(`first_${alpha[iAlpha]}`);
+      if (iAlpha == alpha.length - 1) {
+        iAlpha = 0;
+      } else {
+        iAlpha++;
+      }
+      diary.classList.add(`first_${alpha[iAlpha]}`);
+    }, del * 2);
+  }
 
   let iCol = 1;
 
-  setInterval(() => {
-    diary.classList.remove(`ink_${iCol}`);
-    if (iCol == inkColors) {
-      iCol = 1;
-    } else {
-      iCol++;
-    }
-    diary.classList.add(`ink_${iCol}`);
-  }, del);
+  if (inks) {
+    setInterval(() => {
+      diary.classList.remove(`ink_${iCol}`);
+      if (iCol == inkColors) {
+        iCol = 1;
+      } else {
+        iCol++;
+      }
+      diary.classList.add(`ink_${iCol}`);
+    }, del);
+  }
 }
 
 let diary = document.querySelector(".diary");
@@ -252,5 +262,5 @@ function setDiaryStyle() {
     `cover_${bgCode}`,
     `ink_${inkCode}`
   );
-  // diary.classList.add(`first_c`, `cover_16`, `ink_7`);
+  // diary.classList.add(`first_c`, `cover_6`, `ink_10`);
 }
