@@ -159,10 +159,8 @@ $ink-cols: #ffffffd7, #fff67bf3, #ff8741, #479654f3, #3f253dcc, #72b1ecf1,
 
 @for $i from 1 through length($ink-cols) {
   $c: nth($ink-cols, $i);
-  .diary.f_color_#{$i} {
+  .diary.ink_#{$i} .cover:before {
     color: #{$c};
-    .cover:before {
-    }
   }
 }
 

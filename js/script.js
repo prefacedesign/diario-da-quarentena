@@ -196,13 +196,13 @@ function startDebuggingAnimations() {
   let maxCol = 10;
 
   setInterval(() => {
-    diary.classList.remove(`f_color_${iCol}`);
     if (iCol == maxCol) {
+    diary.classList.remove(`ink_${iCol}`);
       iCol = 1;
     } else {
       iCol++;
     }
-    diary.classList.add(`f_color_${iCol}`);
+    diary.classList.add(`ink_${iCol}`);
   }, del);
 }
 
@@ -249,6 +249,7 @@ function setDiaryStyle() {
   diary.classList.add(
     `first_${firstLetter}`,
     `cover_${bgCode}`,
-    `f_color_${inkCode}`
+    `ink_${inkCode}`
   );
+  // diary.classList.add(`first_c`, `cover_16`, `ink_7`);
 }
