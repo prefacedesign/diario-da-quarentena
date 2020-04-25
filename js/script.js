@@ -253,8 +253,10 @@ String.prototype.hashCode = function () {
 // first_c cover_4 f_color_8
 function setDiaryStyle() {
   let firstLetter = mockData.initials[0].toLowerCase();
-  let bgCodeSeed = mockData.location + mockData.age + mockData.initials;
-  let inkCodeSeed = mockData.initials + mockData.location + mockData.gender;
+  let bgCodeSeed =
+    mockData.profession + mockData.location + mockData.age + mockData.initials;
+  let inkCodeSeed =
+    mockData.age + mockData.initials + mockData.location + mockData.profession;
   let bgCode = (Math.abs(bgCodeSeed.hashCode()) % bgColors) + 1;
   let inkCode = (Math.abs(inkCodeSeed.hashCode()) % inkColors) + 1;
   diary.classList.add(
