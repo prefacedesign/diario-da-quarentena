@@ -200,8 +200,10 @@ $ink-cols: #ffffffd7, #fff67bf3, #ff8741, #479654f3, #3f253dcc, #72b1ecf1,
     user-select: none;
 
     @extend .typewriter;
+    white-space: pre-line;
     &.who:before {
-      content: "DIÁRIO DA QUARENTENA \a";
+      content: "Diário da Pandemia \a";
+      text-transform: uppercase;
     }
   }
 
