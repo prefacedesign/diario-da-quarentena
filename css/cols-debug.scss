@@ -1,0 +1,39 @@
+@import "./vars.scss";
+@import "./fonts.css";
+
+body {
+  background-color: $canvas_bg;
+}
+
+@for $i from 1 through length($ink-cols) {
+  $c: nth($ink-cols, $i);
+  .ink-#{$i} {
+    color: #{$c};
+  }
+}
+
+@for $i from 1 through length($cover-cols) {
+  $c: nth($cover-cols, $i);
+  .bg-#{$i} {
+    background-color: #{$c};
+  }
+}
+
+#container > div {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(8, 1fr);
+  & + div {
+    margin-top: 40px;
+  }
+  & > div {
+    padding: 10px;
+    &:after {
+      font-family: "italian_mosaic_ornamentsRg";
+      font-size: 21px;
+      text-align: center;
+      display: block;
+      content: "c c c c c c c c c c c c";
+    }
+  }
+}

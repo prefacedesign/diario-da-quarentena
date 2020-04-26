@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Colors' debug</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/cols-debug.css">
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      let nBackgrounds = 16;
+      let nInks = 15;
+
+      let container = document.querySelector('#container');
+
+      for (let bgI = 1; bgI <= nBackgrounds; bgI++){
+        let bgContainer = document.createElement("div");
+        container.appendChild(bgContainer);
+        for (let inkI = 1; inkI <= nInks; inkI++) {
+          let inkEl = document.createElement("div");
+          inkEl.classList.add(`ink-${inkI}`);
+          inkEl.classList.add(`bg-${bgI}`);
+          bgContainer.appendChild(inkEl);
+        }
+      }
+
+    </script>
+  </body>
+</html>
