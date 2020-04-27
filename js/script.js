@@ -236,6 +236,7 @@ fetch("../data/example.json")
   .then((json) => {
     mockData = json;
     setDiaryStyle();
+    paginateContent();
   });
 
 // https://stackoverflow.com/a/8831937
@@ -266,5 +267,49 @@ function setDiaryStyle() {
     `cover_${bgCode}`,
     `ink_${inkCode}`
   );
-  // diary.classList.add(`first_e`, `cover_2`, `ink_12`);
+  // diary.classList.add(`first_e`, `cover_3`, `ink_15`);
+}
+
+function paginateContent() {
+  let textContainer = document.querySelector("#aux-text-container");
+  let style = window.getComputedStyle(textContainer);
+  let lineHeight = parseInt(style.getPropertyValue("line-height"), 10);
+  let lineLimit = 16;
+
+  let heightLimit = lineHeight * lineLimit;
+
+  let html = [];
+  // converts the json to html
+  mockData.entries.forEach((e) => {
+    let tags = [];
+    Object.keys(e.open_ended_directives).forEach((key) => {
+      // title of the directive
+      tags.push({
+        tag: "h2",
+        inner_text: key,
+      });
+
+      // student-filled text
+      let s = e.open_ended_directives[key];
+      let parts = s.split("\n");
+      parts.forEach((part) => {
+        if (part.length > 0) {
+          tags.push({
+            tag: "p",
+            inner_text: part.trim(),
+          });
+        }
+      });
+      if (e.mood != "") {
+        tags.push({
+          tag: "p",
+          inner_text: `Resumo da semana... ${e.mood}`,
+        });
+      }
+    });
+    html.push({
+      week: e.date,
+      text: tags,
+    });
+  });
 }
