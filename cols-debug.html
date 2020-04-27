@@ -10,18 +10,29 @@
   <body>
     <div id="container"></div>
     <script>
-      let nBackgrounds = 16;
+      let nBackgrounds = 17;
       let nInks = 15;
 
       let container = document.querySelector('#container');
 
       for (let bgI = 1; bgI <= nBackgrounds; bgI++){
         let bgContainer = document.createElement("div");
+        let p = document.createElement("p");
+        let node = document.createTextNode(`background ${bgI}`);
+        p.appendChild(node);
+        bgContainer.appendChild(p);
         container.appendChild(bgContainer);
+
         for (let inkI = 1; inkI <= nInks; inkI++) {
           let inkEl = document.createElement("div");
           inkEl.classList.add(`ink-${inkI}`);
           inkEl.classList.add(`bg-${bgI}`);
+
+          let p = document.createElement("p");
+          let node = document.createTextNode(`ink ${inkI}`);
+          p.appendChild(node);
+          inkEl.appendChild(p);
+
           bgContainer.appendChild(inkEl);
         }
       }
