@@ -20,11 +20,10 @@ body {
 }
 
 .highlights {
-  font-family: "brizelregular", cursive;
+  font-family: "Patrick Hand", cursive;
 
   color: #cb0072;
-
-  font-size: $fs * 0.95;
+  font-size: $fs;
   display: block;
   mix-blend-mode: multiply;
 }
@@ -280,7 +279,7 @@ $offset: 7px;
     );
   }
 
-  font-family: "gunny_rewrittenregular", cursive;
+  font-family: "Patrick Hand", cursive;
   line-height: $line;
   font-size: $fs;
 
@@ -314,7 +313,7 @@ $offset: 7px;
   }
 
   p + p {
-    text-indent: $line;
+    text-indent: $line * 2/3;
   }
 
   @media (min-width: $sm-brkpnt) {
@@ -442,7 +441,7 @@ $offset: 7px;
     @extend .header-highlights;
     position: absolute;
     left: $line * 2/3;
-    top: $line;
+    top: $line * 1.1;
   }
 }
 
@@ -466,7 +465,8 @@ $offset: 7px;
 .pg-num {
   @extend .header-highlights;
   position: absolute;
-  top: $line;
+  top: $line * 1.1;
+  line-height: $line * 0.9;
   right: 0;
   left: 0;
   padding-right: $line * 2/3;
@@ -478,7 +478,7 @@ $offset: 7px;
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 4px;
+    bottom: 6px;
     border-bottom: 1px solid var(--divider-line-color);
   }
 
@@ -496,7 +496,7 @@ $offset: 7px;
 
   position: absolute;
   z-index: $max-z;
-  bottom: 2/5 * $line;
+  bottom: 3/4 * $line;
 
   @media (min-width: $sm-brkpnt) {
     width: $w * 2;
@@ -516,10 +516,11 @@ $offset: 7px;
     border: none;
     background: none;
     cursor: pointer;
-    font-family: "brizelregular", cursive;
+    font-family: "Patrick Hand SC", cursive;
     text-decoration: none;
-    font-size: 90px;
-    line-height: 40px;
+    font-size: $fs * 3;
+    line-height: $line;
+    padding: $line/4 $line;
     color: #3d50fa;
     color: var(--ink-color);
     transition: opacity 0.05s ease;

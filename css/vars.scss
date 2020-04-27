@@ -6,7 +6,8 @@ $flipTime: 250ms;
 $marg: $w / 20;
 
 $line: ceil($h / 21);
-$fs: $line * 0.777777;
+// $fs: $line * 0.777777;
+$fs: $line * 0.6;
 
 // $lc: $w * 0.1226175;
 $lc: $w * 0.1;
@@ -50,7 +51,7 @@ $radius-adjust: 1.05;
 
 .typewriter {
   font-family: "Courier Prime", monospace;
-  font-size: $fs * 0.6;
+  font-size: $fs * 0.73;
   &,
   p {
     color: mix($default-pencil, maroon);
