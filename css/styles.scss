@@ -19,6 +19,12 @@ body {
   }
 }
 
+.diary-text {
+  font-family: "Patrick Hand", cursive;
+  line-height: $line;
+  font-size: $fs;
+}
+
 .highlights {
   font-family: "Patrick Hand", cursive;
 
@@ -37,6 +43,10 @@ body {
 
 p + .highlights {
   margin-top: $line;
+}
+
+h2 {
+  @extend .highlights;
 }
 
 .header-highlights {
@@ -256,6 +266,7 @@ $offset: 7px;
   width: $w;
 
   overflow-y: hidden;
+  overflow-x: hidden;
   background-color: $paper-color;
 
   color: $default-pencil;
@@ -279,23 +290,18 @@ $offset: 7px;
     );
   }
 
-  font-family: "Patrick Hand", cursive;
-  line-height: $line;
-  font-size: $fs;
-
   &:first-child {
     display: none;
   }
 
   &.summary {
-    @extend .typewriter;
-
     p + p {
       text-indent: 0;
       margin-top: $line;
     }
 
     .text-container {
+      @extend .typewriter;
       position: relative;
       top: 3px;
       &:after {
@@ -457,9 +463,12 @@ $offset: 7px;
 
   margin-top: $offset + 2 * $line;
   height: 17 * $line;
+  width: $w;
 
   padding-left: $line * 2/3;
   padding-right: $line * 2/3;
+
+  @extend .diary-text;
 }
 
 .pg-num {
@@ -533,4 +542,13 @@ $offset: 7px;
 
     $m: 2/3 * $line;
   }
+}
+
+#aux-text-container {
+  @extend .text-container;
+  position: fixed;
+  height: auto;
+  left: 0;
+  top: 0;
+  background: red;
 }
