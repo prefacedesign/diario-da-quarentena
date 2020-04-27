@@ -1,7 +1,7 @@
 let mockData;
 
 let inkColors = 15,
-  bgColors = 16;
+  bgColors = 17;
 
 let mobile = false;
 let pgW = 400,
@@ -264,5 +264,5 @@ function setDiaryStyle() {
     `cover_${bgCode}`,
     `ink_${inkCode}`
   );
-  // diary.classList.add(`first_c`, `cover_6`, `ink_10`);
+  // diary.classList.add(`first_e`, `cover_2`, `ink_12`);
 }
