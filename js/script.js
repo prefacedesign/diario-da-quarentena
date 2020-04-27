@@ -99,6 +99,8 @@ function returnsPages(playSound = true) {
       playFlip();
     }
 
+    blockNavigation(false, [false, true]);
+
     pages[pageIndex].classList.remove("current");
 
     if (!mobilePaginationScheme) {
