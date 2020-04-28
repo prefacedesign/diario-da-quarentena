@@ -350,7 +350,10 @@ function paginateContent() {
         textContainer.appendChild(node);
 
         let lines = parseInt(textContainer.offsetHeight) / lineHeight;
-        if (lines > lineLimit) {
+        if (
+          lines > lineLimit ||
+          (currentTag == "h2" && lines > lineLimit - 2)
+        ) {
           // Breaks it word by word until the limit is reached.
           textContainer.lastChild.innerHTML = "";
           let words = tag.inner_text.split(" ");
@@ -361,7 +364,10 @@ function paginateContent() {
               let oldS = textContainer.lastChild.innerHTML;
               textContainer.lastChild.innerHTML += words[i] + " ";
               lines = parseInt(textContainer.offsetHeight) / lineHeight;
-              if (lines > lineLimit) {
+              if (
+                lines > lineLimit ||
+                (currentTag == "h2" && lines > lineLimit - 2)
+              ) {
                 foundBreakpoint = true;
                 textContainer.lastChild.innerHTML = oldS;
                 pages.push(textContainer.innerHTML);
