@@ -11,7 +11,7 @@ let pgW = 400,
 let audio = new Audio("../sounds/page-flip-4.mp3");
 
 let pageIndex = 0;
-let pages = document.querySelectorAll(".page");
+let pages;
 let mobilePaginationScheme = false;
 let pageOffset = 2;
 let minPage = 0;
@@ -20,6 +20,9 @@ let flipDelay = 250;
 let diaryOpeningOrClosing = false;
 
 function detectMobile() {
+  if (!pages) {
+    pages = document.querySelectorAll(".page");
+  }
   let w = Math.max(
     document.documentElement.clientWidth,
     window.innerWidth || 0
@@ -226,7 +229,6 @@ let fontLoaded = false,
 
 (function () {
   window.addEventListener("resize", detectMobile);
-  detectMobile();
   if (debugAnimations) {
     startDebuggingAnimations();
   }
@@ -235,6 +237,7 @@ let fontLoaded = false,
     if (dataLoaded) {
       setDiaryStyle();
       paginateContent();
+      detectMobile();
     }
   });
 })();
@@ -249,6 +252,7 @@ fetch("../data/example.json")
     if (fontLoaded) {
       setDiaryStyle();
       paginateContent();
+      detectMobile();
     }
   });
 
@@ -329,41 +333,63 @@ function paginateContent() {
 
   console.log(html);
 
-  let pages = {};
-  let currentPage = [];
-
-  let ok = true;
+  let pages;
+  let pageContainer = document.querySelector(".pages-container");
+  let currentTag, currentText;
 
   html.forEach((week) => {
+    pages = [];
     week.tags.forEach((tag) => {
-      if (ok) {
-        let node = document.createElement(tag.tag);
-        let textNode = document.createTextNode(tag.inner_text);
+      let hasEndedProcessing = false;
+      currentTag = tag.tag;
+      currentText = tag.inner_text;
+      do {
+        let node = document.createElement(currentTag);
+        let textNode = document.createTextNode(currentText);
         node.appendChild(textNode);
         textContainer.appendChild(node);
 
-        let lines;
-        lines = parseInt(textContainer.offsetHeight) / lineHeight;
-        if (lines <= lineLimit) {
-          currentPage.push(tag);
-        } else {
-          // I'll have to break it word by word until I reach the limit.
+        let lines = parseInt(textContainer.offsetHeight) / lineHeight;
+        if (lines > lineLimit) {
+          // Breaks it word by word until the limit is reached.
           textContainer.lastChild.innerHTML = "";
           let words = tag.inner_text.split(" ");
           let foundBreakpoint = false;
           let i = 0;
-          for (; i < words.length && !foundBreakpoint; i++) {
-            let oldS = textContainer.lastChild.innerHTML;
-            textContainer.lastChild.innerHTML += words[i] + " ";
-            lines = parseInt(textContainer.offsetHeight) / lineHeight;
-            if (lines > lineLimit) {
-              foundBreakpoint = true;
-              textContainer.lastChild.innerHTML = oldS;
+          for (; i < words.length; i++) {
+            if (!foundBreakpoint) {
+              let oldS = textContainer.lastChild.innerHTML;
+              textContainer.lastChild.innerHTML += words[i] + " ";
+              lines = parseInt(textContainer.offsetHeight) / lineHeight;
+              if (lines > lineLimit) {
+                foundBreakpoint = true;
+                textContainer.lastChild.innerHTML = oldS;
+                pages.push(textContainer.innerHTML);
+                textContainer.innerHTML = ``;
+                currentText = words[i];
+              }
+            } else {
+              currentText += " " + words[i];
             }
           }
-          ok = false;
+        } else {
+          hasEndedProcessing = true;
         }
-      }
+      } while (!hasEndedProcessing);
     });
+    for (let i = 0; i < pages.length; i++) {
+      let pageNode = document.createElement("div");
+      pageNode.classList.add("page");
+      let textContainer = document.createElement("div");
+      textContainer.classList.add("text-container");
+      textContainer.innerHTML = pages[i];
+      pageNode.appendChild(textContainer);
+      pageNode.innerHTML += `<h2 class="date">${
+        week.week
+      }</h2><p class="pg-num">${i + 2}</p>`;
+      console.log(textContainer);
+      pageContainer.appendChild(pageNode);
+    }
   });
+  textContainer.innerHTML = ``;
 }
