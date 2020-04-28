@@ -525,7 +525,7 @@ $offset: 7px;
     border: none;
     background: none;
     cursor: pointer;
-    font-family: "Patrick Hand SC", cursive;
+    font-family: "Patrick Hand", cursive;
     text-decoration: none;
     font-size: $fs * 3;
     line-height: $line;
@@ -547,7 +547,7 @@ $offset: 7px;
 #aux-text-container {
   @extend .text-container;
   margin: unset;
-  position: absolute;
+  position: fixed;
   height: unset;
   left: 0;
   top: 0;
