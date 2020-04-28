@@ -335,6 +335,8 @@ function paginateContent() {
   let pageContainer = document.querySelector(".pages-container");
   let currentTag, currentText;
 
+  let pageCount = 2;
+
   html.forEach((week) => {
     pages = [];
     week.tags.forEach((tag) => {
@@ -382,9 +384,8 @@ function paginateContent() {
       textContainer.classList.add("text-container");
       textContainer.innerHTML = pages[i];
       pageNode.appendChild(textContainer);
-      pageNode.innerHTML += `<h2 class="date">${
-        week.week
-      }</h2><p class="pg-num">${i + 2}</p>`;
+      pageNode.innerHTML += `<h2 class="date">${week.week}</h2><p class="pg-num">${pageCount}</p>`;
+      pageCount++;
       pageContainer.appendChild(pageNode);
     }
   });
