@@ -147,7 +147,7 @@ $sp2: "\2006";
     @include diary-shadow(3px);
     @include right-page-radiuses;
     transition: transform $opening-delay linear;
-    @at-root .diary:not(.loading) &:hover {
+    &:hover {
       transform: rotate3d(0, 1, 0, -5deg);
     }
   }
@@ -182,7 +182,7 @@ $sp2: "\2006";
 .open.diary .cover {
   .about-the-diary,
   &:before {
-    transition: opacity 0s linear $opening-delay/2;
+    transition: opacity 0s linear $opening-delay / 2;
   }
 }
 
