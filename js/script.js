@@ -331,8 +331,6 @@ function paginateContent() {
     });
   });
 
-  console.log(html);
-
   let pages;
   let pageContainer = document.querySelector(".pages-container");
   let currentTag, currentText;
@@ -387,7 +385,6 @@ function paginateContent() {
       pageNode.innerHTML += `<h2 class="date">${
         week.week
       }</h2><p class="pg-num">${i + 2}</p>`;
-      console.log(textContainer);
       pageContainer.appendChild(pageNode);
     }
   });
