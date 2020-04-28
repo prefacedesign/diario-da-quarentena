@@ -546,9 +546,10 @@ $offset: 7px;
 
 #aux-text-container {
   @extend .text-container;
-  position: fixed;
-  height: auto;
+  margin: unset;
+  position: absolute;
+  height: unset;
   left: 0;
   top: 0;
-  background: red;
+  background: greenyellow;
 }

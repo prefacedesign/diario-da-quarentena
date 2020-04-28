@@ -221,13 +221,23 @@ function startDebuggingAnimations() {
 
 let diary = document.querySelector(".diary");
 let debugAnimations = false;
-window.addEventListener("resize", detectMobile);
+let fontLoaded = false,
+  dataLoaded = false;
 
-detectMobile();
-
-if (debugAnimations) {
-  startDebuggingAnimations();
-}
+(function () {
+  window.addEventListener("resize", detectMobile);
+  detectMobile();
+  if (debugAnimations) {
+    startDebuggingAnimations();
+  }
+  document.fonts.load('1rem "Patrick Hand"').then(() => {
+    fontLoaded = true;
+    if (dataLoaded) {
+      setDiaryStyle();
+      paginateContent();
+    }
+  });
+})();
 
 fetch("../data/example.json")
   .then((response) => {
@@ -235,8 +245,11 @@ fetch("../data/example.json")
   })
   .then((json) => {
     mockData = json;
-    setDiaryStyle();
-    paginateContent();
+    dataLoaded = true;
+    if (fontLoaded) {
+      setDiaryStyle();
+      paginateContent();
+    }
   });
 
 // https://stackoverflow.com/a/8831937
@@ -271,45 +284,86 @@ function setDiaryStyle() {
 }
 
 function paginateContent() {
-  let textContainer = document.querySelector("#aux-text-container");
-  let style = window.getComputedStyle(textContainer);
-  let lineHeight = parseInt(style.getPropertyValue("line-height"), 10);
+  let textContainer = document.getElementById("aux-text-container");
+  let lineHeight = textContainer.clientHeight;
   let lineLimit = 16;
-
   let heightLimit = lineHeight * lineLimit;
+  textContainer.innerHTML = ``;
 
   let html = [];
   // converts the json to html
   mockData.entries.forEach((e) => {
     let tags = [];
     Object.keys(e.open_ended_directives).forEach((key) => {
-      // title of the directive
-      tags.push({
-        tag: "h2",
-        inner_text: key,
-      });
-
-      // student-filled text
-      let s = e.open_ended_directives[key];
-      let parts = s.split("\n");
-      parts.forEach((part) => {
-        if (part.length > 0) {
-          tags.push({
-            tag: "p",
-            inner_text: part.trim(),
-          });
-        }
-      });
-      if (e.mood != "") {
+      if (e.open_ended_directives[key] != "") {
+        // title of the directive
         tags.push({
-          tag: "p",
-          inner_text: `Resumo da semana... ${e.mood}`,
+          tag: "h2",
+          inner_text: key,
+        });
+
+        // student-filled text
+        let s = e.open_ended_directives[key];
+        let parts = s.split("\n");
+        parts.forEach((part) => {
+          if (part.length > 0) {
+            tags.push({
+              tag: "p",
+              inner_text: part.trim(),
+            });
+          }
         });
       }
     });
+    if (e.mood != "") {
+      tags.push({
+        tag: "p",
+        inner_text: `Resumo da semana... ${e.mood}`,
+      });
+    }
     html.push({
       week: e.date,
-      text: tags,
+      tags: tags,
+    });
+  });
+
+  console.log(html);
+
+  let pages = {};
+  let currentPage = [];
+
+  let ok = true;
+
+  html.forEach((week) => {
+    week.tags.forEach((tag) => {
+      if (ok) {
+        let node = document.createElement(tag.tag);
+        let textNode = document.createTextNode(tag.inner_text);
+        node.appendChild(textNode);
+        textContainer.appendChild(node);
+
+        let lines;
+        lines = parseInt(textContainer.offsetHeight) / lineHeight;
+        if (lines <= lineLimit) {
+          currentPage.push(tag);
+        } else {
+          // I'll have to break it word by word until I reach the limit.
+          textContainer.lastChild.innerHTML = "";
+          let words = tag.inner_text.split(" ");
+          let foundBreakpoint = false;
+          let i = 0;
+          for (; i < words.length && !foundBreakpoint; i++) {
+            let oldS = textContainer.lastChild.innerHTML;
+            textContainer.lastChild.innerHTML += words[i] + " ";
+            lines = parseInt(textContainer.offsetHeight) / lineHeight;
+            if (lines > lineLimit) {
+              foundBreakpoint = true;
+              textContainer.lastChild.innerHTML = oldS;
+            }
+          }
+          ok = false;
+        }
+      }
     });
   });
 }
