@@ -318,10 +318,6 @@ $offset: 7px;
     }
   }
 
-  p + p {
-    text-indent: $line * 2/3;
-  }
-
   @media (min-width: $sm-brkpnt) {
     transform-style: preserve-3d;
 
@@ -469,6 +465,10 @@ $offset: 7px;
   padding-right: $line * 2/3;
 
   @extend .diary-text;
+
+  p + p {
+    text-indent: $line * 2/3;
+  }
 }
 
 .pg-num {
