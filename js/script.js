@@ -17,6 +17,11 @@ let pageOffset = 2;
 let minPage = 0;
 let flipDelay = 250;
 
+let diary;
+let debugAnimations = false;
+let fontLoaded = false,
+  dataLoaded = false;
+
 let diaryOpeningOrClosing = false;
 
 function detectMobile() {
@@ -222,11 +227,6 @@ function startDebuggingAnimations() {
   }
 }
 
-let diary = document.querySelector(".diary");
-let debugAnimations = false;
-let fontLoaded = false,
-  dataLoaded = false;
-
 (function () {
   window.addEventListener("resize", detectMobile);
   if (debugAnimations) {
@@ -235,9 +235,7 @@ let fontLoaded = false,
   document.fonts.load('1rem "Patrick Hand"').then(() => {
     fontLoaded = true;
     if (dataLoaded) {
-      setDiaryStyle();
-      paginateContent();
-      detectMobile();
+      prepareDiary();
     }
   });
 })();
@@ -250,9 +248,7 @@ fetch("../data/example.json")
     mockData = json;
     dataLoaded = true;
     if (fontLoaded) {
-      setDiaryStyle();
-      paginateContent();
-      detectMobile();
+      prepareDiary();
     }
   });
 
@@ -394,6 +390,19 @@ function paginateContent() {
       pageCount++;
       pageContainer.appendChild(pageNode);
     }
+    ///// todo: h1 da semana.
   });
   textContainer.innerHTML = ``;
+  textContainer.style.display = "none"; // goodbye dear friend
+}
+
+function prepareDiary() {
+  diary = document.querySelector(".diary");
+  paginateContent();
+  detectMobile();
+
+  document.fonts.load('1rem "italian_mosaic_ornamentsRg"').then(() => {
+    setDiaryStyle();
+    diary.classList.remove("loading");
+  });
 }
