@@ -443,7 +443,7 @@ $offset: 7px;
     @extend .header-highlights;
     position: absolute;
     left: $line * 2/3;
-    top: $line * 1.1;
+    top: $line * 1.1 + 1px;
   }
 }
 
