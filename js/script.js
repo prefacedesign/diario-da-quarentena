@@ -325,7 +325,7 @@ function paginateContent() {
     });
     if (e.mood != "") {
       tags.push({
-        tag: "p",
+        tag: "h3",
         inner_text: `Resumo da semana... ${e.mood}`,
       });
     }
