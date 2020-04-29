@@ -113,7 +113,9 @@ function returnsPages(playSound = true) {
 
     if (!mobilePaginationScheme) {
       blockNavigation(true);
-      pages[pageIndex + 1].classList.add("zoom-top");
+      if (pageIndex + 1 < pages.length) {
+        pages[pageIndex + 1].classList.add("zoom-top");
+      }
     }
 
     pageIndex -= pageOffset;
@@ -123,7 +125,9 @@ function returnsPages(playSound = true) {
     setTimeout(() => {
       if (!mobilePaginationScheme) {
         blockNavigation(false);
-        pages[pageIndex + pageOffset + 1].classList.remove("zoom-top");
+        if (pageIndex + pageOffset + 1 < pages.length) {
+          pages[pageIndex + pageOffset + 1].classList.remove("zoom-top");
+        }
       }
       pages[pageIndex + 1].classList.remove("past");
     }, flipDelay);
@@ -337,8 +341,6 @@ function paginateContent() {
 
   let pageCount = 2;
 
-  // console.log(html);
-
   html.forEach((week) => {
     pages = [];
     week.tags.forEach((tag) => {
@@ -401,7 +403,6 @@ function paginateContent() {
     for (let i = 0; i < pages.length; i++) {
       let pageNode = document.createElement("div");
       pageNode.classList.add("page");
-      console.log(i);
       if (i == 0) {
         pageNode.classList.add("first-page-of-week");
       }
@@ -413,7 +414,6 @@ function paginateContent() {
       pageCount++;
       pageContainer.appendChild(pageNode);
     }
-    ///// todo: h1 da semana.
   });
   textContainer.innerHTML = ``;
   textContainer.style.display = "none"; // goodbye dear friend
