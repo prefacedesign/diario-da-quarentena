@@ -3,6 +3,8 @@ let mockData;
 let inkColors = 15,
   bgColors = 17;
 
+let nEntries = 0;
+
 let mobile = false;
 let pgW = 400,
   marg = pgW / 20,
@@ -310,6 +312,8 @@ function paginateContent() {
           inner_text: key,
         });
 
+        nEntries++;
+
         // student-filled text
         let s = e.open_ended_directives[key];
         let parts = s.split("\n");
@@ -328,6 +332,8 @@ function paginateContent() {
         tag: "h3",
         inner_text: `Resumo da semana... ${e.mood}`,
       });
+
+      nEntries++;
     }
     html.push({
       week: e.date,
@@ -419,9 +425,49 @@ function paginateContent() {
   textContainer.style.display = "none"; // goodbye dear friend
 }
 
+function metaContent() {
+  let location = "",
+    profession = "",
+    initials = "",
+    entriesPlural;
+
+  for (let i = 0; i < mockData.initials.length; i++) {
+    initials += mockData.initials[i] + ".";
+  }
+
+  if (mockData.location != "") {
+    location = `Residente de ${mockData.location}`;
+  }
+
+  if (mockData.profession != "") {
+    if (mockData.gender == "Masculino") {
+      profession = `é um ${mockData.profession} de`;
+    } else if (mockData.gender == "Feminino") {
+      profession = `é uma ${mockData.profession} de`;
+    } else {
+      profession = `é ${mockData.profession} de`;
+    }
+  } else {
+    profession = `tem`;
+  }
+
+  if (nEntries == 1) {
+    entriesPlural = "entrada";
+  } else {
+    entriesPlural = "entradas";
+  }
+
+  let diarySummary = document.getElementById("diary-summary");
+  diarySummary.innerHTML = `${location}, ${initials} ${profession} ${mockData.age} anos. Preencheu este diário entre os dias 27 de abril e 15 de maio de 2020 como parte das atividades da Pré-ONHB 2020 – Olimpíada Nacional em História do Brasil.<br><br>Este diário conta com ${nEntries} ${entriesPlural} sobre as diferentes maneiras que a pandemia afetou a vida de todos, incluindo ${initials}.`;
+
+  let stickerOnTheCover = document.getElementById("sticker");
+  stickerOnTheCover.innerHTML = `<p class="who">${initials}, ${mockData.age} anos,</p><p class="location">${mockData.location}.</p>`;
+}
+
 function prepareDiary() {
   diary = document.querySelector(".diary");
   paginateContent();
+  metaContent();
   detectMobile();
 
   document.fonts.load('1rem "italian_mosaic_ornamentsRg"').then(() => {
