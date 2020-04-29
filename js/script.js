@@ -327,14 +327,28 @@ function paginateContent() {
         });
       }
     });
+
     if (e.mood != "") {
       tags.push({
         tag: "h3",
         inner_text: `Resumo da semana... ${e.mood}`,
       });
-
       nEntries++;
     }
+
+    if (e.img != "") {
+      let caption = "";
+      if (e.img_caption != "") {
+        caption = e.img_caption;
+      }
+      tags.push({
+        tag: "img",
+        src: e.img,
+        caption: caption,
+      });
+      nEntries++;
+    }
+
     html.push({
       week: e.date,
       tags: tags,
@@ -349,58 +363,74 @@ function paginateContent() {
 
   html.forEach((week) => {
     pages = [];
+    let imgSrc = "",
+      caption;
     week.tags.forEach((tag) => {
       currentTag = tag.tag;
-      currentText = tag.inner_text;
+      if (currentTag == "img") {
+        imgSrc = tag.src;
+        caption = tag.caption;
+      } else {
+        currentText = tag.inner_text;
+        let hasEndedProcessing = false;
+        do {
+          let node = document.createElement(currentTag);
+          let textNode = document.createTextNode(currentText);
+          node.appendChild(textNode);
+          textContainer.appendChild(node);
 
-      let hasEndedProcessing = false;
-      do {
-        let node = document.createElement(currentTag);
-        let textNode = document.createTextNode(currentText);
-        node.appendChild(textNode);
-        textContainer.appendChild(node);
-
-        let lines = parseInt(textContainer.offsetHeight) / lineHeight;
-        if (
-          lines > lineLimit ||
-          (currentTag == "h2" && lines > lineLimit - 2)
-        ) {
-          // Breaks it word by word until the limit is reached.
-          textContainer.lastChild.innerHTML = "";
-          let words = tag.inner_text.split(" ");
-          let foundBreakpoint = false;
-          let i = 0;
-          // appends each word until the line limit is reached.
-          // saves the page and continues from where it stopped
-          for (; i < words.length; i++) {
-            if (!foundBreakpoint) {
-              let oldS = textContainer.lastChild.innerHTML;
-              textContainer.lastChild.innerHTML += words[i] + " ";
-              lines = parseInt(textContainer.offsetHeight) / lineHeight;
-              if (
-                lines > lineLimit ||
-                (currentTag == "h2" && lines > lineLimit - 2)
-              ) {
-                foundBreakpoint = true;
-                textContainer.lastChild.innerHTML = oldS;
-                pages.push(textContainer.innerHTML);
-                textContainer.innerHTML = ``;
-                currentText = words[i];
+          let lines = parseInt(textContainer.offsetHeight) / lineHeight;
+          if (
+            lines > lineLimit ||
+            (currentTag == "h2" && lines > lineLimit - 2)
+          ) {
+            // Breaks it word by word until the limit is reached.
+            textContainer.lastChild.innerHTML = "";
+            let words = tag.inner_text.split(" ");
+            let foundBreakpoint = false;
+            let i = 0;
+            // appends each word until the line limit is reached.
+            // saves the page and continues from where it stopped
+            for (; i < words.length; i++) {
+              if (!foundBreakpoint) {
+                let oldS = textContainer.lastChild.innerHTML;
+                textContainer.lastChild.innerHTML += words[i] + " ";
+                lines = parseInt(textContainer.offsetHeight) / lineHeight;
+                if (
+                  lines > lineLimit ||
+                  (currentTag == "h2" && lines > lineLimit - 2)
+                ) {
+                  foundBreakpoint = true;
+                  textContainer.lastChild.innerHTML = oldS;
+                  pages.push(textContainer.innerHTML);
+                  textContainer.innerHTML = ``;
+                  currentText = words[i];
+                }
+              } else {
+                currentText += " " + words[i];
               }
-            } else {
-              currentText += " " + words[i];
             }
+          } else {
+            hasEndedProcessing = true;
           }
-        } else {
-          hasEndedProcessing = true;
-        }
-      } while (!hasEndedProcessing);
+        } while (!hasEndedProcessing);
+      }
     });
 
     // has ended the week so if there's still stuff in the
     // textContainer “buffer” it needs to be saved as well.
     if (textContainer.innerHTML != ``) {
       pages.push(textContainer.innerHTML);
+      textContainer.innerHTML = ``;
+    }
+
+    if (imgSrc != "") {
+      textContainer.innerHTML = `<div class="img-container"><p>${caption}</p></div>`;
+      let captionH = textContainer.offsetHeight;
+      let maxImgH = lineHeight * lineLimit - captionH;
+      pages.push(
+        `<div class="img-container"><img style="max-height: ${maxImgH}px;" src="${imgSrc}"><p>${caption}</p></div>`
+      );
       textContainer.innerHTML = ``;
     }
 

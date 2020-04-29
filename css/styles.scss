@@ -45,6 +45,11 @@ p + .highlights {
   margin-top: $line;
 }
 
+h1 {
+  @extend .highlights;
+  font-family: "Patrick Hand SC", cursive;
+}
+
 h2 {
   @extend .highlights;
 }
@@ -53,9 +58,22 @@ h3 {
   @extend .highlights;
 }
 
-h1 {
-  @extend .highlights;
-  font-family: "Patrick Hand SC", cursive;
+.img-container {
+  width: 100%;
+  padding-top: $line / 4;
+
+  img {
+    width: 100%;
+    max-height: 10 * $line;
+    object-fit: contain;
+
+    margin-bottom: $line / 4;
+  }
+
+  p {
+    font-size: $fs * 0.8;
+    line-height: $line * 0.666666666;
+  }
 }
 
 .header-highlights {
