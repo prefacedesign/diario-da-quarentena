@@ -287,13 +287,17 @@ function paginateContent() {
   let textContainer = document.getElementById("aux-text-container");
   let lineHeight = textContainer.clientHeight;
   let lineLimit = 16;
-  let heightLimit = lineHeight * lineLimit;
   textContainer.innerHTML = ``;
 
   let html = [];
   // converts the json to html
   mockData.entries.forEach((e) => {
-    let tags = [];
+    let tags = [
+      {
+        tag: "h1",
+        inner_text: e.date,
+      },
+    ];
     Object.keys(e.open_ended_directives).forEach((key) => {
       if (e.open_ended_directives[key] != "") {
         // title of the directive
@@ -333,12 +337,15 @@ function paginateContent() {
 
   let pageCount = 2;
 
+  // console.log(html);
+
   html.forEach((week) => {
     pages = [];
     week.tags.forEach((tag) => {
-      let hasEndedProcessing = false;
       currentTag = tag.tag;
       currentText = tag.inner_text;
+
+      let hasEndedProcessing = false;
       do {
         let node = document.createElement(currentTag);
         let textNode = document.createTextNode(currentText);
@@ -355,6 +362,8 @@ function paginateContent() {
           let words = tag.inner_text.split(" ");
           let foundBreakpoint = false;
           let i = 0;
+          // appends each word until the line limit is reached.
+          // saves the page and continues from where it stopped
           for (; i < words.length; i++) {
             if (!foundBreakpoint) {
               let oldS = textContainer.lastChild.innerHTML;
@@ -379,9 +388,23 @@ function paginateContent() {
         }
       } while (!hasEndedProcessing);
     });
+
+    // has ended the week so if there's still stuff in the
+    // textContainer “buffer” it needs to be saved as well.
+    if (textContainer.innerHTML != ``) {
+      pages.push(textContainer.innerHTML);
+      textContainer.innerHTML = ``;
+    }
+
+    // now that the pages have been built, I'll add them to the DOM.
+    // this is an extra step so it's easier to do extra customizations.
     for (let i = 0; i < pages.length; i++) {
       let pageNode = document.createElement("div");
       pageNode.classList.add("page");
+      console.log(i);
+      if (i == 0) {
+        pageNode.classList.add("first-page-of-week");
+      }
       let textContainer = document.createElement("div");
       textContainer.classList.add("text-container");
       textContainer.innerHTML = pages[i];

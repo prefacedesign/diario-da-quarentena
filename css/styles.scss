@@ -49,6 +49,11 @@ h2 {
   @extend .highlights;
 }
 
+h1 {
+  @extend .highlights;
+  font-family: "Patrick Hand SC", cursive;
+}
+
 .header-highlights {
   @extend .highlights;
   user-select: none;
@@ -441,9 +446,16 @@ $offset: 7px;
 
   & > .date {
     @extend .header-highlights;
+    font-family: "Patrick Hand SC", cursive;
     position: absolute;
     left: $line * 2/3;
     top: $line * 1.1 + 1px;
+  }
+}
+
+.page.first-page-of-week {
+  .date {
+    display: none;
   }
 }
 
