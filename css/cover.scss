@@ -24,7 +24,6 @@ $sp2: "\2006";
 }
 .cover {
   &:before {
-    content: $s; // defaults to a bunch of Zs!
   }
 }
 
