@@ -318,10 +318,18 @@ function paginateContent() {
         let s = e.open_ended_directives[key];
         let parts = s.split("\n");
         parts.forEach((part) => {
+          let trimmedString = part.trim();
+          let lastSpace = trimmedString.lastIndexOf(" ");
+          if (lastSpace != -1) {
+            trimmedString =
+              trimmedString.substring(0, lastSpace) +
+              `\xa0` +
+              trimmedString.substring(lastSpace + 1);
+          }
           if (part.length > 0) {
             tags.push({
               tag: "p",
-              inner_text: part.trim(),
+              inner_text: trimmedString,
             });
           }
         });
