@@ -20,13 +20,13 @@ body {
 }
 
 .diary-text {
-  font-family: "Patrick Hand", cursive;
+  font-family: $main-font, cursive;
   line-height: $line;
   font-size: $fs;
 }
 
 .highlights {
-  font-family: "Patrick Hand", cursive;
+  font-family: $main-font, cursive;
 
   color: #cb0072;
   font-size: $fs;
@@ -47,7 +47,7 @@ p + .highlights {
 
 h1 {
   @extend .highlights;
-  font-family: "Patrick Hand SC", cursive;
+  font-family: $aux-font, cursive;
 }
 
 h2 {
@@ -468,7 +468,7 @@ $offset: 7px;
 
   & > .date {
     @extend .header-highlights;
-    font-family: "Patrick Hand SC", cursive;
+    font-family: $aux-font, cursive;
     position: absolute;
     left: $line * 2/3;
     top: $line * 1.1 + 1px;
@@ -560,7 +560,7 @@ $offset: 7px;
     background: none;
     cursor: pointer;
     user-select: none;
-    font-family: "Patrick Hand", cursive;
+    font-family: $main-font, cursive;
     text-decoration: none;
     font-size: $fs * 3;
     line-height: $line;
