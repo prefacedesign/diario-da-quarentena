@@ -33,7 +33,7 @@ $sp2: "\2006";
 
 @for $i from 1 through length($ink-cols) {
   $c: nth($ink-cols, $i);
-  .diary.ink_#{$i} {
+  .diary-container.ink_#{$i} {
     --ink-color: #{$c};
     .cover:before {
       color: #{$c};
@@ -47,7 +47,7 @@ $sp2: "\2006";
   --ink-color: #fff;
 }
 
-.diary {
+.diary-container {
   @for $i from 1 through length($cover-cols) {
     $c: nth($cover-cols, $i);
     $c2: nth($line-cols, $i);
@@ -173,7 +173,7 @@ $sp2: "\2006";
 .closed.diary .cover {
   .about-the-diary,
   &:before {
-    transition: opacity $opening-delay * 0.2 linear $opening-delay / 2;
+    transition: opacity 0s linear $opening-delay / 2;
   }
 }
 

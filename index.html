@@ -14,48 +14,50 @@
   <body>
 
     <div id="aux-text-container"><p>Hello World</p></div>
-    <div class="diary closed loading">
-      <div class="spiral"></div>
-      <div class="cover" onclick="openDiary();">
-        <div class="about-the-diary" id="sticker">
+
+    <div class="diary-container">
+      <div class="diary closed loading">
+        <div class="spiral"></div>
+        <div class="cover" onclick="openDiary();">
+          <div class="about-the-diary" id="sticker">
+          </div>
+        </div>
+
+        <div class="pages-container">
+          <div class="page current">
+            <div class="text-container">
+      
+            </div>
+            <p class="pg-num">0</p>
+          </div>
+          <div class="page summary">
+            <div class="text-container">
+              <p id="diary-summary"></p>
+            </div>
+            <p class="pg-num">1</p>
+          </div>
+        </div>
+
+        <ul class="staples">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+        <div id="loading-spinner">
+          <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+          </div>
         </div>
       </div>
-
-      <div class="pages-container">
-        <div class="page current">
-          <div class="text-container">
-    
-          </div>
-          <p class="pg-num">0</p>
-        </div>
-        <div class="page summary">
-          <div class="text-container">
-            <p id="diary-summary"></p>
-          </div>
-          <p class="pg-num">1</p>
-        </div>
-      </div>
-
       <div class="navigation">
         <button onclick="returnsPages()" >&lt;</button>
         <button onclick="advancesPages()">&gt;</button>
-      </div>
-
-      <ul class="staples">
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-
-      <div id="loading-spinner">
-        <div class="sk-chase">
-          <div class="sk-chase-dot"></div>
-          <div class="sk-chase-dot"></div>
-          <div class="sk-chase-dot"></div>
-          <div class="sk-chase-dot"></div>
-          <div class="sk-chase-dot"></div>
-          <div class="sk-chase-dot"></div>
-        </div>
       </div>
     </div>
     <script src="js/script.js"></script>

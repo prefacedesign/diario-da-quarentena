@@ -14,7 +14,8 @@ body {
   overflow-y: scroll; // the flipping page sometimes makes scroll bars appear...
 
   @media (min-width: $sm-brkpnt) {
-    perspective: 50cm;
+    perspective: $perspective;
+    transform-style: preserve-3d;
     padding: $marg $marg $marg * 3 $marg;
   }
 }
@@ -94,7 +95,7 @@ h3 {
 
 .closed.diary {
   .pages-container,
-  .navigation,
+  & + .navigation,
   .staples,
   &:before,
   &:after {
@@ -107,7 +108,7 @@ h3 {
   .opening.diary,
   .closing.diary {
     .pages-container,
-    .navigation,
+    & + .navigation,
     .staples,
     &:before,
     &:after {
@@ -133,7 +134,7 @@ h3 {
       display: none;
     }
 
-    .navigation,
+    & + .navigation,
     .staples {
       display: none;
     }
@@ -151,7 +152,7 @@ h3 {
     &:before {
       display: none;
     }
-    .navigation,
+    & + .navigation,
     .staples {
       display: none;
     }
@@ -178,7 +179,8 @@ h3 {
 
 .diary {
   @media (min-width: $sm-brkpnt) {
-    perspective: 50cm;
+    perspective: $perspective;
+    transform-style: preserve-3d;
   }
   transform: rotate3d(1, 0, 0, 8deg);
 
@@ -244,6 +246,10 @@ h3 {
   }
 }
 
+.diary-container {
+  position: relative;
+}
+
 .pages-container {
   z-index: 5;
   @media (min-width: $sm-brkpnt) {
@@ -251,6 +257,8 @@ h3 {
     left: $horiz-pad;
     top: $vert-pad;
     position: absolute;
+    perspective: $perspective;
+    transform-style: preserve-3d;
   }
   @media (max-width: $sm-brkpnt) {
     width: $w;

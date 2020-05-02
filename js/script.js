@@ -274,6 +274,7 @@ String.prototype.hashCode = function () {
 
 // first_c cover_4 f_color_8
 function setDiaryStyle() {
+  let diaryContainer = document.querySelector(".diary-container");
   let firstLetter = mockData.initials[0].toLowerCase();
   let bgCodeSeed =
     mockData.profession + mockData.location + mockData.age + mockData.initials;
@@ -281,12 +282,12 @@ function setDiaryStyle() {
     mockData.age + mockData.initials + mockData.location + mockData.profession;
   let bgCode = (Math.abs(bgCodeSeed.hashCode()) % bgColors) + 1;
   let inkCode = (Math.abs(inkCodeSeed.hashCode()) % inkColors) + 1;
-  diary.classList.add(
+  diaryContainer.classList.add(
     `first_${firstLetter}`,
     `cover_${bgCode}`,
     `ink_${inkCode}`
   );
-  // diary.classList.add(`first_e`, `cover_3`, `ink_15`);
+  // diaryContainer.classList.add(`first_e`, `cover_3`, `ink_15`);
 }
 
 function paginateContent() {
