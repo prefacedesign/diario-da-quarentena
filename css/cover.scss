@@ -112,11 +112,16 @@ $sp2: "\2006";
   }
 }
 
+.cover,
+.diary,
+.page {
+  animation-fill-mode: forwards;
+}
+
 .cover {
   @include diary-shadow;
   transform-origin: left top;
 
-  position: absolute;
   @media (min-width: $sm-brkpnt) {
     top: -$vert-pad * 3/5;
 
