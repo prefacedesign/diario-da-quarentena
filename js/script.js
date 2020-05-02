@@ -68,7 +68,31 @@ function detectMobile() {
   }
 }
 
+function debugNav(intro = "", clearConsole = false) {
+  if (clearConsole) {
+    console.clear();
+  }
+
+  let s1 = "",
+    s2 = "";
+  for (let i = 0; i < pages.length; i++) {
+    let current = " ",
+      past = " ";
+    if (pages[i].classList.contains("current")) {
+      current = "C";
+    }
+    if (pages[i].classList.contains("past")) {
+      past = "P";
+    }
+    s1 += `${i.toString().padStart(2, "0")}|`;
+    s2 += `${current}${past}|`;
+  }
+  console.log(intro);
+  console.log(` ${s1} \n ${s2}`);
+}
+
 function advancesPages(playSound = true) {
+  debugNav("advancing...", true);
   // are there more pages to flip to?
   if (pageIndex + pageOffset < pages.length) {
     if (playSound) {
@@ -89,6 +113,7 @@ function advancesPages(playSound = true) {
         if (pageIndex >= pages.length - 2) {
           blockNavigation(true, [false, true]);
         }
+        debugNav("advanced...");
       }, flipDelay);
     } else {
       pageIndex += pageOffset;
@@ -98,11 +123,13 @@ function advancesPages(playSound = true) {
       } else {
         blockNavigation(false);
       }
+      debugNav("advanced...");
     }
   }
 }
 
 function returnsPages(playSound = true) {
+  debugNav("returning...", true);
   // have we reached the start of the book?
   if (pageIndex - pageOffset >= minPage) {
     if (playSound) {
@@ -132,6 +159,7 @@ function returnsPages(playSound = true) {
         }
       }
       pages[pageIndex + 1].classList.remove("past");
+      debugNav("returned...");
     }, flipDelay);
   } else {
     if (pageIndex == minPage) {
