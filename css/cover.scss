@@ -153,7 +153,7 @@ $sp2: "\2006";
     transition: transform $opening-delay linear, box-shadow $opening-delay ease;
     @at-root .diary.closed:not(.loading):not(.opening) &:hover {
       transition: transform $opening-delay linear, box-shadow 1s ease;
-      box-shadow: 3px 1px 3px #0003, 0 0 90px 5px var(--cover-color),
+      box-shadow: 3px 1px 3px #0003, 0 0 20px 2px var(--cover-color),
         0 0 0 0.5px rgba(0, 0, 0, 0.5);
     }
   }
