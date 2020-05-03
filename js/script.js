@@ -1,5 +1,7 @@
 let mockData;
 
+let shouldDebugNav = true;
+
 let inkColors = 15,
   bgColors = 17;
 
@@ -24,7 +26,8 @@ let debugAnimations = false;
 let fontLoaded = false,
   dataLoaded = false;
 
-let diaryOpeningOrClosing = false;
+let diaryOpening = false,
+  diaryClosing = false;
 
 function detectMobile() {
   if (!pages) {
@@ -58,9 +61,12 @@ function detectMobile() {
     // if current page is even i'll set index to its
     // even pair
     if (pageIndex % 2 != 0) {
+      debugNav("", true);
       pages[pageIndex].classList.remove("current");
       pageIndex -= 1;
+      pages[pageIndex].classList.remove("past");
       pages[pageIndex].classList.add("current");
+      debugNav();
     }
     pageOffset = 2;
     minPage = 0;
@@ -69,6 +75,10 @@ function detectMobile() {
 }
 
 function debugNav(intro = "", clearConsole = false) {
+  if (!shouldDebugNav) {
+    return;
+  }
+
   if (clearConsole) {
     console.clear();
   }
@@ -91,7 +101,7 @@ function debugNav(intro = "", clearConsole = false) {
   console.log(` ${s1} \n ${s2}`);
 }
 
-function advancesPages(playSound = true) {
+function advancesPages(playSound = true, delay = flipDelay) {
   debugNav("advancing...", true);
   // are there more pages to flip to?
   if (pageIndex + pageOffset < pages.length) {
@@ -114,7 +124,7 @@ function advancesPages(playSound = true) {
           blockNavigation(true, [false, true]);
         }
         debugNav("advanced...");
-      }, flipDelay);
+      }, delay);
     } else {
       pageIndex += pageOffset;
       pages[pageIndex].classList.add("current");
@@ -128,7 +138,7 @@ function advancesPages(playSound = true) {
   }
 }
 
-function returnsPages(playSound = true) {
+function returnsPages(playSound = true, delay = flipDelay) {
   debugNav("returning...", true);
   // have we reached the start of the book?
   if (pageIndex - pageOffset >= minPage) {
@@ -160,7 +170,7 @@ function returnsPages(playSound = true) {
       }
       pages[pageIndex + 1].classList.remove("past");
       debugNav("returned...");
-    }, flipDelay);
+    }, delay);
   } else {
     if (pageIndex == minPage) {
       closeDiary();
@@ -184,30 +194,20 @@ function playFlip() {
 }
 
 function openDiary() {
-  if (!diaryOpeningOrClosing) {
+  if (!diaryOpening && !diaryClosing) {
     playFlip();
     diary.classList.add("opening");
     diary.classList.remove("closed");
-    diaryOpeningOrClosing = true;
-    setTimeout(() => {
-      diary.classList.remove("opening", "closing", "closed");
-      diary.classList.add("open");
-      diaryOpeningOrClosing = false;
-    }, flipDelay * 3);
+    diaryOpening = true;
   }
 }
 
 function closeDiary() {
-  if (!diaryOpeningOrClosing) {
+  if (!diaryOpening && !diaryClosing) {
     playFlip();
     diary.classList.add("closing");
     diary.classList.remove("open");
-    diaryOpeningOrClosing = true;
-    setTimeout(() => {
-      diary.classList.remove("closing", "opening", "open");
-      diary.classList.add("closed");
-      diaryOpeningOrClosing = false;
-    }, flipDelay * 3);
+    diaryClosing = true;
   }
 }
 
@@ -263,6 +263,22 @@ function startDebuggingAnimations() {
 
 (function () {
   window.addEventListener("resize", detectMobile);
+  const transition = document.querySelector(".cover");
+
+  transition.ontransitionend = (e) => {
+    if (e.propertyName == "transform") {
+      if (diaryOpening) {
+        diary.classList.remove("opening", "closing", "closed");
+        diary.classList.add("open");
+        diaryOpening = false;
+      } else if (diaryClosing) {
+        diary.classList.remove("closing", "opening", "open");
+        diary.classList.add("closed");
+        diaryClosing = false;
+      }
+    }
+  };
+  transition.ontransitionstart = (e) => {};
   if (debugAnimations) {
     startDebuggingAnimations();
   }
