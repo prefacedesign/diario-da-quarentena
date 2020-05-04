@@ -142,7 +142,7 @@ h3 {
 
   .closing.diary {
     .cover {
-      transform: rotate3d(0, 1, 0, 0deg);
+      transform: rotate3d(0, 1, 0, -1deg);
       &:before,
       .about-the-diary {
         opacity: 1;
@@ -423,8 +423,6 @@ $offset: 7px;
 
       border-left: 1px solid #dddcd7;
 
-      transform: rotate3d(0, 1, 0, -1deg);
-
       background-image: linear-gradient(
         to left,
         #f1f0eb,
@@ -438,7 +436,6 @@ $offset: 7px;
       }
 
       @at-root .current + & {
-        transform: rotate3d(0, 1, 0, -1deg);
         box-shadow: 3px 1px 3px #0003;
         z-index: 100;
         opacity: 1;
