@@ -196,18 +196,32 @@ function playFlip() {
 function openDiary() {
   if (!diaryOpening && !diaryClosing) {
     playFlip();
-    diary.classList.add("opening");
     diary.classList.remove("closed");
-    diaryOpening = true;
+    // if on desktop the same code will be summoned when
+    // the transition-end event is fired. on mobile the classes
+    // need to be changed manually
+    if (mobile) {
+      diary.classList.add("open");
+    } else {
+      diary.classList.add("opening");
+      diaryOpening = true;
+    }
   }
 }
 
 function closeDiary() {
   if (!diaryOpening && !diaryClosing) {
     playFlip();
-    diary.classList.add("closing");
     diary.classList.remove("open");
-    diaryClosing = true;
+    // if on desktop the same code will be summoned when
+    // the transition-end event is fired. on mobile the classes
+    // need to be changed manually
+    if (mobile) {
+      diary.classList.add("closed");
+    } else {
+      diary.classList.add("closing");
+      diaryClosing = true;
+    }
   }
 }
 
