@@ -377,8 +377,6 @@ $offset: 7px;
 
       border-right: 1px solid #dddcd7;
 
-      transform: rotate3d(0, 1, 0, 3deg);
-
       background-image: linear-gradient(
         to right,
         #f1f0eb,
@@ -395,13 +393,13 @@ $offset: 7px;
         z-index: 1000;
       }
       &.current {
-        transform: rotate3d(0, 1, 0, 3deg);
+        transform: rotate3d(0, 1, 0, 1deg);
         box-shadow: -3px 1px 3px #0003;
         z-index: 100;
         opacity: 1;
       }
       &.past {
-        transform: rotate3d(0, 1, 0, 3deg);
+        transform: rotate3d(0, 1, 0, 1deg);
         z-index: 10;
         opacity: 1;
       }
