@@ -415,7 +415,7 @@ function paginateContent() {
     if (e.img != "") {
       let caption = "";
       if (e.img_caption != "") {
-        caption = e.img_caption;
+        caption = linkify(e.img_caption);
       }
       tags.push({
         tag: "img",
@@ -529,6 +529,14 @@ function paginateContent() {
   });
   textContainer.innerHTML = ``;
   textContainer.style.display = "none"; // goodbye dear friend
+}
+
+// source: https://stackoverflow.com/a/8943487/888094
+function linkify(text) {
+  var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+  return text.replace(urlRegex, function (url) {
+    return `<a href="${url}" target="_blank">${url}</a>`;
+  });
 }
 
 function metaContent() {
