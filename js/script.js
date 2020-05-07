@@ -543,6 +543,8 @@ function metaContent() {
   let location = "",
     profession = "",
     initials = "",
+    ageSticker = "",
+    ageSummary = "",
     entriesPlural;
 
   for (let i = 0; i < mockData.initials.length; i++) {
@@ -555,14 +557,19 @@ function metaContent() {
 
   if (mockData.profession != "") {
     if (mockData.gender == "Masculino") {
-      profession = `é um ${mockData.profession} de`;
+      profession = `é um ${mockData.profession}`;
     } else if (mockData.gender == "Feminino") {
-      profession = `é uma ${mockData.profession} de`;
+      profession = `é uma ${mockData.profession}`;
     } else {
-      profession = `é ${mockData.profession} de`;
+      profession = `é ${mockData.profession}`;
     }
   } else {
     profession = `tem`;
+  }
+
+  if ("age" in mockData) {
+    ageSummary = ` de ${mockData.age} anos`;
+    ageSticker = `, ${mockData.age} anos`;
   }
 
   if (nEntries == 1) {
@@ -572,10 +579,10 @@ function metaContent() {
   }
 
   let diarySummary = document.getElementById("diary-summary");
-  diarySummary.innerHTML = `${location}, <span class="initials">${initials}</span> ${profession} ${mockData.age} anos. Preencheu este diário entre os dias 27 de abril e 15 de maio de 2020 como parte das atividades da Pré-ONHB 2020 – Olimpíada Nacional em História do Brasil.<br><br>Este diário conta com ${nEntries} ${entriesPlural} sobre as diferentes maneiras que a pandemia afetou a vida de todos, incluindo <span class="initials">${initials}</span>.`;
+  diarySummary.innerHTML = `${location}, <span class="initials">${initials}</span> ${profession}${ageSummary}. Preencheu este diário entre os dias 27 de abril e 15 de maio de 2020 como parte das atividades da Pré-ONHB 2020 – Olimpíada Nacional em História do Brasil.<br><br>Este diário conta com ${nEntries} ${entriesPlural} sobre as diferentes maneiras que a pandemia afetou a vida de todos, incluindo <span class="initials">${initials}</span>.`;
 
   let stickerOnTheCover = document.getElementById("sticker");
-  stickerOnTheCover.innerHTML = `<p class="who"><span class="initials">${initials}</span>, ${mockData.age} anos,</p><p class="location">${mockData.location}.</p>`;
+  stickerOnTheCover.innerHTML = `<p class="who"><span class="initials">${initials}</span>${ageSticker},</p><p class="location">${mockData.location}.</p>`;
 }
 
 function prepareDiary() {
