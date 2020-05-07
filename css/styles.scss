@@ -78,8 +78,13 @@ h3 {
   p {
     font-size: $fs * 0.8;
     line-height: $line * 0.666666666;
-    word-break: break-all;
+    word-break: break-word;
     @extend .hyphenator;
+    a {
+      word-break: break-all;
+      color: $default-pencil;
+      text-decoration-color: transparentize($default-pencil, 0.5);
+    }
   }
 }
 
