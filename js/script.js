@@ -1,5 +1,14 @@
 let mockData;
 
+let directives = {
+  trabalho_estudo: "Trabalho e/ou estudos",
+  lazer: "Lazer e descanso",
+  corpo_objetos_pessoas:
+    "Relação com meu próprio corpo, objetos e outras pessoas",
+  alimentacao: "Minha alimentação",
+  sentimentos: "Impressões e sentimentos",
+};
+
 let shouldDebugNav = true;
 
 let inkColors = 15,
@@ -368,7 +377,7 @@ function paginateContent() {
         // title of the directive
         tags.push({
           tag: "h2",
-          inner_text: key,
+          inner_text: directives[key],
         });
 
         nEntries++;
