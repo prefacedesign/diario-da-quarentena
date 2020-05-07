@@ -82,8 +82,7 @@ h3 {
     @extend .hyphenator;
     a {
       word-break: break-all;
-      color: $default-pencil;
-      text-decoration-color: transparentize($default-pencil, 0.5);
+      @extend .discrete-link;
     }
   }
 }
@@ -305,6 +304,11 @@ h3 {
   }
 }
 
+.discrete-link {
+  color: $default-pencil;
+  text-decoration-color: transparentize($default-pencil, 0.5);
+}
+
 $offset: 7px;
 
 .page {
@@ -334,6 +338,14 @@ $offset: 7px;
       transparent 1px,
       transparent $line
     );
+  }
+
+  p {
+    @extend .hyphenator;
+    word-break: break-word;
+    a {
+      @extend .discrete-link;
+    }
   }
 
   &:first-child {

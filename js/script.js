@@ -9,7 +9,7 @@ let directives = {
   sentimentos: "Impressões e sentimentos",
 };
 
-let shouldDebugNav = true;
+let shouldDebugNav = false;
 
 let inkColors = 15,
   bgColors = 17;
@@ -478,7 +478,7 @@ function paginateContent() {
                 ) {
                   foundBreakpoint = true;
                   textContainer.lastChild.innerHTML = oldS;
-                  pages.push(textContainer.innerHTML);
+                  pages.push(linkify(textContainer.innerHTML));
                   textContainer.innerHTML = ``;
                   currentText = words[i];
                 }
@@ -496,7 +496,7 @@ function paginateContent() {
     // has ended the week so if there's still stuff in the
     // textContainer “buffer” it needs to be saved as well.
     if (textContainer.innerHTML != ``) {
-      pages.push(textContainer.innerHTML);
+      pages.push(linkify(textContainer.innerHTML));
       textContainer.innerHTML = ``;
     }
 
