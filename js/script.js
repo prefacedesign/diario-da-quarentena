@@ -4,7 +4,7 @@ let directives = {
   trabalho_estudo: "Trabalho e/ou estudos",
   lazer: "Lazer e descanso",
   corpo_objetos_pessoas:
-    "Relação com meu próprio corpo, objetos e outras pessoas",
+    "Relação com meu próprio corpo, objetos e\xa0outras\xa0pessoas",
   alimentacao: "Minha alimentação",
   sentimentos: "Impressões e sentimentos",
 };
