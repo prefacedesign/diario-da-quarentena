@@ -235,7 +235,8 @@ function closeDiary() {
 }
 
 function startDebuggingAnimations() {
-  let del = 200;
+  let diaryContainer = document.querySelector(".diary-container");
+  let del = 400;
 
   let bgs = true,
     inks = true,
@@ -244,13 +245,16 @@ function startDebuggingAnimations() {
   let iClass = 10;
   if (bgs) {
     setInterval(() => {
-      diary.classList.remove(`cover_${iClass}`);
+      if (!debugAnimations) {
+        return;
+      }
+      diaryContainer.classList.remove(`cover_${iClass}`);
       if (iClass == bgColors) {
         iClass = 1;
       } else {
         iClass++;
       }
-      diary.classList.add(`cover_${iClass}`);
+      diaryContainer.classList.add(`cover_${iClass}`);
     }, (del * bgColors) / 4);
   }
 
@@ -259,13 +263,16 @@ function startDebuggingAnimations() {
 
   if (patterns) {
     setInterval(() => {
-      diary.classList.remove(`first_${alpha[iAlpha]}`);
+      if (!debugAnimations) {
+        return;
+      }
+      diaryContainer.classList.remove(`first_${alpha[iAlpha]}`);
       if (iAlpha == alpha.length - 1) {
         iAlpha = 0;
       } else {
         iAlpha++;
       }
-      diary.classList.add(`first_${alpha[iAlpha]}`);
+      diaryContainer.classList.add(`first_${alpha[iAlpha]}`);
     }, del * 2);
   }
 
@@ -273,13 +280,16 @@ function startDebuggingAnimations() {
 
   if (inks) {
     setInterval(() => {
-      diary.classList.remove(`ink_${iCol}`);
+      if (!debugAnimations) {
+        return;
+      }
+      diaryContainer.classList.remove(`ink_${iCol}`);
       if (iCol == inkColors) {
         iCol = 1;
       } else {
         iCol++;
       }
-      diary.classList.add(`ink_${iCol}`);
+      diaryContainer.classList.add(`ink_${iCol}`);
     }, del);
   }
 }
