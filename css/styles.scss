@@ -42,6 +42,10 @@ body {
   margin-top: $line;
 }
 
+.initials {
+  text-transform: uppercase;
+}
+
 p + .highlights {
   margin-top: $line;
 }

@@ -555,10 +555,10 @@ function metaContent() {
   }
 
   let diarySummary = document.getElementById("diary-summary");
-  diarySummary.innerHTML = `${location}, ${initials} ${profession} ${mockData.age} anos. Preencheu este diário entre os dias 27 de abril e 15 de maio de 2020 como parte das atividades da Pré-ONHB 2020 – Olimpíada Nacional em História do Brasil.<br><br>Este diário conta com ${nEntries} ${entriesPlural} sobre as diferentes maneiras que a pandemia afetou a vida de todos, incluindo ${initials}.`;
+  diarySummary.innerHTML = `${location}, <span class="initials">${initials}</span> ${profession} ${mockData.age} anos. Preencheu este diário entre os dias 27 de abril e 15 de maio de 2020 como parte das atividades da Pré-ONHB 2020 – Olimpíada Nacional em História do Brasil.<br><br>Este diário conta com ${nEntries} ${entriesPlural} sobre as diferentes maneiras que a pandemia afetou a vida de todos, incluindo <span class="initials">${initials}</span>.`;
 
   let stickerOnTheCover = document.getElementById("sticker");
-  stickerOnTheCover.innerHTML = `<p class="who">${initials}, ${mockData.age} anos,</p><p class="location">${mockData.location}.</p>`;
+  stickerOnTheCover.innerHTML = `<p class="who"><span class="initials">${initials}</span>, ${mockData.age} anos,</p><p class="location">${mockData.location}.</p>`;
 }
 
 function prepareDiary() {
