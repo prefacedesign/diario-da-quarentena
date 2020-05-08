@@ -29,6 +29,7 @@ let mobilePaginationScheme = false;
 let pageOffset = 2;
 let minPage = 0;
 let flipDelay = 250;
+let pageIsFlipping = false;
 
 let diary;
 let debugAnimations = false;
@@ -113,7 +114,8 @@ function debugNav(intro = "", clearConsole = false) {
 function advancesPages(playSound = true, delay = flipDelay) {
   debugNav("advancing...", true);
   // are there more pages to flip to?
-  if (pageIndex + pageOffset < pages.length) {
+  if (pageIndex + pageOffset < pages.length && !pageIsFlipping) {
+    pageIsFlipping = true;
     if (playSound) {
       playFlip();
     }
@@ -133,6 +135,7 @@ function advancesPages(playSound = true, delay = flipDelay) {
           blockNavigation(true, [false, true]);
         }
         debugNav("advanced...");
+        pageIsFlipping = false;
       }, delay);
     } else {
       pageIndex += pageOffset;
@@ -143,6 +146,7 @@ function advancesPages(playSound = true, delay = flipDelay) {
         blockNavigation(false);
       }
       debugNav("advanced...");
+      pageIsFlipping = false;
     }
   }
 }
@@ -150,7 +154,8 @@ function advancesPages(playSound = true, delay = flipDelay) {
 function returnsPages(playSound = true, delay = flipDelay) {
   debugNav("returning...", true);
   // have we reached the start of the book?
-  if (pageIndex - pageOffset >= minPage) {
+  if (pageIndex - pageOffset >= minPage && !pageIsFlipping) {
+    pageIsFlipping = true;
     if (playSound) {
       playFlip();
     }
@@ -178,6 +183,7 @@ function returnsPages(playSound = true, delay = flipDelay) {
         }
       }
       pages[pageIndex + 1].classList.remove("past");
+      pageIsFlipping = false;
       debugNav("returned...");
     }, delay);
   } else {
@@ -525,6 +531,19 @@ function paginateContent() {
     for (let i = 0; i < pages.length; i++) {
       let pageNode = document.createElement("div");
       pageNode.classList.add("page");
+      if (i % 2 == 0) {
+        // pageNode.onclick = function () {
+        //   if (!mobilePaginationScheme) {
+        //     returnsPages();
+        //   }
+        // };
+      } else {
+        // pageNode.onclick = function () {
+        //   if (!mobilePaginationScheme) {
+        //     advancesPages();
+        //   }
+        // };
+      }
       if (i == 0) {
         pageNode.classList.add("first-page-of-week");
       }

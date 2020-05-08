@@ -68,17 +68,9 @@ h1 {
     color: var(--ink-color);
     position: relative;
   }
-  @at-root .page:nth-child(n + 0) {
-  }
-  @at-root .page:nth-child(n + 1) {
-  }
-  @at-root .page:nth-child(n + 2) {
-  }
-  @at-root .page:nth-child(n + 1) {
-  }
   &:before {
     float: left;
-    transform: rotateZ(2deg);
+    transform: rotateZ(1.2deg);
     top: 3px;
     opacity: 0.9;
   }
