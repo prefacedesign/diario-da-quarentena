@@ -1,13 +1,15 @@
 let mockData;
 
-let directives = {
-  trabalho_estudo: "Trabalho e/ou estudos",
-  lazer: "Lazer e descanso",
-  corpo_objetos_pessoas:
-    "Relação com meu próprio corpo, objetos e\xa0outras\xa0pessoas",
-  alimentacao: "Minha alimentação",
-  sentimentos: "Impressões e sentimentos",
-};
+let directives = [
+  { key: "trabalho_estudo", text: "Trabalho e/ou estudos" },
+  { key: "lazer", text: "Lazer e descanso" },
+  {
+    key: "corpo_objetos_pessoas",
+    text: "Relação com meu próprio corpo, objetos e\xa0outras\xa0pessoas",
+  },
+  { key: "alimentacao", text: "Minha alimentação" },
+  { key: "sentimentos", text: "Impressões e sentimentos" },
+];
 
 let shouldDebugNav = false;
 
@@ -388,18 +390,22 @@ function paginateContent() {
         inner_text: e.date,
       },
     ];
-    Object.keys(e.open_ended_directives).forEach((key) => {
-      if (e.open_ended_directives[key] != "") {
+    directives.forEach((directive) => {
+      // Object.keys(e.open_ended_directives).forEach((key) => {
+      if (
+        directive.key in e.open_ended_directives &&
+        e.open_ended_directives[directive.key] != ""
+      ) {
         // title of the directive
         tags.push({
           tag: "h2",
-          inner_text: directives[key],
+          inner_text: directive.text,
         });
 
         nEntries++;
 
         // student-filled text
-        let s = e.open_ended_directives[key];
+        let s = e.open_ended_directives[directive.key];
         let parts = s.split("\n");
         parts.forEach((part) => {
           let trimmedString = part.trim();
