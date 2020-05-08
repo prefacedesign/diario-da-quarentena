@@ -16,7 +16,7 @@
       },
       "img": "/img/mock-imgs/img01.jpg",
       "img_caption": "Ao chegarmos junto ao Tabôco, a noite, ha muito, tinha cahido. Nuvens carregadas de chuva pesavão no horisonte, estendendo um véo tristonho, por entre o qual a lua, a custo, diffundia raios amortecidos e tibios.",
-      "mood": "😒 Entediado"
+      "emoji": "entediado"
     },
     {
       "date": "Semana 2: 4 a 8 de maio",
@@ -29,7 +29,7 @@
       },
       "img": "/img/mock-imgs/img02.jpg",
       "img_caption": "O caminho vai sempre seguindo o rio, o qual ora sahe em campo limpo, ora d'elle se separa por uma mata espessa e sombria.",
-      "mood": "😔 Triste"
+      "emoji": "triste"
     },
     {
       "date": "Semana 3: 11 a 15 de maio",
@@ -42,7 +42,7 @@
       },
       "img": "/img/mock-imgs/img03.jpg",
       "img_caption": "Scelerisque curabitur dui a scelerisque consectetur ullamcorper ut condimentum consectetur vestibulum.",
-      "mood": "😌 Sereno"
+      "emoji": "sereno"
     }
   ]
 }

@@ -11,6 +11,30 @@ let directives = [
   { key: "sentimentos", text: "Impressões e sentimentos" },
 ];
 
+let emojiKeys = {
+  raiva: "😡",
+  ansioso: "😟",
+  entediado: "😒",
+  triste: "😞",
+  animado: "😊",
+  cansado: "😴",
+  feliz: "😃",
+  satisfeito: "🙂",
+  sereno: "😌",
+};
+
+let moodKeys = {
+  raiva: "com raiva",
+  ansioso: "ansioso",
+  entediado: "entediado",
+  triste: "triste",
+  animado: "animado!",
+  cansado: "cansado",
+  feliz: "feliz",
+  satisfeito: "satisfeito",
+  sereno: "sereno",
+};
+
 let shouldDebugNav = false;
 
 let inkColors = 15,
@@ -390,6 +414,16 @@ function paginateContent() {
         inner_text: e.date,
       },
     ];
+    if (e.emoji != "") {
+      tags.push({
+        tag: "h3",
+        inner_text: `<span class="mood">${
+          moodKeys[e.emoji]
+        }</span><br><span class="emoji">${emojiKeys[e.emoji]}</span>`,
+      });
+      nEntries++;
+    }
+
     directives.forEach((directive) => {
       // Object.keys(e.open_ended_directives).forEach((key) => {
       if (
@@ -425,14 +459,6 @@ function paginateContent() {
         });
       }
     });
-
-    if (e.mood != "") {
-      tags.push({
-        tag: "h3",
-        inner_text: `Resumo da semana... ${e.mood}`,
-      });
-      nEntries++;
-    }
 
     if (e.img != "") {
       let caption = "";
@@ -473,8 +499,7 @@ function paginateContent() {
         let hasEndedProcessing = false;
         do {
           let node = document.createElement(currentTag);
-          let textNode = document.createTextNode(currentText);
-          node.appendChild(textNode);
+          node.innerHTML = currentText;
           textContainer.appendChild(node);
 
           let lines = parseInt(textContainer.offsetHeight) / lineHeight;

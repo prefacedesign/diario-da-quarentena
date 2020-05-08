@@ -59,7 +59,6 @@ h1 {
   @extend .highlights;
   font-family: $aux-font, cursive;
   margin-top: $line * 3/4;
-  margin-bottom: $line * 5/4;
   text-align: center;
   &:before,
   &:after {
@@ -89,6 +88,25 @@ h2 {
 
 h3 {
   @extend .highlights;
+  text-align: center;
+  color: $default-pencil;
+  margin-bottom: $line * 9/4;
+  position: relative;
+  .emoji {
+    display: block;
+    font-size: $line;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .mood {
+    &:before {
+      content: " -- me sentindo:\00a0";
+    }
+    &:after {
+      content: " -- ";
+    }
+  }
 }
 
 .img-container {
