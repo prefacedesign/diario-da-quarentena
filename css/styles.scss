@@ -58,8 +58,8 @@ p + .highlights {
 h1 {
   @extend .highlights;
   font-family: $aux-font, cursive;
-  margin-top: $line * 1/4;
-  margin-bottom: $line * 7/4;
+  margin-top: $line * 3/4;
+  margin-bottom: $line * 5/4;
   text-align: center;
   &:before,
   &:after {
