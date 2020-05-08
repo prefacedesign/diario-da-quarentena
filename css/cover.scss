@@ -8,18 +8,24 @@ $sp1: "\2004";
 $sp2: "\2006";
 @each $letter in $alphabet {
   $s: "" !global;
-  .first_#{to-lower-case($letter)} .cover:before {
-    @for $y from 1 through 41 {
-      @for $x from 1 through 28 {
-        $s: $s + $letter + " " !global;
+  .first_#{to-lower-case($letter)} {
+    .cover:before {
+      @for $y from 1 through 41 {
+        @for $x from 1 through 28 {
+          $s: $s + $letter + " " !global;
+        }
+        @if $y % 2 == 0 {
+          $s: $s + $br + " " !global;
+        } @else {
+          $s: $s + $br + " " + $letter !global;
+        }
       }
-      @if $y % 2 == 0 {
-        $s: $s + $br + " " !global;
-      } @else {
-        $s: $s + $br + " " + $letter !global;
-      }
+      content: "#{$s}";
     }
-    content: "#{$s}";
+    .page h1:before,
+    .page h1:after {
+      content: "#{$letter}";
+    }
   }
 }
 .cover {
