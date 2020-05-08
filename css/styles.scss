@@ -5,6 +5,11 @@
 
 body {
   background-color: $canvas_bg;
+  background-image: linear-gradient(
+    to bottom,
+    $canvas_bg,
+    darken($canvas_bg, 10%) 100%
+  );
   min-height: 100vh;
 
   display: grid;
@@ -397,9 +402,9 @@ $offset: 7px;
         content: "";
         position: absolute;
         left: $line * 2/3;
-        bottom: $line * 1/2;
-        width: $line * 3/2;
-        height: $line * 3/2;
+        bottom: $line * 1;
+        width: $line * 2;
+        height: $line * 2;
         background-image: url(../img/stamp-onhb.png);
         background-repeat: no-repeat;
         background-size: contain;

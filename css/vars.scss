@@ -23,7 +23,7 @@ $sc: $w * 0.01;
 $max-z: 999;
 
 $default-pencil: dimgray;
-$canvas_bg: #5e5d5d;
+$canvas_bg: #cccbcb;
 $paper-color: #f1f0eb;
 
 $main-line: #d6d3cc;
@@ -34,7 +34,7 @@ $sm-brkpnt: $w * 2 + $marg * 2;
 $default-cover-color: #cb0072;
 
 @mixin diary-shadow($x: 0px) {
-  box-shadow: $x 2px 5px darken($canvas_bg, 10%);
+  box-shadow: $x 1px 4px 1px darken($canvas_bg, 20%);
 }
 
 $vert-pad: 5px;
