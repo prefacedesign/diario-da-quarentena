@@ -37,9 +37,6 @@ let moodKeys = {
 
 let shouldDebugNav = false;
 
-let inkColors = 15,
-  bgColors = 17;
-
 let nEntries = 0;
 
 let mobile = false;
@@ -326,71 +323,22 @@ function startDebuggingAnimations() {
   }
 }
 
-(function () {
-  window.addEventListener("resize", detectMobile);
-  const transition = document.querySelector(".cover");
-
-  transition.ontransitionend = (e) => {
-    if (e.propertyName == "transform") {
-      if (diaryOpening) {
-        diary.classList.remove("opening", "closing", "closed");
-        diary.classList.add("open");
-        diaryOpening = false;
-      } else if (diaryClosing) {
-        diary.classList.remove("closing", "opening", "open");
-        diary.classList.add("closed");
-        diaryClosing = false;
-      }
-    }
-  };
-  transition.ontransitionstart = (e) => {};
-  if (debugAnimations) {
-    startDebuggingAnimations();
-  }
-  document.fonts.load('1rem "Patrick Hand"').then(() => {
-    fontLoaded = true;
-    if (dataLoaded) {
-      prepareDiary();
-    }
-  });
-})();
-
-fetch("../data/example.json")
-  .then((response) => {
-    return response.json();
-  })
-  .then((json) => {
-    mockData = json;
-    dataLoaded = true;
-    if (fontLoaded) {
-      prepareDiary();
-    }
-  });
-
-// https://stackoverflow.com/a/8831937
-String.prototype.hashCode = function () {
-  var hash = 0;
-  if (this.length == 0) {
-    return hash;
-  }
-  for (var i = 0; i < this.length; i++) {
-    var char = this.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return hash;
-};
-
 // first_c cover_4 f_color_8
 function setDiaryStyle() {
   let diaryContainer = document.querySelector(".diary-container");
   let firstLetter = mockData.initials[0].toLowerCase();
-  let bgCodeSeed =
-    mockData.profession + mockData.location + mockData.age + mockData.initials;
-  let inkCodeSeed =
-    mockData.age + mockData.initials + mockData.location + mockData.profession;
-  let bgCode = (Math.abs(bgCodeSeed.hashCode()) % bgColors) + 1;
-  let inkCode = (Math.abs(inkCodeSeed.hashCode()) % inkColors) + 1;
+  let bgCode = coverColorCode(
+    mockData.initials,
+    mockData.location,
+    mockData.age,
+    mockData.profession
+  );
+  let inkCode = inkColorCode(
+    mockData.initials,
+    mockData.location,
+    mockData.age,
+    mockData.profession
+  );
   diaryContainer.classList.add(
     `first_${firstLetter}`,
     `cover_${bgCode}`,
@@ -656,3 +604,46 @@ function prepareDiary() {
     diary.classList.remove("loading");
   });
 }
+
+/// hello
+
+(function () {
+  window.addEventListener("resize", detectMobile);
+  const transition = document.querySelector(".cover");
+
+  transition.ontransitionend = (e) => {
+    if (e.propertyName == "transform") {
+      if (diaryOpening) {
+        diary.classList.remove("opening", "closing", "closed");
+        diary.classList.add("open");
+        diaryOpening = false;
+      } else if (diaryClosing) {
+        diary.classList.remove("closing", "opening", "open");
+        diary.classList.add("closed");
+        diaryClosing = false;
+      }
+    }
+  };
+  transition.ontransitionstart = (e) => {};
+  if (debugAnimations) {
+    startDebuggingAnimations();
+  }
+  document.fonts.load('1rem "Patrick Hand"').then(() => {
+    fontLoaded = true;
+    if (dataLoaded) {
+      prepareDiary();
+    }
+  });
+})();
+
+fetch("../data/example.json")
+  .then((response) => {
+    return response.json();
+  })
+  .then((json) => {
+    mockData = json;
+    dataLoaded = true;
+    if (fontLoaded) {
+      prepareDiary();
+    }
+  });
