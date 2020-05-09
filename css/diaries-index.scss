@@ -38,9 +38,6 @@ body {
     $c: nth($ink-cols, $i);
     &.ink_#{$i} {
       --ink-color: #{$c};
-      .diary-decoration:before {
-        color: #{$c};
-      }
     }
   }
 

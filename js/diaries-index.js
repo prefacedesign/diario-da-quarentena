@@ -7,7 +7,27 @@ function setStyles() {
   diariesList.classList.remove("loading");
 }
 
+function randStr(length) {
+  var result = "";
+  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  var charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 function setupDiariesLinks() {
+  for (let i = 0; i < 100; i++) {
+    mockData.push({
+      initials: randStr(4),
+      age: randStr(2),
+      gender: randStr(4),
+      profession: randStr(4),
+      location: randStr(4),
+      link: "./diary.html",
+    });
+  }
   mockData.forEach((diary) => {
     let bgCode = coverColorCode(
       diary.initials,
