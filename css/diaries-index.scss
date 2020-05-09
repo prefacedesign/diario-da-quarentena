@@ -18,7 +18,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 960px; // ugly, should not be here
-  grid-gap: 2rem;
+  grid-gap: 4rem;
 }
 
 .diary-link {
