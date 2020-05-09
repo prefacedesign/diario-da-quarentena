@@ -15,12 +15,12 @@ String.prototype.hashCode = function () {
   return hash;
 };
 
-function coverColorCode(initials, location, age, profession) {
-  let bgCodeSeed = profession + location + age + initials;
+function coverColorCode(initials, location, age, profession, gender) {
+  let bgCodeSeed = gender + profession + location + age + initials;
   return (Math.abs(bgCodeSeed.hashCode()) % bgColors) + 1;
 }
 
-function inkColorCode(initials, location, age, profession) {
-  let inkCodeSeed = age + initials + location + profession;
+function inkColorCode(initials, location, age, profession, gender) {
+  let inkCodeSeed = age + initials + location + profession + gender;
   return (Math.abs(inkCodeSeed.hashCode()) % inkColors) + 1;
 }

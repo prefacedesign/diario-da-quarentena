@@ -331,13 +331,15 @@ function setDiaryStyle() {
     mockData.initials,
     mockData.location,
     mockData.age,
-    mockData.profession
+    mockData.profession,
+    mockData.gender
   );
   let inkCode = inkColorCode(
     mockData.initials,
     mockData.location,
     mockData.age,
-    mockData.profession
+    mockData.profession,
+    mockData.gender
   );
   diaryContainer.classList.add(
     `first_${firstLetter}`,
