@@ -2,10 +2,6 @@
 
 // c h
 
-$s: "";
-$br: "\a";
-$sp1: "\2004";
-$sp2: "\2006";
 @each $letter in $alphabet {
   $s: "" !global;
   .first_#{to-lower-case($letter)} {

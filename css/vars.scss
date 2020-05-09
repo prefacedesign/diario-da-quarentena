@@ -76,6 +76,10 @@ $ink-cols: #a0bcf1, #a7644f, #943772, #f1b63f, #d45308, #479654, #332653,
   #658d73, #f85555, #72625d, #a8a8a8, #e0abab, #7c97a0, #006099, #ac5569;
 
 $alphabet: A b C D E f G H i J K L m N O P Q R S t U V W x y Z;
+$s: "";
+$br: "\a";
+$sp1: "\2004";
+$sp2: "\2006";
 
 .de-hyphenator {
   hyphens: none !important;

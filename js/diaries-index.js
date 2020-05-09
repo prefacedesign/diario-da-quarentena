@@ -25,7 +25,8 @@ function setupDiariesLinks() {
     );
 
     let initials = "",
-      age = "";
+      age = "",
+      firstLetter = diary.initials[0].toLowerCase();
     for (let i = 0; i < diary.initials.length; i++) {
       initials += diary.initials[i] + ".";
     }
@@ -35,7 +36,12 @@ function setupDiariesLinks() {
     }
 
     let diaryLink = document.createElement("div");
-    diaryLink.classList.add("diary-link", `cover_${bgCode}`, `ink_${inkCode}`);
+    diaryLink.classList.add(
+      "diary-link",
+      `first_${firstLetter}`,
+      `cover_${bgCode}`,
+      `ink_${inkCode}`
+    );
 
     // the heading
     let header = document.createElement("header");
