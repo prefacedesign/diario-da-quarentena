@@ -1,0 +1,98 @@
+[
+  {
+    "initials": "CLP",
+    "age": 36,
+    "gender": "Masculino",
+    "profession": "Designer",
+    "location": "Campinas, SP",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "DSA",
+    "age": 35,
+    "gender": "Masculino",
+    "profession": "Programador",
+    "location": "Ponta Grossa, PR",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "LVR",
+    "age": 36,
+    "gender": "Masculino",
+    "profession": "Programador e arquiteto de informação",
+    "location": "Campinas, SP",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "APKG",
+    "age": 37,
+    "gender": "Feminino",
+    "profession": "Professora",
+    "location": "Campinas, SP",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "BGP",
+    "age": 5,
+    "gender": "Masculino",
+    "profession": "Estudante",
+    "location": "Campinas, SP",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "AKG",
+    "age": 73,
+    "gender": "Feminino",
+    "profession": "Aposentada",
+    "location": "Campinas, SP",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "DMP",
+    "age": 63,
+    "gender": "Masculino",
+    "profession": "Professor e consultor",
+    "location": "Campinas, SP",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "KIRL",
+    "age": 37,
+    "gender": "Outro",
+    "profession": "Aleatório",
+    "location": "Salvador, BA",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "TY",
+    "age": 51,
+    "gender": "Prefiro não responder",
+    "profession": "Cantor",
+    "location": "Oxford, Inglaterra",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "TY",
+    "age": 51,
+    "gender": "Prefiro não responder",
+    "profession": "Cantor",
+    "location": "Oxford, Inglaterra",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "OIRY",
+    "age": 93,
+    "gender": "Feminino",
+    "profession": "Prefeita de Ubatuba",
+    "location": "Ubatuba, SP",
+    "link": "./diary.html"
+  },
+  {
+    "initials": "HELLO",
+    "age": 12,
+    "gender": "Feminino",
+    "profession": "Prefeita-mirim de Ubatuba",
+    "location": "Ubatuba, SP",
+    "link": "./diary.html"
+  }
+]
