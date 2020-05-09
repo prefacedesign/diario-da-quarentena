@@ -8,15 +8,17 @@ body {
 
   display: grid;
   align-items: center;
+  justify-content: center;
 
-  padding: 2rem;
+  padding: 4rem;
 }
 
 #diaries-list {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  width: 960px; // ugly, should not be here
+  grid-gap: 2rem;
 }
 
 .diary-link {
@@ -28,7 +30,8 @@ body {
   header {
     padding: 0.75rem;
     h1 {
-      font-size: 19px;
+      font-size: 18px;
+      padding-bottom: 3px;
       font-weight: 500;
     }
     h2 {
@@ -38,13 +41,13 @@ body {
   }
 
   .diary-decoration {
-    height: 10rem;
+    height: 8rem;
     background: #cb0072;
   }
 
   a {
     margin: 0.75rem;
-    display: block;
+    display: inline-block;
     font-size: 14px;
     font-weight: 500;
     color: black;
