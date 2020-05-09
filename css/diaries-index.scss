@@ -84,9 +84,13 @@ body {
     font-weight: 500;
     color: black;
     text-decoration-color: rgba(0, 0, 0, 0.33);
+    padding: 0.0625rem 0.125rem;
+    position: relative;
+    left: -0.125rem;
     pointer-events: auto;
     &:hover {
-      background: lightgray;
+      text-decoration: none;
+      background: rgba(0, 0, 0, 0.125);
     }
   }
 }
