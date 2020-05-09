@@ -73,7 +73,8 @@ body {
 
   .diary-decoration {
     height: 8rem;
-    background: #cb0072;
+    background-color: #cb0072;
+    background-color: var(--cover-color);
   }
 
   a {
