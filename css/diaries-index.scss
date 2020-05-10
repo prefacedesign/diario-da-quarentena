@@ -94,12 +94,13 @@ body {
   border-radius: 0.125rem;
 
   @include diary-shadow(0);
+  transform: rotate3d(0, 0.001, 0, 0.01deg);
 
   pointer-events: none;
-  transition: box-shadow 1.5s ease;
+  transition: box-shadow 1.5s ease, transform 6s ease;
   &:hover {
-    box-shadow: 0 10px 30px -7px var(--cover-color),
-      0 0 0.5px 0.25px var(--cover-color);
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 10px 30px -7px var(--cover-color);
   }
 
   header {
