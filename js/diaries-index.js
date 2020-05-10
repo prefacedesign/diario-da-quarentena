@@ -18,7 +18,7 @@ function randStr(length) {
 }
 
 function setupDiariesLinks() {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 400; i++) {
     mockData.push({
       initials: randStr(4),
       age: randStr(2),

@@ -4,6 +4,8 @@
 @import "./fonts.css";
 @import "./cooper.scss";
 
+$text-col: #505050;
+
 body {
   font-family: "Cooper Hewitt", sans-serif;
 
@@ -68,14 +70,14 @@ body {
 
 .diary-link {
   background: white;
+  color: $text-col;
   border-radius: 0.125rem;
 
   @include diary-shadow(0);
 
   pointer-events: none;
-  transition: box-shadow 3s ease;
+  transition: box-shadow 1.5s ease;
   &:hover {
-    transition: box-shadow 1s ease;
     box-shadow: 0 10px 30px -7px var(--cover-color),
       0 0 0.5px 0.25px var(--cover-color);
   }
@@ -103,7 +105,7 @@ body {
     &:after {
       position: absolute;
       left: -2rem;
-      top: -1.5rem;
+      top: -2rem;
       right: -1.5rem;
       bottom: -1.5rem;
       color: var(--ink-color);
@@ -124,7 +126,7 @@ body {
     display: inline-block;
     font-size: 14px;
     font-weight: 500;
-    color: black;
+    color: $text-col;
     text-decoration-color: rgba(0, 0, 0, 0.33);
     padding: 0.0625rem 0.125rem;
     position: relative;
