@@ -43,6 +43,9 @@ body {
   &.loading {
     .diary-decoration {
       opacity: 0.25;
+      &:after {
+        opacity: 0;
+      }
     }
   }
 }
