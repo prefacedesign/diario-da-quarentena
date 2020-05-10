@@ -9,19 +9,36 @@ $text-col: #505050;
 body {
   font-family: "Cooper Hewitt", sans-serif;
 
-  display: grid;
-  align-items: center;
-  justify-content: center;
-
-  padding: 4rem;
+  padding: 2rem;
+  @media (min-width: 992px) {
+    grid-gap: 3rem;
+  }
+  @media (min-width: 1200px) {
+    grid-gap: 4rem;
+    display: grid;
+    justify-items: center;
+  }
 }
 
 #diaries-list {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 960px; // ugly, should not be here
-  grid-gap: 4rem;
+  width: 100%;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3rem;
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 4rem;
+    max-width: calc(320px * 4 + 4rem * 3);
+  }
 
   &.loading {
     .diary-decoration {
@@ -96,7 +113,7 @@ body {
   }
 
   .diary-decoration {
-    height: 8rem;
+    height: 11rem;
     background-color: #cb0072;
     background-color: var(--cover-color);
     transition: opacity 1s ease;
