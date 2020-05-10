@@ -18,6 +18,8 @@ function randStr(length) {
 }
 
 function setupDiariesLinks() {
+  let diaryCode = 1;
+
   for (let i = 0; i < 200; i++) {
     mockData.push({
       initials: randStr(4),
@@ -81,11 +83,20 @@ function setupDiariesLinks() {
     diaryLink.append(deco);
 
     // the link & eventually etc
+    let footer = document.createElement("footer");
+
     let anchor = document.createElement("a");
     anchor.title = `Acesse o diário de ${initials}`;
     anchor.href = diary.link;
     anchor.appendChild(document.createTextNode("Ler este diário"));
-    diaryLink.appendChild(anchor);
+
+    let diaryCodeContainer = document.createElement("p");
+    diaryCodeContainer.innerHTML = `#&ThinSpace;${diaryCode++}`;
+
+    footer.appendChild(anchor);
+    footer.appendChild(diaryCodeContainer);
+
+    diaryLink.appendChild(footer);
 
     diariesList.appendChild(diaryLink);
   });
