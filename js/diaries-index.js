@@ -18,13 +18,13 @@ function randStr(length) {
 }
 
 function setupDiariesLinks() {
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < 200; i++) {
     mockData.push({
       initials: randStr(4),
-      age: randStr(2),
+      age: "" + Math.round(Math.random() * 100),
       gender: randStr(4),
       profession: randStr(4),
-      location: randStr(4),
+      location: randStr(20) + ", " + randStr(2).toUpperCase(),
       link: "./diary.html",
     });
   }
