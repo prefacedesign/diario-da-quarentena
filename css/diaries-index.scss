@@ -37,6 +37,7 @@ body > header {
 
   display: grid;
   grid-gap: 0.5rem;
+  align-items: center;
   grid-template-columns: max-content 1fr min-content;
   @media (min-width: 1200px) {
     grid-template-columns: 7fr 3fr min-content;
@@ -63,16 +64,11 @@ body > header {
       font-weight: 400;
     }
   }
-  p {
-    grid-column: 1;
-    grid-row: 2;
-  }
   #logos {
     grid-column: 3;
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 1rem;
-    grid-row: 1 / span 2;
     img {
       max-width: unset;
       height: 3rem;
