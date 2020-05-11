@@ -1,6 +1,5 @@
 @import "./reset.scss";
 @import "./vars.scss";
-@import "./common.scss";
 @import "./fonts.css";
 @import "./cooper.scss";
 
@@ -8,6 +7,7 @@ $text-col: #505050;
 
 body {
   font-family: "Cooper Hewitt", sans-serif;
+  overflow-y: scroll; // the flipping page sometimes makes scroll bars appear...
 
   padding: 2rem;
   @media (min-width: 992px) {
