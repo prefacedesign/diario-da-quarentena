@@ -20,7 +20,7 @@ function randStr(length) {
 function setupDiariesLinks() {
   let diaryCode = 1;
 
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 9; i++) {
     mockData.push({
       initials: randStr(4),
       age: "" + Math.round(Math.random() * 100),
