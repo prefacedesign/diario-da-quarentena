@@ -469,7 +469,7 @@ $offset: 7px;
         z-index: 1000;
       }
       &.current {
-        transform: rotate3d(0, 1, 0, 1deg);
+        transform: rotate3d(0, 1, 0, 1.5deg);
         box-shadow: -3px 1px 3px #0003;
         z-index: 100;
         opacity: 1;
@@ -511,6 +511,7 @@ $offset: 7px;
 
       @at-root .current + & {
         box-shadow: 3px 1px 3px #0003;
+        transform: rotate3d(0, 0.05, 0, -1deg);
         z-index: 100;
         opacity: 1;
       }
@@ -619,6 +620,8 @@ $offset: 7px;
   position: absolute;
   z-index: $max-z;
   bottom: 3/4 * $line;
+
+  transform: translate3d(0, 0, 100px); // fix for safari...
 
   @media (max-width: $aux-w) {
     transform: scale(0.9) translateY(-60%);
