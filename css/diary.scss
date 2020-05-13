@@ -8,6 +8,7 @@ body {
   display: grid;
   place-items: center;
   @media (min-width: $sm-brkpnt) {
+    padding-top: 1rem;
     grid-row-gap: 2rem;
   }
   background-color: $canvas_bg;
