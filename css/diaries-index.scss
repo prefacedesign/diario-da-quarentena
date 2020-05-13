@@ -26,7 +26,7 @@ body {
 }
 
 body > header {
-  width: 100%;
+  @extend .pandemy-diaries-head;
   padding: 1rem 2rem;
   @media (min-width: 992px) {
     padding: 1rem 3rem;
@@ -34,24 +34,7 @@ body > header {
   @media (min-width: 1200px) {
     padding: 1rem 4rem;
   }
-
-  display: grid;
-  grid-gap: 0.5rem;
-  align-items: center;
-  grid-template-columns: max-content 1fr min-content;
-  @media (min-width: 1200px) {
-    grid-template-columns: 7fr 3fr min-content;
-  }
-
   h1 {
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-
-    @media (max-width: 992px) {
-      font-size: 1.4rem;
-      line-height: 1.6rem;
-      font-weight: 600;
-    }
     @media (min-width: 992px) {
       font-size: 2rem;
       font-weight: 500;
@@ -62,18 +45,6 @@ body > header {
     @media (min-width: 1200px) {
       font-size: 3rem;
       font-weight: 400;
-    }
-  }
-  #logos {
-    grid-column: 3;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 1rem;
-    img {
-      max-width: unset;
-      height: 3rem;
-      justify-self: end;
-      object-fit: contain;
     }
   }
 }

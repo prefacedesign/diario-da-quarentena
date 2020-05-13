@@ -116,3 +116,35 @@ $sp2: "\2006";
   hyphenate-limit-last: always;
   hyphenate-limit-zone: 8%;
 }
+
+.pandemy-diaries-head {
+  width: 100%;
+
+  display: grid;
+  grid-gap: 0.5rem;
+  align-items: center;
+  grid-template-columns: max-content 1fr min-content;
+  @media (min-width: 1200px) {
+    grid-template-columns: 7fr 3fr min-content;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    font-weight: 600;
+  }
+  #logos {
+    grid-column: 3;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 1rem;
+    img {
+      max-width: unset;
+      height: 3rem;
+      justify-self: end;
+      object-fit: contain;
+    }
+  }
+}
