@@ -352,7 +352,7 @@ function setDiaryStyle() {
 function paginateContent() {
   let textContainer = document.getElementById("aux-text-container");
   let lineHeight = textContainer.clientHeight;
-  let lineLimit = 16;
+  let lineLimit = 16.5;
   textContainer.innerHTML = ``;
 
   let html = [];
@@ -452,7 +452,7 @@ function paginateContent() {
           node.innerHTML = currentText;
           textContainer.appendChild(node);
 
-          let lines = parseInt(textContainer.offsetHeight) / lineHeight;
+          let lines = textContainer.offsetHeight / lineHeight;
           if (
             lines > lineLimit ||
             (currentTag == "h2" && lines > lineLimit - 2)
@@ -468,7 +468,7 @@ function paginateContent() {
               if (!foundBreakpoint) {
                 let oldS = textContainer.lastChild.innerHTML;
                 textContainer.lastChild.innerHTML += words[i] + " ";
-                lines = parseInt(textContainer.offsetHeight) / lineHeight;
+                lines = textContainer.offsetHeight / lineHeight;
                 if (
                   lines > lineLimit ||
                   (currentTag == "h2" && lines > lineLimit - 2)
@@ -630,7 +630,7 @@ function prepareDiary() {
   if (debugAnimations) {
     startDebuggingAnimations();
   }
-  document.fonts.load('1rem "Patrick Hand"').then(() => {
+  document.fonts.ready.then(() => {
     fontLoaded = true;
     if (dataLoaded) {
       prepareDiary();
