@@ -2,11 +2,12 @@
 @import "./vars.scss";
 @import "./fonts.css";
 @import "./cover.scss";
+@import "./cooper.scss";
 
 body {
   display: grid;
   place-items: center;
-  justify-content: center;
+  grid-row-gap: 2rem;
   background-color: $canvas_bg;
   background-image: linear-gradient(
     to bottom,
@@ -20,7 +21,6 @@ body {
   @media (min-width: $sm-brkpnt) {
     perspective: $perspective;
     transform-style: preserve-3d;
-    padding: $marg $marg $marg * 3 $marg;
   }
 }
 
@@ -303,6 +303,7 @@ h3 {
 
 .diary-container {
   position: relative;
+  margin: 2rem 1rem;
 }
 
 .pages-container {
@@ -757,5 +758,27 @@ $offset: 7px;
   100%,
   0% {
     transform: scale(1);
+  }
+}
+
+footer {
+  @extend .pandemy-diaries-head;
+  background: white;
+
+  align-self: end;
+
+  padding: 0.5rem 1rem;
+  #logos img {
+    height: 2.4rem;
+  }
+  h1 {
+    font-family: "Cooper Hewitt", sans-serif;
+    margin-top: unset;
+    text-align: unset;
+    color: black;
+    font-weight: 500;
+    br {
+      display: none;
+    }
   }
 }
