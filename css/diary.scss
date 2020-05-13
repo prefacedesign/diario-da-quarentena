@@ -7,7 +7,9 @@
 body {
   display: grid;
   place-items: center;
-  grid-row-gap: 2rem;
+  @media (min-width: $sm-brkpnt) {
+    grid-row-gap: 2rem;
+  }
   background-color: $canvas_bg;
   background-image: linear-gradient(
     to bottom,
@@ -232,6 +234,8 @@ h3 {
   }
 }
 
+$aux-w: $w + 2 * $marg;
+
 .diary {
   @media (min-width: $sm-brkpnt) {
     perspective: $perspective;
@@ -279,8 +283,6 @@ h3 {
     }
   }
 
-  $aux-w: $w + 2 * $marg;
-
   @media (max-width: $aux-w) {
     transform: scale(0.9);
   }
@@ -303,7 +305,11 @@ h3 {
 
 .diary-container {
   position: relative;
-  margin: 2rem 1rem;
+  justify-self: center;
+
+  @media (max-width: $aux-w) {
+    margin: 0;
+  }
 }
 
 .pages-container {
@@ -613,6 +619,25 @@ $offset: 7px;
   z-index: $max-z;
   bottom: 3/4 * $line;
 
+  @media (max-width: $aux-w) {
+    transform: scale(0.9) translateY(-60%);
+  }
+  @media (max-width: $aux-w*0.9) {
+    transform: scale(0.9 * 0.9) translateY(-130%);
+  }
+  @media (max-width: $aux-w*0.8) {
+    transform: scale(0.9 * 0.8) translateY(-220%);
+  }
+  @media (max-width: $aux-w*0.7) {
+    transform: scale(0.9 * 0.7) translateY(-340%);
+  }
+  @media (max-width: $aux-w*0.6) {
+    transform: scale(0.9 * 0.6) translateY(-500%);
+  }
+  @media (max-width: $aux-w*0.5) {
+    transform: scale(0.9 * 0.5) translateY(-720%);
+  }
+
   @media (min-width: $sm-brkpnt) {
     width: $w * 2;
     left: calc(50% - #{$w});
@@ -786,11 +811,22 @@ footer {
 #back {
   font-family: "Cooper Hewitt", sans-serif;
   font-weight: 500;
-  position: absolute;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  left: 1rem;
-  top: 0.5rem;
+
+  @media (max-width: $sm-brkpnt) {
+    justify-self: start;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    position: relative;
+  }
+
+  @media (min-width: $sm-brkpnt) {
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem;
+  }
+
   font-size: 0.75rem;
   text-decoration: none;
   color: black;
