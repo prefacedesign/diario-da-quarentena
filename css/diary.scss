@@ -782,3 +782,35 @@ footer {
     }
   }
 }
+
+#back {
+  font-family: "Cooper Hewitt", sans-serif;
+  font-weight: 500;
+  position: absolute;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  left: 1rem;
+  top: 0.5rem;
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: black;
+  padding-left: 0.75rem;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    display: block;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    width: 0.75rem;
+    height: 0.75rem;
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+}
