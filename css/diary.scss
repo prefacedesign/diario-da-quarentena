@@ -3,6 +3,7 @@
 @import "./fonts.css";
 @import "./cover.scss";
 @import "./cooper.scss";
+@import "./print.scss";
 
 body {
   display: grid;
@@ -20,151 +21,153 @@ body {
 
   min-height: 100vh;
   overflow-y: scroll; // the flipping page sometimes makes scroll bars appear...
+}
 
+#aux-text-container {
+  visibility: hidden;
+  @extend .text-container;
+  p {
+    @extend .hyphenator;
+  }
+  margin: unset !important;
+  position: fixed;
+  height: auto !important;
+  left: 0;
+  top: 0;
+  background: greenyellow;
+}
+
+body:not(.print-version) {
   @media (min-width: $sm-brkpnt) {
     perspective: $perspective;
     transform-style: preserve-3d;
   }
-}
 
-.diary-text {
-  font-family: $main-font, cursive;
-  line-height: $line;
-  font-size: $fs;
-}
-
-.highlights {
-  font-family: $main-font, cursive;
-
-  color: #cb0072;
-  font-size: $fs;
-  display: block;
-  mix-blend-mode: multiply;
-}
-
-.mood-summary {
-  @extend .highlights;
-  color: $default-pencil;
-  text-indent: 0 !important;
-  margin-top: $line;
-}
-
-.initials {
-  text-transform: uppercase;
-}
-
-p + .highlights {
-  margin-top: $line;
-}
-
-h1 {
-  @extend .highlights;
-  font-family: $aux-font, cursive;
-  margin-top: $line * 3/4;
-  text-align: center;
-  &:before,
-  &:after {
-    font-family: "italian_mosaic_ornamentsRg";
-    font-size: 28px;
-    color: var(--ink-color);
-    position: relative;
+  .diary-text {
+    font-family: $main-font, sans-serif;
+    line-height: $line;
+    font-size: $fs;
   }
-  &:before {
-    float: left;
-    transform: rotateZ(1.2deg);
-    top: 3px;
-    opacity: 0.9;
-  }
-  &:after {
-    float: right;
-    transform: rotateZ(0.5deg);
-    top: 1px;
-    opacity: 0.8;
-  }
-}
 
-h2 {
-  @extend .highlights;
-  font-family: $aux-font, cursive;
-}
+  .highlights {
+    font-family: $main-font, sans-serif;
 
-h3 {
-  @extend .highlights;
-  text-align: center;
-  color: $default-pencil;
-  margin-bottom: $line * 9/4;
-  position: relative;
-  .emoji {
+    color: #cb0072;
+    font-size: $fs;
     display: block;
-    font-size: $line;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    mix-blend-mode: multiply;
   }
-  .mood {
+
+  .mood-summary {
+    @extend .highlights;
+    color: $default-pencil;
+    text-indent: 0 !important;
+    margin-top: $line;
+  }
+
+  .initials {
+    text-transform: uppercase;
+  }
+
+  p + .highlights {
+    margin-top: $line;
+  }
+
+  .diary h1 {
+    @extend .highlights;
+    font-family: $aux-font, sans-serif;
+    margin-top: $line * 3/4;
+    text-align: center;
+    &:before,
+    &:after {
+      font-family: "italian_mosaic_ornamentsRg";
+      font-size: 28px;
+      color: var(--ink-color);
+      position: relative;
+    }
     &:before {
-      content: " -- me sentindo:\00a0";
+      float: left;
+      transform: rotateZ(1.2deg);
+      top: 3px;
+      opacity: 0.9;
     }
     &:after {
-      content: " -- ";
+      float: right;
+      transform: rotateZ(0.5deg);
+      top: 1px;
+      opacity: 0.8;
     }
   }
-}
 
-.img-container {
-  width: 100%;
-  padding-top: $line / 4;
+  h2 {
+    @extend .highlights;
+    font-family: $aux-font, sans-serif;
+  }
 
-  img {
+  h3 {
+    @extend .highlights;
+    text-align: center;
+    color: $default-pencil;
+    margin-bottom: $line * 9/4;
+    position: relative;
+    .emoji {
+      display: block;
+      font-size: $line;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .mood {
+      &:before {
+        content: " -- me sentindo:\00a0";
+      }
+      &:after {
+        content: " -- ";
+      }
+    }
+  }
+
+  .img-container {
     width: 100%;
-    max-height: 10 * $line;
-    object-fit: contain;
+    padding-top: $line / 4;
 
-    margin-bottom: $line / 4;
-  }
+    img {
+      width: 100%;
+      max-height: 10 * $line;
+      object-fit: contain;
 
-  p {
-    font-size: $fs * 0.8;
-    line-height: $line * 0.666666666;
-    word-break: break-word;
-    @extend .hyphenator;
-    a {
-      word-break: break-all;
-      @extend .discrete-link;
+      margin-bottom: $line / 4;
+    }
+
+    p {
+      font-size: $fs * 0.8;
+      line-height: $line * 0.666666666;
+      word-break: break-word;
+      @extend .hyphenator;
+      a {
+        word-break: break-all;
+        @extend .discrete-link;
+      }
     }
   }
-}
 
-.header-highlights {
-  @extend .highlights;
-  user-select: none;
-  color: $default-pencil;
-}
-
-.diary {
-  position: relative;
-  @media (min-width: $sm-brkpnt) {
-    height: $h + $vert-pad * 2;
-    width: 2 * $w + $horiz-pad * 2;
+  .header-highlights {
+    @extend .highlights;
+    user-select: none;
+    color: $default-pencil;
   }
-  @media (max-width: $sm-brkpnt) {
-  }
-}
 
-.closed.diary {
-  .pages-container,
-  & + .navigation,
-  .staples,
-  &:before,
-  &:after {
-    display: none;
-    opacity: 0;
+  .diary {
+    position: relative;
+    @media (min-width: $sm-brkpnt) {
+      height: $h + $vert-pad * 2;
+      width: 2 * $w + $horiz-pad * 2;
+    }
+    @media (max-width: $sm-brkpnt) {
+    }
   }
-}
 
-@media (max-width: $sm-brkpnt) {
-  .opening.diary,
-  .closing.diary {
+  .closed.diary {
     .pages-container,
     & + .navigation,
     .staples,
@@ -174,336 +177,631 @@ h3 {
       opacity: 0;
     }
   }
-}
 
-@media (min-width: $sm-brkpnt) {
-  .opening.diary {
-    .cover {
-      transform: rotate3d(0, 1, 0, -180deg);
-      &:before {
-        opacity: 0;
-      }
-      .about-the-diary {
-        opacity: 0;
-      }
-    }
-
-    &:before {
-      display: none;
-    }
-
-    & + .navigation,
-    .staples {
-      display: none;
-    }
-  }
-
-  .closing.diary {
-    .cover {
-      transform: rotate3d(0, 1, 0, -1deg);
+  @media (max-width: $sm-brkpnt) {
+    .opening.diary,
+    .closing.diary {
+      .pages-container,
+      & + .navigation,
+      .staples,
       &:before,
-      .about-the-diary {
-        opacity: 1;
-      }
-    }
-
-    &:before {
-      display: none;
-    }
-    & + .navigation,
-    .staples {
-      display: none;
-    }
-  }
-}
-
-.open.diary {
-  @media (min-width: $sm-brkpnt) {
-    .cover {
-      transform: rotate3d(0, 1, 0, -180deg);
-      z-index: -1;
-      .about-the-diary,
-      &:before {
+      &:after {
+        display: none;
         opacity: 0;
       }
     }
   }
-  @media (max-width: $sm-brkpnt) {
-    .cover {
-      display: none;
-    }
-  }
-}
-
-$aux-w: $w + 2 * $marg;
-
-.diary {
-  @media (min-width: $sm-brkpnt) {
-    perspective: $perspective;
-    transform-style: preserve-3d;
-  }
-  transform: rotate3d(1, 0, 0, 8deg);
 
   @media (min-width: $sm-brkpnt) {
-    padding: ($vert-pad * 2/3) ($horiz-pad) ($vert-pad * 4/3);
+    .opening.diary {
+      .cover {
+        transform: rotate3d(0, 1, 0, -180deg);
+        &:before {
+          opacity: 0;
+        }
+        .about-the-diary {
+          opacity: 0;
+        }
+      }
 
-    &:before,
-    &:after {
-      content: "";
+      &:before {
+        display: none;
+      }
 
-      position: absolute;
-      top: 0;
-      z-index: 0;
-
-      height: $h + $vert-pad * 2;
-      width: $w + $horiz-pad;
+      & + .navigation,
+      .staples {
+        display: none;
+      }
     }
 
-    &:before {
-      left: 0;
-      @include left-page-radiuses;
-    }
+    .closing.diary {
+      .cover {
+        transform: rotate3d(0, 1, 0, -1deg);
+        &:before,
+        .about-the-diary {
+          opacity: 1;
+        }
+      }
 
-    &:after {
-      right: 0;
-      @include right-page-radiuses;
-    }
-  }
-
-  @media (max-width: $sm-brkpnt) {
-    &:before {
-      content: "";
-      position: absolute;
-      z-index: 0;
-
-      height: $h + $vert-pad * 2;
-      width: $w + $horiz-pad * 2;
-
-      top: -$vert-pad * 2/3;
-      left: -$horiz-pad;
-    }
-  }
-
-  @media (max-width: $aux-w) {
-    transform: scale(0.9);
-  }
-  @media (max-width: $aux-w*0.9) {
-    transform: scale(0.9 * 0.9);
-  }
-  @media (max-width: $aux-w*0.8) {
-    transform: scale(0.9 * 0.8);
-  }
-  @media (max-width: $aux-w*0.7) {
-    transform: scale(0.9 * 0.7);
-  }
-  @media (max-width: $aux-w*0.6) {
-    transform: scale(0.9 * 0.6);
-  }
-  @media (max-width: $aux-w*0.5) {
-    transform: scale(0.9 * 0.5);
-  }
-}
-
-.diary-container {
-  position: relative;
-  justify-self: center;
-
-  @media (max-width: $aux-w) {
-    margin: 0;
-  }
-}
-
-.pages-container {
-  z-index: 5;
-  @media (min-width: $sm-brkpnt) {
-    width: 2 * $w;
-    left: $horiz-pad;
-    top: $vert-pad;
-    position: absolute;
-    perspective: $perspective;
-    transform-style: preserve-3d;
-  }
-  @media (max-width: $sm-brkpnt) {
-    width: $w;
-    height: $h;
-    position: relative;
-  }
-}
-
-.staples {
-  @media (max-width: $sm-brkpnt) {
-    display: none;
-  }
-  position: absolute;
-  z-index: $max-z;
-  left: calc(50% - 1px);
-  top: 0;
-  bottom: 0;
-  li {
-    position: absolute;
-    height: 3/2 * $line;
-    width: 2px;
-    mix-blend-mode: multiply;
-    background: transparentize(slategray, 0.75);
-    &:nth-child(1) {
-      top: 15%;
-    }
-    &:nth-child(2) {
-      top: calc(50% - 3 / 4 *#{$line});
-    }
-    &:nth-child(3) {
-      bottom: 15%;
-    }
-  }
-}
-
-.discrete-link {
-  color: $default-pencil;
-  text-decoration-color: transparentize($default-pencil, 0.5);
-}
-
-$offset: 7px;
-
-.page {
-  height: $h;
-  width: $w;
-
-  overflow-y: hidden;
-  overflow-x: hidden;
-  background-color: $paper-color;
-
-  color: $default-pencil;
-
-  position: relative;
-  z-index: 1;
-
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 2 * $line;
-    bottom: 0;
-
-    background-image: repeating-linear-gradient(
-      0deg,
-      $main-line,
-      transparent 1px,
-      transparent $line
-    );
-  }
-
-  p {
-    @extend .hyphenator;
-    word-break: break-word;
-    a {
-      @extend .discrete-link;
+      &:before {
+        display: none;
+      }
+      & + .navigation,
+      .staples {
+        display: none;
+      }
     }
   }
 
-  &:first-child {
-    display: none;
+  .open.diary {
+    @media (min-width: $sm-brkpnt) {
+      .cover {
+        transform: rotate3d(0, 1, 0, -180deg);
+        z-index: -1;
+        .about-the-diary,
+        &:before {
+          opacity: 0;
+        }
+      }
+    }
+    @media (max-width: $sm-brkpnt) {
+      .cover {
+        display: none;
+      }
+    }
   }
 
-  &.summary {
-    p + p {
-      text-indent: 0;
-      margin-top: $line;
-    }
+  $aux-w: $w + 2 * $marg;
 
-    .text-container {
-      @extend .typewriter;
-      position: relative;
-      top: 3px;
+  .diary {
+    @media (min-width: $sm-brkpnt) {
+      perspective: $perspective;
+      transform-style: preserve-3d;
+    }
+    transform: rotate3d(1, 0, 0, 8deg);
+
+    @media (min-width: $sm-brkpnt) {
+      padding: ($vert-pad * 2/3) ($horiz-pad) ($vert-pad * 4/3);
+
+      &:before,
       &:after {
         content: "";
+
         position: absolute;
-        left: $line * 2/3;
-        bottom: $line * 1;
-        width: $line * 2;
-        height: $line * 2;
-        background-image: url(../img/stamp-onhb.png);
-        background-repeat: no-repeat;
-        background-size: contain;
+        top: 0;
+        z-index: 0;
+
+        height: $h + $vert-pad * 2;
+        width: $w + $horiz-pad;
+      }
+
+      &:before {
+        left: 0;
+        @include left-page-radiuses;
+      }
+
+      &:after {
+        right: 0;
+        @include right-page-radiuses;
+      }
+    }
+
+    @media (max-width: $sm-brkpnt) {
+      &:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+
+        height: $h + $vert-pad * 2;
+        width: $w + $horiz-pad * 2;
+
+        top: -$vert-pad * 2/3;
+        left: -$horiz-pad;
+      }
+    }
+
+    @media (max-width: $aux-w) {
+      transform: scale(0.9);
+    }
+    @media (max-width: $aux-w*0.9) {
+      transform: scale(0.9 * 0.9);
+    }
+    @media (max-width: $aux-w*0.8) {
+      transform: scale(0.9 * 0.8);
+    }
+    @media (max-width: $aux-w*0.7) {
+      transform: scale(0.9 * 0.7);
+    }
+    @media (max-width: $aux-w*0.6) {
+      transform: scale(0.9 * 0.6);
+    }
+    @media (max-width: $aux-w*0.5) {
+      transform: scale(0.9 * 0.5);
+    }
+  }
+
+  .diary-container {
+    position: relative;
+    justify-self: center;
+
+    @media (max-width: $aux-w) {
+      margin: 0;
+    }
+  }
+
+  .pages-container {
+    z-index: 5;
+    @media (min-width: $sm-brkpnt) {
+      width: 2 * $w;
+      left: $horiz-pad;
+      top: $vert-pad;
+      position: absolute;
+      perspective: $perspective;
+      transform-style: preserve-3d;
+    }
+    @media (max-width: $sm-brkpnt) {
+      width: $w;
+      height: $h;
+      position: relative;
+    }
+  }
+
+  .staples {
+    @media (max-width: $sm-brkpnt) {
+      display: none;
+    }
+    position: absolute;
+    z-index: $max-z;
+    left: calc(50% - 1px);
+    top: 0;
+    bottom: 0;
+    li {
+      position: absolute;
+      height: 3/2 * $line;
+      width: 2px;
+      mix-blend-mode: multiply;
+      background: transparentize(slategray, 0.75);
+      &:nth-child(1) {
+        top: 15%;
+      }
+      &:nth-child(2) {
+        top: calc(50% - 3 / 4 *#{$line});
+      }
+      &:nth-child(3) {
+        bottom: 15%;
       }
     }
   }
 
-  @media (min-width: $sm-brkpnt) {
-    transform-style: preserve-3d;
+  .discrete-link {
+    color: $default-pencil;
+    text-decoration-color: transparentize($default-pencil, 0.5);
+  }
 
-    box-shadow: 0 0 0 #0000;
+  $offset: 7px;
+
+  .page {
+    height: $h;
+    width: $w;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: $paper-color;
+
+    color: $default-pencil;
+
+    position: relative;
+    z-index: 1;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 2 * $line;
+      bottom: 0;
+
+      background-image: repeating-linear-gradient(
+        0deg,
+        $main-line,
+        transparent 1px,
+        transparent $line
+      );
+    }
+
+    p {
+      @extend .hyphenator;
+      word-break: break-word;
+      a {
+        @extend .discrete-link;
+      }
+    }
+
+    &:first-child {
+      display: none;
+    }
+
+    &.summary {
+      p + p {
+        text-indent: 0;
+        margin-top: $line;
+      }
+
+      .text-container {
+        @extend .typewriter;
+        position: relative;
+        top: 3px;
+        &:after {
+          content: "";
+          position: absolute;
+          left: $line * 2/3;
+          bottom: $line * 1;
+          width: $line * 2;
+          height: $line * 2;
+          background-image: url(../img/stamp-onhb.png);
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+      }
+    }
+
+    @media (min-width: $sm-brkpnt) {
+      transform-style: preserve-3d;
+
+      box-shadow: 0 0 0 #0000;
+      // @at-root .current + .page + .page + .page ~ & {
+      //   z-index: 5;
+      // }
+
+      &:nth-child(odd) {
+        transition: transform $flipTime linear 0s,
+          box-shadow $flipTime linear 0s, opacity 0s ease 0s;
+
+        position: absolute;
+        right: 50%;
+
+        transform-origin: top right;
+
+        border-top-left-radius: $lc;
+        border-bottom-left-radius: $lc;
+        border-top-right-radius: $sc;
+        border-bottom-right-radius: $sc;
+
+        border-right: 1px solid #dddcd7;
+
+        background-image: linear-gradient(
+          to right,
+          #f1f0eb,
+          #f1f0eb 70%,
+          #dbdad1 100%
+        );
+
+        &:not(.past):not(.current) {
+          // future page
+          transform: rotate3d(0, 1, 0, 90deg);
+          transition: transform $flipTime linear 0s,
+            box-shadow $flipTime linear 0s, opacity 0s ease $flipTime;
+          opacity: 0;
+          z-index: 1000;
+        }
+        &.current {
+          transform: rotate3d(0, 1, 0, 1.5deg);
+          box-shadow: -3px 1px 3px #0003;
+          z-index: 100;
+          opacity: 1;
+        }
+        &.past {
+          transform: rotate3d(0, 1, 0, 1deg);
+          z-index: 10;
+          opacity: 1;
+        }
+      }
+
+      &:nth-child(even) {
+        transition: transform $flipTime linear 0s,
+          box-shadow $flipTime linear 0s, opacity 0s ease 0s;
+
+        position: absolute;
+        left: 50%;
+
+        transform-origin: top left;
+
+        border-top-left-radius: $sc;
+        border-bottom-left-radius: $sc;
+        border-top-right-radius: $lc;
+        border-bottom-right-radius: $lc;
+
+        border-left: 1px solid #dddcd7;
+
+        background-image: linear-gradient(
+          to left,
+          #f1f0eb,
+          #f1f0eb 95%,
+          #e7e6e0 100%
+        );
+
+        // @at-root .current ~ & {
+        //   z-index: 10;
+        //   opacity: 1;
+        // }
+
+        // @at-root .current + & {
+        //   box-shadow: 3px 1px 3px #0003;
+        //   transform: rotate3d(0, 0.05, 0, -1deg);
+        //   z-index: 100;
+        //   opacity: 1;
+        // }
+
+        &.zoom-top {
+          z-index: 1000;
+          & + .page + .page {
+            z-index: -1 !important;
+            ~ * {
+              display: none;
+            }
+          }
+        }
+
+        &.past {
+          transform: rotate3d(0, 1, 0, -90deg);
+          transition: transform $flipTime linear 0s,
+            box-shadow $flipTime linear 0s, opacity 0s ease $flipTime;
+          opacity: 0;
+          z-index: 10;
+        }
+      }
+    }
+
+    @media (max-width: $sm-brkpnt) {
+      position: absolute;
+      &:not(.current) {
+        display: none;
+      }
+      &.current {
+        display: block;
+      }
+    }
+
+    & > .date {
+      @extend .header-highlights;
+      font-family: $aux-font, sans-serif;
+      position: absolute;
+      left: $line * 2/3;
+      top: $line * 1.1 + 1px;
+    }
+  }
+
+  .page.first-page-of-week {
+    .date {
+      display: none;
+    }
+  }
+
+  @media (min-width: $sm-brkpnt) {
+    .page:nth-child(even) .date {
+      display: none;
+    }
+  }
+
+  .text-container {
+    overflow: hidden;
+    position: relative;
+
+    margin-top: $offset + 2 * $line;
+    height: 17 * $line;
+    width: $w;
+
+    padding-left: $line * 2/3;
+    padding-right: $line * 2/3;
+
+    @extend .diary-text;
+
+    p + p {
+      text-indent: $line * 2/3;
+    }
+  }
+
+  .pg-num {
+    @extend .header-highlights;
+    position: absolute;
+    top: $line * 1.1;
+    line-height: $line * 0.9;
+    right: 0;
+    left: 0;
+    padding-right: $line * 2/3;
+    text-align: right;
+    border-bottom: 1px solid var(--divider-line-color);
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 6px;
+      border-bottom: 1px solid var(--divider-line-color);
+    }
+
+    &:before {
+      content: "p. ";
+      top: 2 * $line;
+      z-index: 2;
+    }
+  }
+
+  .navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 $line * 1/2;
+
+    position: absolute;
+    z-index: $max-z;
+    bottom: 3/4 * $line;
+
+    transform: translate3d(0, 0, 100px); // fix for safari...
+
+    @media (max-width: $aux-w) {
+      transform: scale(0.9) translateY(-60%);
+    }
+    @media (max-width: $aux-w*0.9) {
+      transform: scale(0.9 * 0.9) translateY(-130%);
+    }
+    @media (max-width: $aux-w*0.8) {
+      transform: scale(0.9 * 0.8) translateY(-220%);
+    }
+    @media (max-width: $aux-w*0.7) {
+      transform: scale(0.9 * 0.7) translateY(-340%);
+    }
+    @media (max-width: $aux-w*0.6) {
+      transform: scale(0.9 * 0.6) translateY(-500%);
+    }
+    @media (max-width: $aux-w*0.5) {
+      transform: scale(0.9 * 0.5) translateY(-720%);
+    }
+
+    @media (min-width: $sm-brkpnt) {
+      width: $w * 2;
+      left: calc(50% - #{$w});
+    }
+    @media (max-width: $sm-brkpnt) {
+      width: $w;
+    }
+    > :nth-child(odd) {
+      justify-self: flex-start;
+    }
+    > :nth-child(even) {
+      justify-self: end;
+    }
+
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      user-select: none;
+      font-family: $main-font, sans-serif;
+      text-decoration: none;
+      font-size: $fs * 3;
+      line-height: $line;
+      padding: $line/4 $line;
+      color: #3d50fa;
+      color: var(--ink-color);
+      transition: opacity 0.05s ease;
+      transition-delay: $flipTime;
+      &:disabled {
+        opacity: 0;
+        cursor: default;
+        transition-delay: 0;
+      }
+
+      $m: 2/3 * $line;
+    }
+  }
+
+  #loading-spinner {
+    display: none;
+  }
+
+  .diary.loading #loading-spinner {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: $max-z;
+  }
+
+  .sk-chase {
+    width: $line * 2;
+    height: $line * 2;
+    position: relative;
+    animation: sk-chase 2.5s infinite linear both;
+  }
+
+  .sk-chase-dot {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: sk-chase-dot 2s infinite ease-in-out both;
+    &:before {
+      content: "";
+      display: block;
+      width: 25%;
+      height: 25%;
+      background-color: white;
+      border-radius: 100%;
+      animation: sk-chase-dot-before 2s infinite ease-in-out both;
+    }
+    &:nth-child(1) {
+      animation-delay: -1.1s;
+      &:before {
+        animation-delay: -1.1s;
+      }
+    }
+    &:nth-child(2) {
+      animation-delay: -1s;
+      &:before {
+        animation-delay: -1s;
+      }
+    }
+    &:nth-child(3) {
+      animation-delay: -0.9s;
+      &:before {
+        animation-delay: -0.9s;
+      }
+    }
+    &:nth-child(4) {
+      animation-delay: -0.8s;
+      &:before {
+        animation-delay: -0.8s;
+      }
+    }
+    &:nth-child(5) {
+      animation-delay: -0.7s;
+      &:before {
+        animation-delay: -0.7s;
+      }
+    }
+    &:nth-child(6) {
+      animation-delay: -0.6s;
+      &:before {
+        animation-delay: -0.6s;
+      }
+    }
+  }
+
+  @keyframes sk-chase {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes sk-chase-dot {
+    80%,
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes sk-chase-dot-before {
+    50% {
+      transform: scale(0.4);
+    }
+    100%,
+    0% {
+      transform: scale(1);
+    }
+  }
+}
+
+/// body:not(.print-version)
+/// @at-roots that broke with an all encompassing body class
+.page {
+  @media (min-width: $sm-brkpnt) {
     @at-root .current + .page + .page + .page ~ & {
       z-index: 5;
     }
-
-    &:nth-child(odd) {
-      transition: transform $flipTime linear 0s, box-shadow $flipTime linear 0s,
-        opacity 0s ease 0s;
-
-      position: absolute;
-      right: 50%;
-
-      transform-origin: top right;
-
-      border-top-left-radius: $lc;
-      border-bottom-left-radius: $lc;
-      border-top-right-radius: $sc;
-      border-bottom-right-radius: $sc;
-
-      border-right: 1px solid #dddcd7;
-
-      background-image: linear-gradient(
-        to right,
-        #f1f0eb,
-        #f1f0eb 70%,
-        #dbdad1 100%
-      );
-
-      &:not(.past):not(.current) {
-        // future page
-        transform: rotate3d(0, 1, 0, 90deg);
-        transition: transform $flipTime linear 0s,
-          box-shadow $flipTime linear 0s, opacity 0s ease $flipTime;
-        opacity: 0;
-        z-index: 1000;
-      }
-      &.current {
-        transform: rotate3d(0, 1, 0, 1.5deg);
-        box-shadow: -3px 1px 3px #0003;
-        z-index: 100;
-        opacity: 1;
-      }
-      &.past {
-        transform: rotate3d(0, 1, 0, 1deg);
-        z-index: 10;
-        opacity: 1;
-      }
-    }
-
     &:nth-child(even) {
-      transition: transform $flipTime linear 0s, box-shadow $flipTime linear 0s,
-        opacity 0s ease 0s;
-
-      position: absolute;
-      left: 50%;
-
-      transform-origin: top left;
-
-      border-top-left-radius: $sc;
-      border-bottom-left-radius: $sc;
-      border-top-right-radius: $lc;
-      border-bottom-right-radius: $lc;
-
-      border-left: 1px solid #dddcd7;
-
-      background-image: linear-gradient(
-        to left,
-        #f1f0eb,
-        #f1f0eb 95%,
-        #e7e6e0 100%
-      );
-
       @at-root .current ~ & {
         z-index: 10;
         opacity: 1;
@@ -515,281 +813,7 @@ $offset: 7px;
         z-index: 100;
         opacity: 1;
       }
-
-      &.zoom-top {
-        z-index: 1000;
-        & + .page + .page {
-          z-index: -1 !important;
-          ~ * {
-            display: none;
-          }
-        }
-      }
-
-      &.past {
-        transform: rotate3d(0, 1, 0, -90deg);
-        transition: transform $flipTime linear 0s,
-          box-shadow $flipTime linear 0s, opacity 0s ease $flipTime;
-        opacity: 0;
-        z-index: 10;
-      }
     }
-  }
-
-  @media (max-width: $sm-brkpnt) {
-    position: absolute;
-    &:not(.current) {
-      display: none;
-    }
-    &.current {
-      display: block;
-    }
-  }
-
-  & > .date {
-    @extend .header-highlights;
-    font-family: $aux-font, cursive;
-    position: absolute;
-    left: $line * 2/3;
-    top: $line * 1.1 + 1px;
-  }
-}
-
-.page.first-page-of-week {
-  .date {
-    display: none;
-  }
-}
-
-@media (min-width: $sm-brkpnt) {
-  .page:nth-child(even) .date {
-    display: none;
-  }
-}
-
-.text-container {
-  overflow: hidden;
-  position: relative;
-
-  margin-top: $offset + 2 * $line;
-  height: 17 * $line;
-  width: $w;
-
-  padding-left: $line * 2/3;
-  padding-right: $line * 2/3;
-
-  @extend .diary-text;
-
-  p + p {
-    text-indent: $line * 2/3;
-  }
-}
-
-.pg-num {
-  @extend .header-highlights;
-  position: absolute;
-  top: $line * 1.1;
-  line-height: $line * 0.9;
-  right: 0;
-  left: 0;
-  padding-right: $line * 2/3;
-  text-align: right;
-  border-bottom: 1px solid var(--divider-line-color);
-
-  &:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 6px;
-    border-bottom: 1px solid var(--divider-line-color);
-  }
-
-  &:before {
-    content: "p. ";
-    top: 2 * $line;
-    z-index: 2;
-  }
-}
-
-.navigation {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 0 $line * 1/2;
-
-  position: absolute;
-  z-index: $max-z;
-  bottom: 3/4 * $line;
-
-  transform: translate3d(0, 0, 100px); // fix for safari...
-
-  @media (max-width: $aux-w) {
-    transform: scale(0.9) translateY(-60%);
-  }
-  @media (max-width: $aux-w*0.9) {
-    transform: scale(0.9 * 0.9) translateY(-130%);
-  }
-  @media (max-width: $aux-w*0.8) {
-    transform: scale(0.9 * 0.8) translateY(-220%);
-  }
-  @media (max-width: $aux-w*0.7) {
-    transform: scale(0.9 * 0.7) translateY(-340%);
-  }
-  @media (max-width: $aux-w*0.6) {
-    transform: scale(0.9 * 0.6) translateY(-500%);
-  }
-  @media (max-width: $aux-w*0.5) {
-    transform: scale(0.9 * 0.5) translateY(-720%);
-  }
-
-  @media (min-width: $sm-brkpnt) {
-    width: $w * 2;
-    left: calc(50% - #{$w});
-  }
-  @media (max-width: $sm-brkpnt) {
-    width: $w;
-  }
-  > :nth-child(odd) {
-    justify-self: flex-start;
-  }
-  > :nth-child(even) {
-    justify-self: end;
-  }
-
-  button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    user-select: none;
-    font-family: $main-font, cursive;
-    text-decoration: none;
-    font-size: $fs * 3;
-    line-height: $line;
-    padding: $line/4 $line;
-    color: #3d50fa;
-    color: var(--ink-color);
-    transition: opacity 0.05s ease;
-    transition-delay: $flipTime;
-    &:disabled {
-      opacity: 0;
-      cursor: default;
-      transition-delay: 0;
-    }
-
-    $m: 2/3 * $line;
-  }
-}
-
-#aux-text-container {
-  visibility: hidden;
-  @extend .text-container;
-  p {
-    @extend .hyphenator;
-  }
-  margin: unset;
-  position: fixed;
-  height: unset;
-  left: 0;
-  top: 0;
-  background: greenyellow;
-}
-
-#loading-spinner {
-  display: none;
-}
-
-.diary.loading #loading-spinner {
-  display: inline-block;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: $max-z;
-}
-
-.sk-chase {
-  width: $line * 2;
-  height: $line * 2;
-  position: relative;
-  animation: sk-chase 2.5s infinite linear both;
-}
-
-.sk-chase-dot {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  animation: sk-chase-dot 2s infinite ease-in-out both;
-}
-
-.sk-chase-dot:before {
-  content: "";
-  display: block;
-  width: 25%;
-  height: 25%;
-  background-color: white;
-  border-radius: 100%;
-  animation: sk-chase-dot-before 2s infinite ease-in-out both;
-}
-
-.sk-chase-dot:nth-child(1) {
-  animation-delay: -1.1s;
-}
-.sk-chase-dot:nth-child(2) {
-  animation-delay: -1s;
-}
-.sk-chase-dot:nth-child(3) {
-  animation-delay: -0.9s;
-}
-.sk-chase-dot:nth-child(4) {
-  animation-delay: -0.8s;
-}
-.sk-chase-dot:nth-child(5) {
-  animation-delay: -0.7s;
-}
-.sk-chase-dot:nth-child(6) {
-  animation-delay: -0.6s;
-}
-.sk-chase-dot:nth-child(1):before {
-  animation-delay: -1.1s;
-}
-.sk-chase-dot:nth-child(2):before {
-  animation-delay: -1s;
-}
-.sk-chase-dot:nth-child(3):before {
-  animation-delay: -0.9s;
-}
-.sk-chase-dot:nth-child(4):before {
-  animation-delay: -0.8s;
-}
-.sk-chase-dot:nth-child(5):before {
-  animation-delay: -0.7s;
-}
-.sk-chase-dot:nth-child(6):before {
-  animation-delay: -0.6s;
-}
-
-@keyframes sk-chase {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes sk-chase-dot {
-  80%,
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes sk-chase-dot-before {
-  50% {
-    transform: scale(0.4);
-  }
-  100%,
-  0% {
-    transform: scale(1);
   }
 }
 

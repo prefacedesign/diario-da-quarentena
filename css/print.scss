@@ -1,0 +1,129 @@
+@import "./vars.scss";
+@import "./cooper.scss";
+
+body.print-version {
+  font-family: "Cooper Hewitt", sans-serif;
+
+  p,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 16px;
+    line-height: 21px;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0.075em;
+  }
+
+  h2 {
+    margin: 0 0 0.25em 0;
+    color: #cb0072;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    padding: 0 0 2rem;
+    display: grid;
+    place-items: center;
+    br {
+      display: none;
+    }
+    .mood {
+      margin-top: 1rem;
+      font-size: 18px;
+      display: block;
+      &:before {
+        content: "Me sentindo:\00a0";
+      }
+    }
+    .emoji {
+      margin-top: 1rem;
+      font-size: 30px;
+    }
+  }
+
+  p {
+    @extend .hyphenator;
+    & + p {
+      margin-top: 1em;
+    }
+    & + h2 {
+      margin-top: 1.75rem;
+    }
+  }
+
+  .page {
+    background: $paper-color;
+    @include diary-shadow;
+    padding: 2rem;
+    margin: 2rem 0;
+    @media (max-width: $sm-brkpnt) {
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    position: relative;
+
+    &:first-child {
+      display: none;
+    }
+    .pg-num {
+      position: absolute;
+      top: 0;
+      left: -2rem;
+      font-size: 9px;
+      font-weight: 500;
+      text-align: right;
+      &:before {
+        content: "pg. ";
+      }
+    }
+  }
+
+  .img-container {
+    padding: 2rem 0;
+    display: grid;
+    place-items: center;
+    img {
+      object-fit: contain;
+      width: 100%;
+      max-height: 50vh;
+    }
+    p {
+      font-size: 12px;
+      line-height: 15px;
+      text-align: center;
+      max-width: 40ch;
+      padding: 1rem;
+    }
+  }
+
+  .cover,
+  .navigation,
+  .spiral {
+    display: none;
+  }
+
+  .pages-container {
+    max-width: 60ch;
+  }
+
+  .date {
+    display: none;
+  }
+
+  .page h1 {
+    &:before,
+    &:after {
+      content: "";
+    }
+  }
+}
