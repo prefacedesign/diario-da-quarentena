@@ -1,6 +1,11 @@
 @import "./vars.scss";
 
 @media print {
+  @page {
+    size: landscape;
+    margin: 10mm 10mm 20mm 10mm;
+  }
+
   body {
     font-family: "Cooper Hewitt", sans-serif;
 
@@ -61,7 +66,10 @@
     }
 
     .page {
-      background: $paper-color;
+      background: $paper-color !important;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+
       @include diary-shadow;
       padding: 2rem;
       margin: 2rem 0;
@@ -107,7 +115,8 @@
 
     .cover,
     .navigation,
-    .spiral {
+    .spiral,
+    .staples {
       display: none;
     }
 
