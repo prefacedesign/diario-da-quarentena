@@ -596,6 +596,10 @@ function metaContent() {
 }
 
 function prepareDiary() {
+  if (!dataLoaded || !fontLoaded) {
+    return;
+  }
+
   diary = document.querySelector(".diary");
   paginateContent();
   metaContent();
@@ -607,45 +611,58 @@ function prepareDiary() {
   });
 }
 
-/// hello
+function setDiaryData (data) {
+  mockData = data;
+  dataLoaded = true;
+  prepareDiary();
+}
 
-(function () {
-  window.addEventListener("resize", detectMobile);
-  const transition = document.querySelector(".cover");
+jQuery(function ($) {
 
-  transition.ontransitionend = (e) => {
-    if (e.propertyName == "transform") {
-      if (diaryOpening) {
-        diary.classList.remove("opening", "closing", "closed");
-        diary.classList.add("open");
-        diaryOpening = false;
-      } else if (diaryClosing) {
-        diary.classList.remove("closing", "opening", "open");
-        diary.classList.add("closed");
-        diaryClosing = false;
+  registerListeners();
+
+  function registerListeners () {
+    $(window).on('resize', detectMobile);
+
+    $(".cover").on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function (e) {
+      if (e.originalEvent.propertyName === "transform") {
+        if (diaryOpening) {
+          diary.classList.remove("opening", "closing", "closed");
+          diary.classList.add("open");
+          diaryOpening = false;
+        } else if (diaryClosing) {
+          diary.classList.remove("closing", "opening", "open");
+          diary.classList.add("closed");
+          diaryClosing = false;
+        }
       }
-    }
-  };
-  transition.ontransitionstart = (e) => {};
-  if (debugAnimations) {
-    startDebuggingAnimations();
-  }
-  document.fonts.ready.then(() => {
-    fontLoaded = true;
-    if (dataLoaded) {
-      prepareDiary();
-    }
-  });
-})();
+    })
 
-fetch("../data/example.json")
-  .then((response) => {
-    return response.json();
-  })
-  .then((json) => {
-    mockData = json;
-    dataLoaded = true;
-    if (fontLoaded) {
-      prepareDiary();
+    if (debugAnimations) {
+      startDebuggingAnimations();
     }
-  });
+
+    try {
+      document.fonts.ready.then(() => {
+        fontLoaded = true;
+        prepareDiary();
+      });
+    }
+    catch (e) {
+      alert('Por favor, atualize o seu navegador, ou utilize outro.');
+    }
+  }
+
+  if (!window.fetchDiary) {
+    window.fetchDiary = function () {
+      fetch("./data/example.json")
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => {
+            setDiaryData(json);
+          });
+    }
+  }
+  window.fetchDiary();
+});
