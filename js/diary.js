@@ -326,20 +326,20 @@ function startDebuggingAnimations() {
 // first_c cover_4 f_color_8
 function setDiaryStyle() {
   let diaryContainer = document.querySelector(".diary-container");
-  let firstLetter = mockData.initials[0].toLowerCase();
+  let firstLetter = mockData.iniciais[0].toLowerCase();
   let bgCode = coverColorCode(
-    mockData.initials,
-    mockData.location,
-    mockData.age,
-    mockData.profession,
-    mockData.gender
+    mockData.iniciais,
+    mockData.local,
+    mockData.idade,
+    mockData.profissao,
+    mockData.genero
   );
   let inkCode = inkColorCode(
-    mockData.initials,
-    mockData.location,
-    mockData.age,
-    mockData.profession,
-    mockData.gender
+    mockData.iniciais,
+    mockData.local,
+    mockData.idade,
+    mockData.profissao,
+    mockData.genero
   );
   diaryContainer.classList.add(
     `first_${firstLetter}`,
@@ -410,10 +410,10 @@ function paginateContent() {
       }
     });
 
-    if (e.img != "") {
+    if (e.img) {
       let caption = "";
-      if (e.img_caption != "") {
-        caption = linkify(e.img_caption);
+      if (e.legenda) {
+        caption = linkify(e.legenda);
       }
       tags.push({
         tag: "img",
@@ -557,29 +557,29 @@ function metaContent() {
     ageSummary = "",
     entriesPlural;
 
-  for (let i = 0; i < mockData.initials.length; i++) {
-    initials += mockData.initials[i] + ".";
+  for (let i = 0; i < mockData.iniciais.length; i++) {
+    initials += mockData.iniciais[i] + ".";
   }
 
-  if (mockData.location != "") {
-    location = `Residente de ${mockData.location}`;
+  if (mockData.local != "") {
+    location = `Residente de ${mockData.local}`;
   }
 
-  if (mockData.profession != "") {
-    if (mockData.gender == "Masculino") {
-      profession = `é um ${mockData.profession}`;
-    } else if (mockData.gender == "Feminino") {
-      profession = `é uma ${mockData.profession}`;
+  if (mockData.profissao != "") {
+    if (mockData.genero === "m") {
+      profession = `é um ${mockData.profissao}`;
+    } else if (mockData.genero === "f") {
+      profession = `é uma ${mockData.profissao}`;
     } else {
-      profession = `é ${mockData.profession}`;
+      profession = `é ${mockData.profissao}`;
     }
   } else {
     profession = `tem`;
   }
 
-  if ("age" in mockData) {
-    ageSummary = ` de ${mockData.age} anos`;
-    ageSticker = `, ${mockData.age} anos`;
+  if ("idade" in mockData) {
+    ageSummary = ` de ${mockData.idade} anos`;
+    ageSticker = `, ${mockData.idade} anos`;
   }
 
   if (nEntries == 1) {
@@ -592,7 +592,7 @@ function metaContent() {
   diarySummary.innerHTML = `${location}, <span class="initials">${initials}</span> ${profession}${ageSummary}. Preencheu este diário entre os dias 27 de abril e 15 de maio de 2020 como parte das atividades da Pré-ONHB 2020 – Olimpíada Nacional em História do Brasil.<br><br>Este diário conta com ${nEntries} ${entriesPlural} sobre as diferentes maneiras que a pandemia afetou a vida de todos, incluindo <span class="initials">${initials}</span>.`;
 
   let stickerOnTheCover = document.getElementById("sticker");
-  stickerOnTheCover.innerHTML = `<p class="who"><span class="initials">${initials}</span>${ageSticker},</p><p class="location">${mockData.location}.</p>`;
+  stickerOnTheCover.innerHTML = `<p class="who"><span class="initials">${initials}</span>${ageSticker},</p><p class="location">${mockData.local}.</p>`;
 }
 
 function prepareDiary() {

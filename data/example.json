@@ -1,12 +1,12 @@
 {
-  "initials": "CLP",
-  "age": 36,
-  "gender": "Masculino",
-  "profession": "Designer",
-  "location": "Campinas, SP",
+  "iniciais": "CLP",
+  "idade": 36,
+  "genero": "Masculino",
+  "profissao": "Designer",
+  "local": "Campinas, SP",
   "entries": [
     {
-      "date": "Semana 1: 27 de abril a 1º de maio",
+      "date": "Semana 1: 27 de abril a 3 de maio",
       "open_ended_directives": {
         "lazer": "A nossa verdadeira missão ia ter principio. Verificar a possibilidade de uma passagem, até o Aquidauana, no tempo das aguas, quando os pantanaes se tornão intransitaveis, seguir, ao longo da serra de Maracajú, uma pretendida senda, que fugitivos havião aberto; observar a natureza dos terrenos e os obstaculos que pudessem impedir a descida das forças nos mezes de Abril e Maio, continuar ainda mais a exploração até o rio Aquidauana, cuja margem esquerda estava occupada pelo inimigo, apromptar os meios de passagem para aquelle rio, era o nosso programma, vasto e brilhante, importando não pequena responsabilidade, mas cuja boa execução principalmente dependia de meios, que não nos tinhão sido ministrados. Oito soldados nos acompanhavão e, d'esses, nenhum tinha conhecimento da tal passagem, aliás com rações, sómente para onze dias, e armados com fuzis de pederneira, nos quaes as balas só entravão partidas!",
         "trabalho_estudo": "Esta corixa dava nado em toda sua extensão, obrigando-nos a fazer pelotas, que devião transportar nossas cargas. Nada mais expedito: um couro bem secco, levantado nas quatro pontas, que se ligão por cordeis ou tiras, recebe os pesos que, são solidamente amarrados, de modo a formarem um systema immovel, em cima do qual assenta-se o passageiro, como melhor puder. Depois de lançada á agua com todo o cuidado, atira-se um nadador á frente da pelota, levando entre os dentes a cordinha que a guia, ao passo que um segundo ajuda a mantel-a na boa direcção, empurrando-a de quando em quando.",
@@ -15,7 +15,7 @@
         "sentimentos": "Ahi achavão-se vestigios da passagem de numerosa comitiva, e, ao aclarar o dia, reconhecêrão os soldados serem pisadas de indios, a despeito de não apreciarmos os signaes que differençassem essas pégádas, das de qualquer outra planta de pé, como com razão o affiançavão elles. \n Esses homens são de uma sagacidade espantosa; nunca se enganão e conhecem perfeitamente os rastos de todos os animaes. Ao depois, vimos nos indios demonstração de um tino tão fino, que reconhecem, pela impressão do pé no terreno, a pessoa que a deixára.\n O Tabôco dava nado de lado a lado: recorremos aos couros e o passámos com difficuldade, perigando, n'essa occasião, a fragil pelota, em que se mettêra o nosso collega Lago."
       },
       "img": "/img/mock-imgs/img01.jpg",
-      "img_caption": "Ao chegarmos junto ao Tabôco, a noite, ha muito, tinha cahido. Nuvens carregadas de chuva pesavão no horisonte, estendendo um véo tristonho, por entre o qual a lua, a custo, diffundia raios amortecidos e tibios.",
+      "legenda": "Ao chegarmos junto ao Tabôco, a noite, ha muito, tinha cahido. Nuvens carregadas de chuva pesavão no horisonte, estendendo um véo tristonho, por entre o qual a lua, a custo, diffundia raios amortecidos e tibios.",
       "emoji": "entediado"
     },
     {
@@ -28,7 +28,7 @@
         "sentimentos": ""
       },
       "img": "/img/mock-imgs/img02.jpg",
-      "img_caption": "O caminho vai sempre seguindo o rio, o qual ora sahe em campo limpo, ora d'elle se separa por uma mata espessa e sombria.",
+      "legenda": "O caminho vai sempre seguindo o rio, o qual ora sahe em campo limpo, ora d'elle se separa por uma mata espessa e sombria.",
       "emoji": "triste"
     },
     {
@@ -41,7 +41,7 @@
         "sentimentos": "O terena é agil e activo: o seu parecer exprime mobilidade; a sua intelligencia é astuciosa e com propensão ao mal. Aceita com difficuldade as nossas idéas e conserva arreigados os seus usos especiaes, talvez por espirito mais firme de liberdade. O homem é robusto, corpulento, de boa estatura; o seu semblante apresenta o nariz um tanto achatado na base; as sobrancelhas pouco obliquas, em alguns individuos bastas e desenhadas com regularidade; ás vezes é pugibarba, outras tem buço e barbas bem apparentes. A desconfiança transluz nos seus olhares inquietos, vivos; a dobrez nos seus gestos."
       },
       "img": "/img/mock-imgs/img03.jpg",
-      "img_caption": "Scelerisque curabitur dui a scelerisque consectetur ullamcorper ut condimentum consectetur vestibulum.",
+      "legenda": "Scelerisque curabitur dui a scelerisque consectetur ullamcorper ut condimentum consectetur vestibulum.",
       "emoji": "sereno"
     }
   ]
