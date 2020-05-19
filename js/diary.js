@@ -371,7 +371,7 @@ function paginateContent() {
           moodKeys[e.emoji]
         }</span><br><span class="emoji">${emojiKeys[e.emoji]}</span>`,
       });
-      nEntries++;
+      //nEntries++;
     }
 
     directives.forEach((directive) => {
@@ -543,7 +543,11 @@ function paginateContent() {
 
 // source: https://stackoverflow.com/a/8943487/888094
 function linkify(text) {
-  var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+  if (typeof text !== 'string') {
+    return;
+  }
+
+  let urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
   return text.replace(urlRegex, function (url) {
     return `<a href="${url}" target="_blank">${url}</a>`;
   });
