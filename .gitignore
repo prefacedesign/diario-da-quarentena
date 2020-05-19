@@ -16,3 +16,7 @@ yarn-error.log*
 *.sln
 *.sw?
 
+# Project files
+css/print.css
+css/diary.css
+css/diaries-index.css
