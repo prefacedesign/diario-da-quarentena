@@ -459,7 +459,7 @@ function paginateContent() {
           ) {
             // Breaks it word by word until the limit is reached.
             textContainer.lastChild.innerHTML = "";
-            let words = tag.inner_text.split(" ");
+            let words = currentText.split(" ");
             let foundBreakpoint = false;
             let i = 0;
             // appends each word until the line limit is reached.
